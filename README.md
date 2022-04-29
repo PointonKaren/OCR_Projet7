@@ -1,2 +1,3 @@
-# OCR_Projet7
-OpenClassrooms - Formation Développeur Web - Projet 7 - Créez un réseau social d'entreprise
+# Projet 7 de la formation Développement Web d'OpenClassrooms
+
+*Readme à compléter*
