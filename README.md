@@ -6,14 +6,7 @@
 
 ### Packages à installer :
 
-* bcrypt
-* e-mail validator
 * express
-* jsonwebtoken
-* multer
 * nodemon
-* password-validator
-  
-
 
 *Readme à compléter*
