@@ -2,9 +2,10 @@ const multer = require("multer");
 const path = require("path");
 
 const MIME_TYPES = {
-  "picture/jpg": "jpg",
-  "picture/jpeg": "jpg",
-  "picture/png": "png",
+  "images/jpg": "jpg",
+  "images/jpeg": "jpg",
+  "images/png": "png",
+  "images/gif": "gif",
 }; // Dictionnaire des extensions acceptées
 
 /**
@@ -12,7 +13,7 @@ const MIME_TYPES = {
  */
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, "pictures");
+    callback(null, "images");
   },
   filename: (req, file, callback) => {
     const name = file.originalname.replace(" ", "_");
@@ -28,12 +29,12 @@ const upload = multer({
   storage: storage,
   fileFilter: (req, file, callback) => {
     const ext = path.extname(file.originalname).toLowerCase();
-    if (ext !== ".png" && ext !== ".jpg" && ext !== ".jpeg") {
-      // Quelle que soit la casse, seules les extensions png, jpg et jpeg seront acceptées.
+    if (ext !== ".png" && ext !== ".jpg" && ext !== ".jpeg" && ext !== ".gif") {
+      // Quelle que soit la casse, seules les extensions png, jpg, jpeg et gif seront acceptées.
       return callback(null, false);
     }
     callback(null, true);
   },
 });
 
-module.exports = upload.single("picture");
+module.exports = upload.single("image");

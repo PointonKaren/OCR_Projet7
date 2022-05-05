@@ -9,7 +9,7 @@ module.exports = (sequelize, Datatypes) => {
     },
     url: {
       type: Datatypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
   });
   Post.associate = (models) => {

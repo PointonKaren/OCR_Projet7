@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const fileSystem = require("fs");
 
 require("dotenv").config();
 
@@ -153,7 +153,7 @@ exports.modifyUser = (req, res, next) => {
   if (req.file) {
     updatedUser = {
       ...JSON.parse(req.body.user),
-      pictureUrl: `${req.protocol}://${req.get("host")}/pictures/${
+      pictureUrl: `${req.protocol}://${req.get("host")}/images/${
         req.file.filename
       }`,
     };
@@ -167,26 +167,28 @@ exports.modifyUser = (req, res, next) => {
 
   User.findOne({ where: { id: req.params.id } })
     .then((user) => {
-      if (updatedUser.userId == req.auth.userId || req.auth.userRole == 2) {
+      if (req.params.id == req.auth.userId || req.auth.userRole == 2) {
         if (req.file) {
-          const pictureName = user.pictureUrl.split("pictures/")[1];
-          fileSystem.unlink(`pictures/${pictureName}`, () => {});
-          user.picture = updatedUser.picture;
+          const pictureName = user.pictureUrl.split("images/")[1];
+          fileSystem.unlink(`images/${pictureName}`, () => {});
+          user.pictureUrl = updatedUser.pictureUrl;
         }
         user.firstName = updatedUser.firstName;
         user.surname = updatedUser.surname;
         user.jobTitle = updatedUser.jobTitle;
         user.bio = updatedUser.bio;
+
+        user
+          .save()
+          .then(() =>
+            res
+              .status(200)
+              .json({ message: "Utilisateur modifié.", user: user })
+          )
+          .catch((error) => res.status(400).json({ message: error }));
       } else {
         return res.status(403).json({ message: "Requête non autorisée." });
       }
-
-      user
-        .save()
-        .then(() =>
-          res.status(200).json({ message: "Utilisateur modifié.", user: user })
-        )
-        .catch((error) => res.status(400).json({ message: error }));
     })
     .catch((error) => res.status(500).json({ message: error }));
 };
@@ -203,10 +205,11 @@ exports.deleteUser = (req, res, next) => {
       if (!user) {
         res.status(404).json({ message: "L'utilisateur n'existe pas." });
       }
-      if (user.userId == req.auth.userId || req.auth.userRole == 2) {
-        const filename = user.pictureUrl.split("/pictures/")[1];
-        fileSystem.unlink(`pictures/${filename}`, () => {
-          User.destroy({ where: { id: req.params.id } })
+      if (req.params.id == req.auth.userId || req.auth.userRole == 2) {
+        const filename = user.pictureUrl.split("/images/")[1];
+        fileSystem.unlink(`images/${filename}`, () => {
+          user
+            .destroy()
             .then(() => {
               res.status(200).json({ message: "Utilisateur supprimé." });
             })
@@ -219,6 +222,6 @@ exports.deleteUser = (req, res, next) => {
       }
     })
     .catch((error) => {
-      res.status(404).json({ message: error });
+      res.status(500).json({ message: error });
     });
 };
