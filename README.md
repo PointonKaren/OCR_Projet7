@@ -6,7 +6,13 @@
 
 ### Packages à installer :
 
+* bcrypt
+* dotenv
 * express
+* helmet
+* jsonwebtoken
 * nodemon
+* password-validator
+* sequelize
 
 *Readme à compléter*
