@@ -1,5 +1,5 @@
 node_modules
-images/*
-!images/.gitkeep
+pictures/*
+!pictures/.gitkeep
 .env
 todolist.txt
