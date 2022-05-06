@@ -10,15 +10,21 @@ const verifyToken = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     req.auth = { userId: decodedToken.userId, userRole: decodedToken.userRole };
-    console.log(req);
-    if (req.body.userId && req.body.userId !== req.auth.userId) {
-      // S'il y a un userId dans le corps de la requête et qu'il est le même que celui contenu dans le token
-      throw "Requête non autorisée.";
-    } else {
-      next();
-    }
+    next();
+    // if (contentType == "multipart/form-data") {
+    //   userId = JSON.parse(req.body.data).userId;
+    // } else {
+    //   userId = req.body.userId;
+    // }
+
+    // if (userId && userId === req.auth.userId) {
+    //   // S'il y a un userId dans le corps de la requête et qu'il est le même que celui contenu dans le token
+    //   next();
+    // } else {
+    //   return res.status(403).json({ message: "Requête non autorisée." });
+    // }
   } catch (error) {
-    res.status(403).json({ message: error });
+    res.status(500).json({ message: error });
   }
 };
 

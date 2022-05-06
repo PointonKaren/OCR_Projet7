@@ -1,8 +1,9 @@
 const passwordValidator = require("password-validator");
+const emailValidator = require("email-validator");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const getPasswordSchema = () => {
+const validatePassword = (password) => {
   const passwordSchema = new passwordValidator();
 
   passwordSchema
@@ -20,7 +21,25 @@ const getPasswordSchema = () => {
     .not()
     .spaces();
 
-    return passwordSchema;
+  const valid = passwordSchema.validate(password);
+
+  let errorMessage = "";
+  const errors = passwordSchema.validate(password, {
+    details: true,
+  });
+  for (let i in errors) {
+    errorMessage += errors[i].message + " ";
+  }
+
+  return { valid: valid, message: errorMessage };
+};
+
+const validateEmail = (email) => {
+  if (emailValidator.validate(email) && email.endsWith("groupomania.com")) {
+    return { valid: true };
+  } else {
+    return { valid: false };
+  }
 };
 
 const generateToken = (user) => {
@@ -34,8 +53,8 @@ const generateToken = (user) => {
   );
 };
 
-
 module.exports = {
-  getPasswordSchema,
-  generateToken
+  validatePassword,
+  validateEmail,
+  generateToken,
 };

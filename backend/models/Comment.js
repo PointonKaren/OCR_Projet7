@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const sequelize = require('../utils/database')
+const Sequelize = require("sequelize");
+const sequelize = require("../utils/database");
 
 const Comment = sequelize.define("Comment", {
   id: {
@@ -14,6 +14,7 @@ const Comment = sequelize.define("Comment", {
     allowNull: false,
   },
 });
+
 Comment.associate = (models) => {
   Comment.belongsTo(models.User, {
     foreignKey: {

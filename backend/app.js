@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 
 const postRoutes = require("./routes/post");
 const userRoutes = require("./routes/user");
@@ -18,6 +19,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(express.json());
 
 app.use("/api/user", userRoutes);

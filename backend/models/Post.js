@@ -9,15 +9,17 @@ const Post = sequelize.define("Post", {
     allowNull: false,
     autoIncrement: true,
   },
+  title: { type: Sequelize.STRING, allowNull: false },
   imageUrl: {
     type: Sequelize.STRING,
     allowNull: false,
   },
 });
+
 Post.associate = (models) => {
   Post.belongsTo(models.User, {
     foreignKey: {
-      allowNull: true,
+      allowNull: false,
     },
     onDelete: "CASCADE",
   });

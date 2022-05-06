@@ -44,13 +44,20 @@ const server = http.createServer(app);
 const sequelize = require("./utils/database");
 
 // Importing all models
-require("./models/User");
-require("./models/Post");
-require("./models/Comment");
-require("./models/Like");
+const User = require("./models/User");
+const Post = require("./models/Post");
+const Comment = require("./models/Comment");
+const Like = require("./models/Like");
+
+const models = { User: User, Post: Post, Comment: Comment, Like: Like };
+
+User.associate(models);
+Post.associate(models);
+Comment.associate(models);
+Like.associate(models);
 
 sequelize
-  .sync({ force: true })
+  .sync()
   .then(() => {
     console.log("Base de données synchronisée");
     // Se synchronise d'abord à la BDD avant de lancer le serveur

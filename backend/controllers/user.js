@@ -1,11 +1,15 @@
 const bcrypt = require("bcrypt");
-const emailValidator = require("email-validator");
+
 const fileSystem = require("fs");
 
 require("dotenv").config();
 
 const User = require("../models/User");
-const { getPasswordSchema, generateToken } = require("../utils/common");
+const {
+  validatePassword,
+  validateEmail,
+  generateToken,
+} = require("../utils/common");
 
 /**
  * S'enregistrer sur le site
@@ -15,22 +19,16 @@ const { getPasswordSchema, generateToken } = require("../utils/common");
  * @returns
  */
 const signup = (req, res, next) => {
-  const passwordSchema = getPasswordSchema();
+  const passwordValidation = validatePassword(req.body.password);
+  const emailValidation = validateEmail(req.body.email);
 
-  if (!passwordSchema.validate(req.body.password)) {
-    let errorMessage = "";
-    const errors = passwordSchema.validate(req.body.password, {
-      details: true,
-    });
-    for (let i in errors) {
-      errorMessage += errors[i].message + " ";
-    }
+  if (!passwordValidation.valid) {
     return res.status(400).json({
-      message: errorMessage,
+      message: passwordValidation.message,
     });
   }
 
-  if (emailValidator.validate(req.body.email)) {
+  if (emailValidation.valid) {
     // Si la syntaxe du mail utilisé est correcte
     bcrypt
       .hash(req.body.password, 10)
@@ -87,6 +85,7 @@ const login = (req, res, next) => {
             token: generateToken(user),
             firstName: user.firstName,
             surname: user.surname,
+            pictureUrl: user.pictureUrl,
             jobTitle: user.jobTitle,
             bio: user.bio,
           });
@@ -130,10 +129,14 @@ const getUsers = (req, res, next) => {
  * @param {*} res
  * @param {*} next
  */
-const getOneUser = (req, res, next) => {
-  User.findOne({ where: { id: req.params.id } })
+const getUser = (req, res, next) => {
+  // TODO: corriger le fait qu'on peut "trouver" un user qui n'existe pas
+  // TODO: permettre d'afficher le profil (en masquant les données sensibles) d'un autre user quand on n'est ni modo ni admin
+  const currentUserId = req.params.id;
+
+  User.findOne({ where: { id: currentUserId } })
     .then((user) => {
-      if (req.auth.userId == req.params.id || req.auth.userRole == 2) {
+      if (req.auth.userId == currentUserId || req.auth.userRole == 2) {
         return res
           .status(200)
           .json({ message: "Utilisateur trouvé.", user: user });
@@ -156,25 +159,29 @@ const getOneUser = (req, res, next) => {
 const modifyUser = (req, res, next) => {
   let updatedUser;
   // TODO: Faire en sorte que l'image de profil ne dépasse un certain format/poids
+  // TODO: Corriger la modif user qui ne semble pas fonctionner
+  // TODO: Faire en sorte que l'user puisse modifier son mdp en le cryptant
   // 2 cas possibles : soit l'utilisateur modifie notamment l'image, soit il ne touche pas à l'image et ne modifie que le contenu du formulaire
   if (req.file) {
     updatedUser = {
-      ...JSON.parse(req.body.user),
+      ...JSON.parse(req.body.data),
       pictureUrl: `${req.protocol}://${req.get("host")}/images/${
         req.file.filename
       }`,
     };
   } else {
-    if (!req.body.user) {
+    if (!req.body.data) {
       updatedUser = { ...req.body };
     } else {
       return res.status(400).json({ message: "Format de fichier inattendu." });
     }
   }
 
-  User.findOne({ where: { id: req.params.id } })
+  const currentUserId = req.params.id;
+
+  User.findOne({ where: { id: currentUserId } })
     .then((user) => {
-      if (req.params.id == req.auth.userId || req.auth.userRole == 2) {
+      if (currentUserId == req.auth.userId || req.auth.userRole == 2) {
         if (req.file) {
           const pictureName = user.pictureUrl.split("images/")[1];
           fileSystem.unlink(`images/${pictureName}`, () => {});
@@ -201,18 +208,20 @@ const modifyUser = (req, res, next) => {
 };
 
 /**
- * Supprimer une sauce
+ * Supprimer un utilisateur
  * @param {*} req
  * @param {*} res
  * @param {*} next
  */
 const deleteUser = (req, res, next) => {
-  User.findOne({ where: { id: req.params.id } })
+  const currentUserId = req.params.id;
+  // TODO: Trouver et corriger ce qui empêche la fonction de fonctionner (erreur 500 sur Postman)
+  User.findOne({ where: { id: currentUserId } })
     .then((user) => {
       if (!user) {
         res.status(404).json({ message: "L'utilisateur n'existe pas." });
       }
-      if (req.params.id == req.auth.userId || req.auth.userRole == 2) {
+      if (currentUserId == req.auth.userId || req.auth.userRole == 2) {
         const filename = user.pictureUrl.split("/images/")[1];
         fileSystem.unlink(`images/${filename}`, () => {
           user
@@ -237,7 +246,7 @@ module.exports = {
   signup,
   login,
   getUsers,
-  getOneUser,
+  getUser,
   modifyUser,
   deleteUser,
 };

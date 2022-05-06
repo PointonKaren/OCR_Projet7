@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const sequelize = require('../utils/database')
+const Sequelize = require("sequelize");
+const sequelize = require("../utils/database");
 
 const Like = sequelize.define("Like", {
   id: {
