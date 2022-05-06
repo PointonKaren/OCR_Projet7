@@ -1,11 +1,8 @@
 const express = require("express");
-const helmet = require("helmet");
 
 const postRoutes = require("./routes/post");
 const userRoutes = require("./routes/user");
-const commentRoutes = require("./routes/comment");
-
-const databaseUtils = require("./utils/database");
+// const commentRoutes = require("./routes/comment");
 
 const app = express();
 app.use((req, res, next) => {
@@ -21,14 +18,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(helmet());
-
 app.use(express.json());
 
-databaseUtils.authenticate();
-
 app.use("/api/user", userRoutes);
-app.use("/api/comment", commentRoutes);
+//app.use("/api/comment", commentRoutes);
 app.use("/api/post", postRoutes);
 
 module.exports = app;
