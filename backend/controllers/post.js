@@ -18,8 +18,13 @@ const getAllPosts = (req, res, next) => {};
  * @param {*} next
  */
 const createPost = (req, res, next) => {
+  const userData = JSON.parse(req.body.user);
+  if (!req.file) {
+    return res.status(400).json({ error: "Fichier absent ou inattendu." });
+  }
+
   const post = new Post({
-    userId: req.userId,
+    userId: userData.userId,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
       req.file.filename
     }`,

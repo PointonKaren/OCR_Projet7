@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const sequelize = require('../utils/database')
+const Sequelize = require("sequelize");
+const sequelize = require("../utils/database");
 
 const Post = sequelize.define("Post", {
   id: {
@@ -9,7 +9,7 @@ const Post = sequelize.define("Post", {
     allowNull: false,
     autoIncrement: true,
   },
-  url: {
+  imageUrl: {
     type: Sequelize.STRING,
     allowNull: false,
   },

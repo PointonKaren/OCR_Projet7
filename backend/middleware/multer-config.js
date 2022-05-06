@@ -2,10 +2,10 @@ const multer = require("multer");
 const path = require("path");
 
 const MIME_TYPES = {
-  "images/jpg": "jpg",
-  "images/jpeg": "jpg",
-  "images/png": "png",
-  "images/gif": "gif",
+  "image/jpg": "jpg",
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/gif": "gif",
 }; // Dictionnaire des extensions acceptées
 
 /**

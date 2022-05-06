@@ -50,7 +50,7 @@ require("./models/Comment");
 require("./models/Like");
 
 sequelize
-  .sync()
+  .sync({ force: true })
   .then(() => {
     console.log("Base de données synchronisée");
     // Se synchronise d'abord à la BDD avant de lancer le serveur

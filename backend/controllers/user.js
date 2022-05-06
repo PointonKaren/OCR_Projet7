@@ -5,7 +5,7 @@ const fileSystem = require("fs");
 require("dotenv").config();
 
 const User = require("../models/User");
-const { getPasswordSchema, generateToken } = require('../utils/common');
+const { getPasswordSchema, generateToken } = require("../utils/common");
 
 /**
  * S'enregistrer sur le site
@@ -98,7 +98,7 @@ const login = (req, res, next) => {
     })
     .catch((error) => {
       console.log(error);
-      res.status(500).json({ message: error })
+      res.status(500).json({ message: error });
     });
 };
 
@@ -155,7 +155,7 @@ const getOneUser = (req, res, next) => {
  */
 const modifyUser = (req, res, next) => {
   let updatedUser;
-
+  // TODO: Faire en sorte que l'image de profil ne dépasse un certain format/poids
   // 2 cas possibles : soit l'utilisateur modifie notamment l'image, soit il ne touche pas à l'image et ne modifie que le contenu du formulaire
   if (req.file) {
     updatedUser = {
@@ -232,7 +232,6 @@ const deleteUser = (req, res, next) => {
       res.status(500).json({ message: error });
     });
 };
-
 
 module.exports = {
   signup,
