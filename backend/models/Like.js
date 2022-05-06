@@ -1,26 +1,28 @@
-module.exports = (sequelize, Datatypes) => {
-  const Like = sequelize.define("Like", {
-    id: {
-      type: Datatypes.INTEGER,
-      primaryKey: true,
-      unique: true,
+const Sequelize = require('sequelize')
+const sequelize = require('../utils/database')
+
+const Like = sequelize.define("Like", {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    unique: true,
+    allowNull: false,
+    autoIncrement: true,
+  },
+});
+Like.associate = (models) => {
+  Like.belongsTo(models.User, {
+    foreignKey: {
       allowNull: false,
-      autoIncrement: true,
     },
+    onDelete: "CASCADE",
   });
-  Like.associate = (models) => {
-    Like.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false,
-      },
-      onDelete: "CASCADE",
-    });
-    Like.belongsTo(models.Post, {
-      foreignKey: {
-        allowNull: false,
-      },
-      onDelete: "CASCADE",
-    });
-  };
-  return Like;
+  Like.belongsTo(models.Post, {
+    foreignKey: {
+      allowNull: false,
+    },
+    onDelete: "CASCADE",
+  });
 };
+
+module.exports = Like;

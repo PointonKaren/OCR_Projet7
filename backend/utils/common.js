@@ -1,6 +1,8 @@
 const passwordValidator = require("password-validator");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
-exports.getPasswordSchema = () => {
+const getPasswordSchema = () => {
   const passwordSchema = new passwordValidator();
 
   passwordSchema
@@ -17,4 +19,23 @@ exports.getPasswordSchema = () => {
     .has()
     .not()
     .spaces();
+
+    return passwordSchema;
+};
+
+const generateToken = (user) => {
+  return jwt.sign(
+    {
+      userId: user.id,
+      userRole: user.role,
+    },
+    process.env.SECRET_KEY,
+    { expiresIn: "24h" }
+  );
+};
+
+
+module.exports = {
+  getPasswordSchema,
+  generateToken
 };

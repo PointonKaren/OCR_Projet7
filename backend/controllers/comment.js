@@ -6,7 +6,7 @@ const Comment = require("../models/Comment");
  * @param {*} res
  * @param {*} next
  */
-exports.createComment = (req, res, next) => {};
+const createComment = (req, res, next) => {};
 
 /**
  *
@@ -14,7 +14,7 @@ exports.createComment = (req, res, next) => {};
  * @param {*} res
  * @param {*} next
  */
-exports.getOneComment = (req, res, next) => {};
+const getOneComment = (req, res, next) => {};
 
 /**
  *
@@ -22,7 +22,7 @@ exports.getOneComment = (req, res, next) => {};
  * @param {*} res
  * @param {*} next
  */
-exports.deleteComment = (req, res, next) => {};
+const deleteComment = (req, res, next) => {};
 
 /**
  *
@@ -30,4 +30,12 @@ exports.deleteComment = (req, res, next) => {};
  * @param {*} res
  * @param {*} next
  */
-exports.modifyComment = (req, res, next) => {};
+const modifyComment = (req, res, next) => {};
+
+
+module.exports = {
+    createComment,
+    getOneComment,
+    deleteComment,
+    modifyComment
+}

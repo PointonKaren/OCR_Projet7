@@ -1,22 +1,23 @@
 const fileSystem = require("fs");
 
+const User = require("../models/User");
 const Post = require("../models/Post");
 
 /**
- *
+ * Récupérer tous les posts
  * @param {*} req
  * @param {*} res
  * @param {*} next
  */
-exports.getAllPosts = (req, res, next) => {};
+const getAllPosts = (req, res, next) => {};
 
 /**
- *
+ * Créer un post
  * @param {*} req
  * @param {*} res
  * @param {*} next
  */
-exports.createPost = (req, res, next) => {
+const createPost = (req, res, next) => {
   const post = new Post({
     userId: req.userId,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
@@ -28,11 +29,31 @@ exports.createPost = (req, res, next) => {
     .save()
     .then(() =>
       res.status(201).json({
-        message: "Post publié !",
+        message: "Post publié.",
         postId: post.id,
       })
     )
     .catch((error) => res.status(400).json({ message: error }));
+};
+
+/**
+ * Récupérer un post
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
+const getOnePost = (req, res, next) => {
+  Post.findOne({ where: { id: req.params.id }, include: [{ model: User }] })
+
+    .then((post) => {
+      res.status(200).json({
+        message: "Post trouvé.",
+        post: post,
+      });
+    })
+    .catch((error) => {
+      res.status(404).json({ message: error });
+    });
 };
 
 /**
@@ -41,7 +62,7 @@ exports.createPost = (req, res, next) => {
  * @param {*} res
  * @param {*} next
  */
-exports.getOnePost = (req, res, next) => {};
+const modifyPost = (req, res, next) => {};
 
 /**
  *
@@ -49,7 +70,7 @@ exports.getOnePost = (req, res, next) => {};
  * @param {*} res
  * @param {*} next
  */
-exports.modifyPost = (req, res, next) => {};
+const deletePost = (req, res, next) => {};
 
 /**
  *
@@ -57,12 +78,13 @@ exports.modifyPost = (req, res, next) => {};
  * @param {*} res
  * @param {*} next
  */
-exports.deletePost = (req, res, next) => {};
+const likePost = (req, res, next) => {};
 
-/**
- *
- * @param {*} req
- * @param {*} res
- * @param {*} next
- */
-exports.likePost = (req, res, next) => {};
+module.exports = {
+  getAllPosts,
+  createPost,
+  getOnePost,
+  modifyPost,
+  deletePost,
+  likePost,
+};

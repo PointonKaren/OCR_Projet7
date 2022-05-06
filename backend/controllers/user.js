@@ -1,10 +1,11 @@
 const bcrypt = require("bcrypt");
+const emailValidator = require("email-validator");
 const fileSystem = require("fs");
 
 require("dotenv").config();
 
 const User = require("../models/User");
-const utils = require("../utils");
+const { getPasswordSchema, generateToken } = require('../utils/common');
 
 /**
  * S'enregistrer sur le site
@@ -13,8 +14,8 @@ const utils = require("../utils");
  * @param {*} next
  * @returns
  */
-exports.signup = (req, res, next) => {
-  const passwordSchema = utils.common.getPasswordSchema();
+const signup = (req, res, next) => {
+  const passwordSchema = getPasswordSchema();
 
   if (!passwordSchema.validate(req.body.password)) {
     let errorMessage = "";
@@ -64,7 +65,7 @@ exports.signup = (req, res, next) => {
  * @param {*} res
  * @param {*} next
  */
-exports.login = (req, res, next) => {
+const login = (req, res, next) => {
   User.findOne({ where: { email: req.body.email } }) // Est-ce que l'utilisateur existe ?
     .then((user) => {
       if (!user) {
@@ -83,16 +84,22 @@ exports.login = (req, res, next) => {
           res.status(200).json({
             userId: user.id,
             role: user.role,
-            token: utils.token.generateToken(user),
+            token: generateToken(user),
             firstName: user.firstName,
             surname: user.surname,
             jobTitle: user.jobTitle,
             bio: user.bio,
           });
         })
-        .catch((error) => res.status(500).json({ message: error }));
+        .catch((error) => {
+          console.log(error);
+          res.status(500).json({ message: error });
+        });
     })
-    .catch((error) => res.status(500).json({ message: error }));
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json({ message: error })
+    });
 };
 
 /**
@@ -101,7 +108,7 @@ exports.login = (req, res, next) => {
  * @param {*} res
  * @param {*} next
  */
-exports.getUsers = (req, res, next) => {
+const getUsers = (req, res, next) => {
   if (req.auth.userRole == 2) {
     User.findAll()
       .then((users) => {
@@ -123,7 +130,7 @@ exports.getUsers = (req, res, next) => {
  * @param {*} res
  * @param {*} next
  */
-exports.getOneUser = (req, res, next) => {
+const getOneUser = (req, res, next) => {
   User.findOne({ where: { id: req.params.id } })
     .then((user) => {
       if (req.auth.userId == req.params.id || req.auth.userRole == 2) {
@@ -146,7 +153,7 @@ exports.getOneUser = (req, res, next) => {
  * @param {*} next
  * @returns
  */
-exports.modifyUser = (req, res, next) => {
+const modifyUser = (req, res, next) => {
   let updatedUser;
 
   // 2 cas possibles : soit l'utilisateur modifie notamment l'image, soit il ne touche pas à l'image et ne modifie que le contenu du formulaire
@@ -199,7 +206,7 @@ exports.modifyUser = (req, res, next) => {
  * @param {*} res
  * @param {*} next
  */
-exports.deleteUser = (req, res, next) => {
+const deleteUser = (req, res, next) => {
   User.findOne({ where: { id: req.params.id } })
     .then((user) => {
       if (!user) {
@@ -224,4 +231,14 @@ exports.deleteUser = (req, res, next) => {
     .catch((error) => {
       res.status(500).json({ message: error });
     });
+};
+
+
+module.exports = {
+  signup,
+  login,
+  getUsers,
+  getOneUser,
+  modifyUser,
+  deleteUser,
 };
