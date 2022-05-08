@@ -66,16 +66,16 @@ const getPostComments = (req, res, next) => {
 const deleteComment = (req, res, next) => {
   const currentUserId = req.body.userId;
   const currentUserRole = req.auth.userRole;
-  const currentCommentId = res.params.id;
+  const currentCommentId = req.params.id;
   Comment.findOne({ where: { id: currentCommentId } })
     .then((comment) => {
       if (!comment) {
-        res.status(404).json({ message: "Le commentaire n'existe pas." });
+        return res.status(404).json({ message: "Le commentaire n'existe pas." });
       }
       if (
-        currentUserId == comment.UserId ||
-        currentUserRole == 1 ||
-        currentUserRole == 2
+        currentUserId === comment.UserId ||
+        currentUserRole === 1 ||
+        currentUserRole === 2
       ) {
         comment
           .destroy()
@@ -103,14 +103,19 @@ const deleteComment = (req, res, next) => {
 const modifyComment = (req, res, next) => {
   const currentUserId = req.body.userId;
   const currentUserRole = req.auth.userRole;
-  const currentCommentId = res.params.id;
+  const currentCommentId = req.params.id;
+
 
   Comment.findOne({
     where: {
       id: currentCommentId,
     },
   }).then((comment) => {
-    if (currentUserId == comment.UserId || currentUserRole === 2) {
+    if (!comment) {
+      return res.status(404).json({ message: "Le commentaire n'existe pas." });
+    };
+
+    if (currentUserId === comment.UserId || currentUserRole === 2) {
       comment.message = req.body.message;
     }
     comment

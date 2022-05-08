@@ -3,6 +3,7 @@ const fileSystem = require("fs");
 const User = require("../models/User");
 const Like = require("../models/Like");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 /**
  * Récupérer tous les posts
@@ -97,13 +98,16 @@ const getPost = (req, res, next) => {
  * @param {*} next
  */
 const modifyPost = (req, res, next) => {
-  let currentUserId;
+  const currentUserId = req.body.userId;
   const currentUserRole = req.auth.userRole;
   const currentPostId = req.params.id;
 
   Post.findOne({ where: { id: currentPostId } })
     .then((post) => {
-      if (currentUserId == post.UserId || currentUserRole == 2) {
+        if(!post) {
+            return res.status(404).json({ message: "Post introuvable." });
+        }
+      if (currentUserId === post.UserId || currentUserRole === 2 || currentUserRole === 1) {
         post.title = req.body.title;
 
         post
@@ -135,9 +139,9 @@ const deletePost = (req, res, next) => {
         res.status(404).json({ message: "Le post n'existe pas." });
       }
       if (
-        post.UserId == currentUserId ||
-        req.auth.userRole == 1 ||
-        req.auth.userRole == 2
+        post.UserId === currentUserId ||
+        req.auth.userRole === 1 ||
+        req.auth.userRole === 2
       ) {
         const filename = post.imageUrl.split("/images/")[1];
         fileSystem.unlink(`images/${filename}`, () => {
