@@ -1,10 +1,12 @@
 <template>
   <!--Post minifié -->
-  <div class="minified__post">
-    <div class="minified__card">
-      <PostCard />
+  <a href="#">
+    <div class="minified__post">
+      <div class="minified__card">
+        <PostCard />
+      </div>
     </div>
-  </div>
+  </a>
 </template>
 
 <script>
@@ -23,7 +25,6 @@ export default {
   border: 2px solid #091f43;
   width: 900px;
   padding-top: 10px;
-  box-shadow: 3px 4px 20px #091f43;
   display: flex;
   flex-direction: row-reverse;
   margin: auto;

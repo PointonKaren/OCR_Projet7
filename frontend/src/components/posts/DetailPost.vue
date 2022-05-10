@@ -22,15 +22,15 @@ export default {
 
 <style lang="scss">
 #detailed__post {
+  background-color: rgb(207, 207, 207);
   border: 2px solid #091f43;
   width: 900px;
   padding-top: 10px;
   padding-bottom: 10px;
-  box-shadow: 3px 4px 20px #091f43;
   display: flex;
   flex-direction: row-reverse;
   margin: auto;
-  margin-bottom: 100px;
+  margin-top: 100px;
   #cards {
     margin: auto;
     display: flex;

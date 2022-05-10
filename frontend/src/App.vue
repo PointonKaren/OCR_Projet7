@@ -1,32 +1,35 @@
 <template>
   <div id="app">
     <BoxHeader />
-    <BoxSignup />
+    <BoxPresentation />
+    <!-- <BoxSignup />
     <BoxLogin />
-    <ProfileButton />
     <DetailPost />
-    <PostsCascade />
+    <PostsCascade /> -->
   </div>
 </template>
 
 <script>
 import BoxHeader from "./components/others/BoxHeader.vue";
-import BoxSignup from "./components/others/BoxSignup.vue";
-import BoxLogin from "./components/others/BoxLogin.vue";
-import ProfileButton from "./components/others/ProfileButton.vue";
-import DetailPost from "./components/posts/DetailPost.vue";
-import PostsCascade from "./components/posts/PostsCascade.vue";
+import BoxPresentation from "./components/others/BoxPresentation.vue";
+// import BoxSignup from "./components/others/BoxSignup.vue";
+// import BoxLogin from "./components/others/BoxLogin.vue";
+// import DetailPost from "./components/posts/DetailPost.vue";
+// import PostsCascade from "./components/posts/PostsCascade.vue";
 export default {
   name: "App",
   components: {
     BoxHeader,
-    BoxSignup,
-    BoxLogin,
-    ProfileButton,
-    DetailPost,
-    PostsCascade,
+    BoxPresentation,
+    // BoxSignup,
+    // BoxLogin,
+    // DetailPost,
+    // PostsCascade,
   },
 };
+// let body = document.querySelector("body");
+
+// body.style.backgroundColor = "#eee";
 </script>
 
 <style lang="scss">

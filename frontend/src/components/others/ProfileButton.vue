@@ -1,21 +1,50 @@
 <template>
   <!--Bouton "Profil"-->
-  <div id="profile"></div>
+  <div id="profile">
+    <div class="profile__picture"></div>
+    <div id="profile__buttons">
+      <!-- <button class="button logout">Me déconnecter</button>
+      <button class="button delete__account">Supprimer mon compte</button> -->
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: "ProfileButton",
 };
+// const profile = document.getElementById("profile");
+// const profileButtons = document.getElementById("profile__button");
+
+// const openBox = () => {
+//   profileButtons.style.display = "block";
+// };
+
+// const closeBox = () => {
+//   profileButtons.style.display = "none";
+// };
+// const addProfileEvents = () => {
+//   profile.addEventListener("click", () => {
+//     openBox();
+//   });
+
+//   profile.addEventListener("click", () => {
+//     closeBox();
+//   });
+// };
+// addProfileEvents();
 </script>
 
 <style lang="scss">
 #profile {
-  background-image: url("https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kMXJhbHNvZ25qbmczNy5jbG91ZGZyb250Lm5ldC8zNzg4MDJiMC1jNTI4LTQ4MjktYjBiNS0wY2M2NDBkZjYzY2QuanBlZw==");
-  height: 70px;
-  width: 70px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 50px;
+  width: 50px;
+  .profile__picture {
+    background-image: url("https://www.handiclubnimois.fr/wp-content/uploads/2020/10/blank-profile-picture-973460_1280.png");
+    height: 50px;
+    width: 50px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50px;
+  }
 }
 </style>

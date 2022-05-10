@@ -25,7 +25,7 @@
           required
         />
       </p>
-      <input type="submit" value="Envoyer" />
+      <input type="submit" value="Envoyer" class="button send" />
     </form>
   </div>
 </template>
@@ -38,16 +38,33 @@ export default {
 
 <style lang="scss">
 #login {
+  width: 20vw;
+  margin: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  padding-left: 20px;
+  background-color: rgb(207, 207, 207);
+  border: 2px solid #091f43;
   form {
+    display: flex;
+    flex-direction: column;
     label {
       display: block;
       width: 170px;
       float: left;
     }
-    .input {
-      width: 260px;
-      text-align: center;
-    }
+  }
+  .input {
+    width: 260px;
+    text-align: center;
+  }
+  .send {
+    margin: 0;
+    margin-bottom: 20px;
+    align-self: center;
   }
 }
 </style>

@@ -24,7 +24,8 @@ export default {
 
 <style lang="scss">
 .comment__card {
-  border: 2px solid white;
+  border: 1px solid white;
+  background-color: white;
   box-shadow: 3px 4px 7px grey;
   border-radius: 20px;
   margin-bottom: 20px;

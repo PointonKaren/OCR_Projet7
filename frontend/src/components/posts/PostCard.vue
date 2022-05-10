@@ -50,7 +50,7 @@ export default {
   .post__image {
     img {
       border-radius: 10px;
-      border: 5px solid white;
+      border: 3px solid white;
       max-height: 512px;
     }
   }
