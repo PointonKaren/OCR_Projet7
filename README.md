@@ -1,10 +1,5 @@
 # Projet 7 de la formation Développement Web d'OpenClassrooms
 
-## Frontend
-### Packages à installer :
-* sass-loader
-* sass
-
 ## Backend
 ### Packages à installer :
 
@@ -19,13 +14,84 @@
 * password-validator
 * sequelize
 
-## Fonctionnalités
+### Fonctionnalités
 
-Trois niveaux d'utilisateurs créés :
+Pour chaque niveau d'utilisateurs :
 
-0: utilisateur "normal" : peut consulter les posts, les noms/prénoms/photos et rôles dans l'entreprise des autres utilisateurs. Il peut également commenter et aimer un post.
-1: modérateur : autorisations précédentes + peut également supprimer des posts et commentaires.
-2: administrateur : autorisations précédentes + peut également modifier des comptes, posts, commentaires, accéder à une liste de tous les utilisateurs et supprimer des comptes.
+* **0 : simple utilisateur :**
+  - S'enregistrer et se connecter
+  - Poster un post
+  - Supprimer un de ses posts
+  - Consulter tous les posts
+  - Liker un post
+  - Consulter le détail et les commendaires d'un post
+  - Commenter un post
+  - Supprimer ses commentaires
+  - Modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
+  - Modifier son mot de passe
+  - Supprimer son compte
+* **1 : modérateur : idem +**
+  - Modifier un titre
+  - Supprimer un post
+  - Supprimer des commentaires
+* **2 : administrateur : idem +**
+  - Modifier un profil
+  - Supprimer un utilisateur
+
+## Frontend
+### Packages à installer :
+* sass-loader
+* sass
+
+### Fonctionnalités développées
+
+Pour chaque niveau d'utilisateurs :
+
+* **0 : simple utilisateur :**
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+* **1 : modérateur : idem +**
+  - 
+  - 
+  - 
+* **2 : administrateur : idem +**
+  - 
+  - 
+
+### Fonctionnalités possibles
+
+Ces fonctionnalités peuvent être développées (certaines sont déjà prévues dans le backend) mais n'ont pas été mises en place dans ce MVP.
+
+Pour chaque niveau d'utilisateurs :
+
+* **0 : simple utilisateur :**
+  - S'enregistrer et se connecter
+  - Poster un post
+  - Supprimer un de ses posts
+  - Consulter tous les posts
+  - Liker un post
+  - Consulter le détail et les commendaires d'un post
+  - Commenter un post
+  - Supprimer ses commentaires
+  - Modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
+  - Modifier son mot de passe
+  - Supprimer son compte
+  - Accéder à un trombinoscope
+* **1 : modérateur : idem +**
+  - Modifier un titre
+  - Supprimer un post
+  - Supprimer des commentaires
+* **2 : administrateur : idem +**
+  - Modifier un profil
+  - Supprimer un utilisateur
+  - Consulter tous les posts et commentaires d'un utilisateur
 
 
 *Readme à compléter*
