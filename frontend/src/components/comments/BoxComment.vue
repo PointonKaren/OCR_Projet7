@@ -1,11 +1,10 @@
 <template>
+  <!-- Bloc "Commentaire" -->
   <div class="comment__card">
-    <!-- Commentaire -->
     <div class="comment__buttons">
-      <button class="button post__delete">
-        <i class="fa-solid fa-trash-can"></i>
+      <button class="button delete post__delete">
+        <i class="fa-regular fa-trash-can"></i>
       </button>
-      <br />
       <button class="button edit">
         <i class="fa-regular fa-pen-to-square"></i>
       </button>
@@ -14,7 +13,6 @@
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
       consequuntur.
     </p>
-    <button class="button likes"><i class="fa-solid fa-heart"></i></button>
   </div>
 </template>
 
@@ -26,10 +24,14 @@ export default {
 
 <style lang="scss">
 .comment__card {
-  margin: 0;
-  border: 1px solid violet;
+  border: 2px solid white;
+  box-shadow: 3px 4px 7px grey;
+  border-radius: 20px;
+  margin-bottom: 20px;
   width: 30vw;
   .comment__buttons {
+    padding-right: 10px;
+    padding-top: 10px;
     display: flex;
     justify-content: flex-end;
   }

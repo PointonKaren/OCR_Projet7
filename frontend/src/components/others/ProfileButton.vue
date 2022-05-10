@@ -1,8 +1,6 @@
 <template>
-  <div class="comment__card">
-    <!--Bouton "Profil"-->
-    <div id="profile"></div>
-  </div>
+  <!--Bouton "Profil"-->
+  <div id="profile"></div>
 </template>
 
 <script>
