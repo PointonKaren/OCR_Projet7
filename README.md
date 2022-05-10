@@ -1,5 +1,16 @@
 # Projet 7 de la formation Développement Web d'OpenClassrooms
 
+## Lancer les serveurs :
+
+1) Télécharger, installer et lancer le logiciel XAMPP : https://www.apachefriends.org/fr/index.html,
+2) Se connecter à la BDD : ,
+// TODO: Ajouter la méthode pour se connecter. Où entrer mdp ?
+3) Cliquer sur Start sur les deux premières lignes (Apache et MySQL),
+4) *Facultatif : pour consulter la BDD, cliquer sur le bouton Admin de MySQL (possible uniquement si Apache démarré),*
+5) Sur l'éditeur de code, dans le terminal de commande, lancer le serveur (commande nodemon depuis le dossier backend),
+6) Dans le dossier frontend, taper la commande npm run serve,
+7) Ne pas fermer l'éditeur de texte et XAMPP tant que l'application web est utilisée,
+
 ## Backend
 ### Packages à installer :
 
@@ -14,15 +25,6 @@
 * password-validator
 * sequelize
 
-### Lancer le serveur :
-
-1) Télécharger et installer le logiciel XAMPP : https://www.apachefriends.org/fr/index.html
-2) Se connecter à la BDD : 
-// TODO: Ajouter la méthode pour se connecter. Où entrer mdp ?
-3) Cliquer sur Start sur les deux premières lignes (Apache et MySQL)
-4) *Facultatif : pour consulter la BDD, cliquer sur le bouton Admin de MySQL (possible uniquement si Apache démarré)*
-5) Sur l'éditeur de code, dans le terminal de commande, lancer le serveur (commande nodemon depuis le dossier backend)
-6) Conserver l'éditeur de texte et XAMPP ouvert tout le temps d'utilisation du serveur
 
 ### Fonctionnalités
 
