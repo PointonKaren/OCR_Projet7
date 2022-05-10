@@ -39,18 +39,21 @@ Pour chaque niveau d'utilisateurs :
   - Liker un post
   - Consulter le détail et les commendaires d'un post
   - Commenter un post
+  - Editer ses commentaires
   - Supprimer ses commentaires
-  - Modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
+  - Consulter et modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
   - Modifier son mot de passe
   - Supprimer son compte
 * **1 : modérateur : idem +**
   
-  - Modifier un titre
+  - Modifier un titre de post
   - Supprimer un post
   - Supprimer des commentaires
 * **2 : administrateur : idem +**
   
-  - Modifier un profil
+  - Modifier n'importe quel commentaire
+  - Consulter n'importe quel profil
+  - Modifier n'importe quel profil (notamment mail/mot de passe en cas d'oubli)
   - Supprimer un utilisateur
 
 ## Frontend
@@ -102,21 +105,24 @@ Pour chaque niveau d'utilisateurs :
   - Liker un post
   - Consulter le détail et les commendaires d'un post
   - Commenter un post
+  - Editer ses commentaires
   - Supprimer ses commentaires
-  - Modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
+  - Consulter et modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
   - Modifier son mot de passe
   - Supprimer son compte
   - Accéder à un trombinoscope
 * **1 : modérateur : idem +**
   
-  - Modifier un titre
+  - Modifier un titre de post
   - Supprimer un post
   - Supprimer des commentaires
 * **2 : administrateur : idem +**
   
-  - Modifier un profil
+  - Modifier n'importe quel commentaire
+  - Consulter n'importe quel profil
+  - Modifier n'importe quel profil (notamment mail/mot de passe en cas d'oubli)
   - Supprimer un utilisateur
-  - Consulter tous les posts et commentaires d'un utilisateur
+  - Consulter une liste de tous les posts et commentaires d'un utilisateur précis
 
 
 *Readme à compléter*
