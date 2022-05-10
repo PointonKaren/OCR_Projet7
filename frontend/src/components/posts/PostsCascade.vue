@@ -7,11 +7,7 @@
         <i class="fa-solid fa-arrow-up"></i></button
     ></a>
     <div id="cascade">
-      <MinifiedPost />
-      <MinifiedPost />
-      <MinifiedPost />
-      <MinifiedPost />
-      <MinifiedPost />
+      <MinifiedPost v-for="(card, index) in 3" :key="index" />
     </div>
   </div>
 </template>

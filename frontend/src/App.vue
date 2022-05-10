@@ -1,30 +1,15 @@
 <template>
   <div id="app">
-    <BoxHeader />
-    <BoxPresentation />
-    <!-- <BoxSignup />
-    <BoxLogin />
-    <DetailPost />
-    <PostsCascade /> -->
+    <PageHome />
   </div>
 </template>
 
 <script>
-import BoxHeader from "./components/others/BoxHeader.vue";
-import BoxPresentation from "./components/others/BoxPresentation.vue";
-// import BoxSignup from "./components/others/BoxSignup.vue";
-// import BoxLogin from "./components/others/BoxLogin.vue";
-// import DetailPost from "./components/posts/DetailPost.vue";
-// import PostsCascade from "./components/posts/PostsCascade.vue";
+import PageHome from "./page/PageHome.vue";
 export default {
   name: "App",
   components: {
-    BoxHeader,
-    BoxPresentation,
-    // BoxSignup,
-    // BoxLogin,
-    // DetailPost,
-    // PostsCascade,
+    PageHome,
   },
 };
 // let body = document.querySelector("body");
