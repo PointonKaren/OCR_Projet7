@@ -1,7 +1,7 @@
 <template>
   <!--Bloc "Signup"-->
   <div id="signup">
-    <h2>M'enregistrer</h2>
+    <h1>Inscription</h1>
     <form method="post" action="traitement.org">
       <p>
         <label for="firstName">Prénom : </label>
@@ -53,7 +53,10 @@ export default {
 
 <style lang="scss">
 #signup {
-  width: 20vw;
+  h1 {
+    text-align: center;
+  }
+  width: 40vw;
   margin: auto;
   position: fixed;
   top: 50%;
@@ -66,14 +69,15 @@ export default {
   form {
     display: flex;
     flex-direction: column;
+    align-items: center;
     label {
       display: block;
-      width: 170px;
+      // width: 170px;
       float: left;
     }
   }
   .input {
-    width: 260px;
+    // width: 260px;
     text-align: center;
   }
   .send {
