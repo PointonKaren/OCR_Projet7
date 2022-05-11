@@ -1,15 +1,18 @@
 <template>
   <div id="app">
-    <PageHome />
+    <BoxHeader />
+    <ViewHome />
   </div>
 </template>
 
 <script>
-import PageHome from "./page/PageHome.vue";
+import BoxHeader from "./components/others/BoxHeader.vue";
+import ViewHome from "./views/ViewHome.vue";
 export default {
   name: "App",
   components: {
-    PageHome,
+    BoxHeader,
+    ViewHome,
   },
 };
 // let body = document.querySelector("body");
@@ -28,7 +31,7 @@ export default {
     color: #091f43;
   }
   p {
-    font-size: 1.1em;
+    font-size: 1.2em;
   }
 }
 // Design des boutons
