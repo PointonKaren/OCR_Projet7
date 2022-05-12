@@ -29,6 +29,9 @@
           v-model="password"
         />
       </p>
+      <div v-if="status == 'error_login'">
+        Adresse mail et/ou mot de passe invalide.
+      </div>
       <input
         type="submit"
         value="Envoyer"
@@ -36,11 +39,14 @@
         :class="{ 'button--disabled': !validatedFields }"
         @click="login()"
       />
+      <span v-if="status == 'loading'">Connexion en cours...</span>
+      <span v-else>Connexion</span>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "BoxLogin",
   data: function () {
@@ -57,6 +63,7 @@ export default {
         return false;
       }
     },
+    ...mapState(["status"]),
   },
   methods: {
     login: function () {

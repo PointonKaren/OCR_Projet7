@@ -7,28 +7,50 @@ const instance = axios.create({
 });
 
 const store = createStore({
-  state: {},
+  state: {
+    status: "",
+    user: {
+      userId: -1,
+      role: 0,
+      token: "",
+      firstName: "",
+      surname: "",
+      pictureUrl: "",
+      jobTitle: "",
+      bio: "",
+    },
+  },
+  mutations: {
+    setStatus: function (state, status) {
+      state.status = status;
+    },
+    logUser: function (state, user) {
+      state.user = user;
+    },
+  },
   actions: {
+    createAccount: ({ commit }, userInfos) => {
+      commit("setStatus", "loading");
+      instance
+        .post("/user/signup", userInfos)
+        .then(function () {
+          commit("setStatus", "created");
+        })
+        .catch(function () {
+          commit("setStatus", "error_create");
+        });
+    },
     login: ({ commit }, userInfos) => {
-      commit;
+      commit("setStatus", "loading");
       instance
         .post("/user/login", userInfos)
         .then(function (response) {
+          commit("setStatus", "");
+          commit("logUser", response.data);
           console.log(response);
         })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    createAccount: ({ commit }, userInfos) => {
-      commit;
-      instance
-        .post("/user/signup", userInfos)
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
+        .catch(function () {
+          commit("setStatus", "error_login");
         });
     },
   },
