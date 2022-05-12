@@ -12,18 +12,18 @@
 7) Ne pas fermer l'éditeur de texte et XAMPP tant que l'application web est utilisée,
 
 ## Backend
-### Packages à installer :
+### Packages installés :
 
-* bcrypt
-* dotenv
-* email-validator
-* express
-* helmet
-* jsonwebtoken
-* multer
-* nodemon
-* password-validator
-* sequelize
+* bcrypt : https://www.npmjs.com/package/bcrypt
+* dotenv : https://www.npmjs.com/package/dotenv
+* email-validator : https://www.npmjs.com/package/email-validator
+* express : https://www.npmjs.com/package/express
+* helmet : https://www.npmjs.com/package/helmet
+* jsonwebtoken : https://www.npmjs.com/package/jsonwebtoken
+* multer : https://www.npmjs.com/package/multer
+* nodemon : https://www.npmjs.com/package/nodemon
+* password-validator : https://www.npmjs.com/package/password-validator
+* sequelize : https://www.npmjs.com/package/sequelize
 
 
 ### Fonctionnalités
@@ -57,13 +57,13 @@ Pour chaque niveau d'utilisateurs :
   - Supprimer un utilisateur
 
 ## Frontend
-### Packages à installer :
+### Packages installés :
 
-* axios
-* sass
-* sass-loader
-* vue-router
-* vuex
+* axios : https://www.npmjs.com/package/axios
+* sass : https://www.npmjs.com/package/sass
+* sass-loader : https://www.npmjs.com/package/sass-loader
+* vue-router : https://router.vuejs.org/installation.html
+* vuex : https://vuex.vuejs.org/installation.html
 
 ### Fonctionnalités développées
 
