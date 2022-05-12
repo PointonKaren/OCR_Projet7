@@ -2,7 +2,7 @@
   <!--Bloc "Login"-->
   <div id="login_form">
     <h1>Connexion</h1>
-    <form method="get" action="traitement.org">
+    <div class="form">
       <p>
         <label for="email">Mail professionnel : </label>
         <input
@@ -35,7 +35,7 @@
         class="button send"
         :class="{ 'button--disabled': !validatedFields }"
       />
-    </form>
+    </div>
   </div>
 </template>
 
@@ -72,7 +72,7 @@ export default {
   h1 {
     text-align: center;
   }
-  form {
+  .form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -116,7 +116,7 @@ export default {
     h1 {
       font-size: 1.3em;
     }
-    form {
+    .form {
       margin: 0;
       p {
         margin: 0;
