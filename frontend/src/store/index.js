@@ -9,6 +9,17 @@ const instance = axios.create({
 const store = createStore({
   state: {},
   actions: {
+    login: ({ commit }, userInfos) => {
+      commit;
+      instance
+        .post("/user/login", userInfos)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
     createAccount: ({ commit }, userInfos) => {
       commit;
       instance

@@ -34,6 +34,7 @@
         value="Envoyer"
         class="button send"
         :class="{ 'button--disabled': !validatedFields }"
+        @click="login()"
       />
     </div>
   </div>
@@ -55,6 +56,21 @@ export default {
       } else {
         return false;
       }
+    },
+  },
+  methods: {
+    login: function () {
+      this.$store
+        .dispatch("login", {
+          email: this.email,
+          password: this.password,
+        })
+        .then(function (response) {
+          console.log(response);
+        }),
+        function (error) {
+          console.log(error);
+        };
     },
   },
 };
