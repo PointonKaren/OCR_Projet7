@@ -40,8 +40,14 @@ export default {
   }
   width: 40vw;
   margin: auto;
+  margin-top: 10vh;
   padding-left: 20px;
   background-color: rgb(207, 207, 207);
   border: 2px solid #091f43;
+}
+@media screen and (max-width: 1200px) {
+  #presentation {
+    display: none;
+  }
 }
 </style>

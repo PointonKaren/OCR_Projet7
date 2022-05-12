@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <BoxPresentation class="presentation" />
+    <BoxPresentation />
     <div id="create" v-if="mode == 'create'">
       <button class="button login" @click="switchToLogin()">
         Me connecter
@@ -76,9 +76,6 @@ export default {
     }
   }
   @media screen and (max-width: 1200px) {
-    .presentation {
-      display: none;
-    }
     #create {
       position: fixed;
       top: 50%;
@@ -100,4 +97,7 @@ export default {
     }
   }
 }
+// TODO: Voir dans le P5 comment a été géré le formulaire :
+// TODO: Afficher les messages d'erreurs générés par le back. backend\controllers\user.js pour le mail et backend\utils\common.js pour le mdp. Cf P6
+// TODO: https://www.youtube.com/watch?v=W2ZWbE45vkg
 </style>

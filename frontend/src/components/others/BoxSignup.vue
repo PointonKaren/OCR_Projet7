@@ -2,7 +2,7 @@
   <!--Bloc "Signup"-->
   <div id="signup">
     <h1>Inscription</h1>
-    <form method="post" action="traitement.org">
+    <div class="form">
       <p>
         <label for="firstName">Prénom : </label>
         <input
@@ -56,8 +56,9 @@
         value="Envoyer"
         class="button send"
         :class="{ 'button--disabled': !validatedFields }"
+        @click="createAccount()"
       />
-    </form>
+    </div>
   </div>
 </template>
 
@@ -86,12 +87,22 @@ export default {
       }
     },
   },
+  methods: {
+    createAccount: function () {
+      this.$store.dispatch("createAccount", {
+        firstname: this.firstname,
+        lastname: this.lastname,
+        email: this.email,
+        password: this.password,
+      });
+    },
+  },
 };
 </script>
 
 <style lang="scss">
 #signup {
-  width: 40vw;
+  width: 35vw;
   max-width: 600px;
   margin: auto;
   padding-left: 20px;
@@ -101,12 +112,12 @@ export default {
   h1 {
     text-align: center;
   }
-  form {
+  .form {
     display: flex;
     flex-direction: column;
     align-items: center;
     p {
-      font-size: 1.3em;
+      font-size: 1.1em;
       label {
         display: block;
         text-align: center;
@@ -145,7 +156,7 @@ export default {
     h1 {
       font-size: 1.3em;
     }
-    form {
+    .form {
       margin: 0;
       p {
         margin: 0;
