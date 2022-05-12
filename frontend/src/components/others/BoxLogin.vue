@@ -2,17 +2,18 @@
   <!--Bloc "Login"-->
   <div id="login_form">
     <h1>Connexion</h1>
-    <form method="post" action="traitement.org">
+    <form method="get" action="traitement.org">
       <p>
         <label for="email">Mail professionnel : </label>
         <input
-          class="input"
+          class="input email"
           type="email"
           name="email"
           id="email"
           placeholder="prenom.nom@groupomania.com"
           pattern=".+@groupomania\.com"
           required
+          v-model="email"
         />
       </p>
       <p>
@@ -25,9 +26,15 @@
           required
           title="Minimun 8 caractères, 1 majuscule, 1
         minuscule et 2 chiffres."
+          v-model="password"
         />
       </p>
-      <input type="submit" value="Envoyer" class="button send" />
+      <input
+        type="submit"
+        value="Envoyer"
+        class="button send"
+        :class="{ 'button--disabled': !validatedFields }"
+      />
     </form>
   </div>
 </template>
@@ -35,6 +42,21 @@
 <script>
 export default {
   name: "BoxLogin",
+  data: function () {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  computed: {
+    validatedFields: function () {
+      if (this.email != "" && this.password != "") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
 };
 </script>
 
@@ -78,6 +100,11 @@ export default {
       padding-right: 15px;
       padding-left: 15px;
       font-size: 1.3em;
+    }
+    .button--disabled {
+      background-color: grey;
+      color: lightgrey;
+      border: 1px solid darkgrey;
     }
   }
 }

@@ -5,11 +5,25 @@
     <form method="post" action="traitement.org">
       <p>
         <label for="firstName">Prénom : </label>
-        <input class="input" type="text" name="pseudo" id="pseudo" required />
+        <input
+          class="input"
+          type="text"
+          name="firstname"
+          id="firstname"
+          required
+          v-model="firstname"
+        />
       </p>
       <p>
         <label for="surname">Nom : </label>
-        <input class="input" type="text" name="pseudo" id="pseudo" required />
+        <input
+          class="input"
+          type="text"
+          name="surname"
+          id="surname"
+          required
+          v-model="surname"
+        />
       </p>
       <p>
         <label for="email">Mail professionnel : </label>
@@ -21,6 +35,7 @@
           placeholder="prenom.nom@groupomania.com"
           pattern=".+@groupomania\.com"
           required
+          v-model="email"
         />
       </p>
       <p>
@@ -33,19 +48,44 @@
           required
           title="Minimun 8 caractères, 1 majuscule, 1
         minuscule et 2 chiffres."
+          v-model="password"
         />
       </p>
-      <input type="submit" value="Envoyer" class="button send" />
+      <input
+        type="submit"
+        value="Envoyer"
+        class="button send"
+        :class="{ 'button--disabled': !validatedFields }"
+      />
     </form>
   </div>
-  <!--TODO: Voir dans le P5 comment a été géré le formulaire :-->
-  <!--TODO: Utiliser les regex pour mail et mdp -->
-  <!--TODO: Afficher les messages d'erreurs générés par le back. backend\controllers\user.js pour le mail et backend\utils\common.js pour le mdp. Cf P6 -->
 </template>
 
 <script>
 export default {
   name: "BoxSignup",
+  data: function () {
+    return {
+      firstname: "",
+      surname: "",
+      email: "",
+      password: "",
+    };
+  },
+  computed: {
+    validatedFields: function () {
+      if (
+        this.firstname != "" &&
+        this.lastname != "" &&
+        this.email != "" &&
+        this.password != ""
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
 };
 </script>
 
@@ -89,6 +129,11 @@ export default {
       padding-right: 15px;
       padding-left: 15px;
       font-size: 1.3em;
+    }
+    .button--disabled {
+      background-color: grey;
+      color: lightgrey;
+      border: 1px solid darkgrey;
     }
   }
 }
