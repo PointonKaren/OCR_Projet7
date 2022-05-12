@@ -15,14 +15,14 @@
         />
       </p>
       <p>
-        <label for="surname">Nom : </label>
+        <label for="lastname">Nom : </label>
         <input
           class="input"
           type="text"
-          name="surname"
-          id="surname"
+          name="lastname"
+          id="lastname"
           required
-          v-model="surname"
+          v-model="lastname"
         />
       </p>
       <p>
@@ -67,7 +67,7 @@ export default {
   data: function () {
     return {
       firstname: "",
-      surname: "",
+      lastname: "",
       email: "",
       password: "",
     };
