@@ -58,8 +58,12 @@ Pour chaque niveau d'utilisateurs :
 
 ## Frontend
 ### Packages à installer :
-* sass-loader
+
+* axios
 * sass
+* sass-loader
+* vue-router
+* vuex
 
 ### Fonctionnalités développées
 
