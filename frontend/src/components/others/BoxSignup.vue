@@ -89,12 +89,19 @@ export default {
   },
   methods: {
     createAccount: function () {
-      this.$store.dispatch("createAccount", {
-        firstName: this.firstname,
-        surname: this.surname,
-        email: this.email,
-        password: this.password,
-      });
+      this.$store
+        .dispatch("createAccount", {
+          firstName: this.firstname,
+          surname: this.surname,
+          email: this.email,
+          password: this.password,
+        })
+        .then(function (response) {
+          console.log(response);
+        }),
+        function (error) {
+          console.log(error);
+        };
     },
   },
 };
