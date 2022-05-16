@@ -14,8 +14,6 @@
       <BoxLogin />
     </div>
 
-    <!-- mettre les 3 box au dessus dans une div, v-if si let isLog = false, v-else si let isLog = true -->
-
     <!-- <DetailPost /> -->
     <!-- <PostsCascade /> -->
   </div>
@@ -55,19 +53,11 @@ export default {
 <style lang="scss">
 #home {
   margin-top: 30px;
-  #create {
-    display: flex;
-    flex-direction: column;
-    .login {
-      margin: auto;
-      margin-top: 40px;
-      margin-bottom: 40px;
-      font-size: 1.3em;
-    }
-  }
+  #create,
   #login {
     display: flex;
     flex-direction: column;
+    .login,
     .signup {
       margin: auto;
       margin-top: 40px;
@@ -76,28 +66,20 @@ export default {
     }
   }
   @media screen and (max-width: 1200px) {
-    #create {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      .login {
-        font-size: 1.3em;
-        margin-bottom: -10px;
-      }
-    }
+    #create,
     #login {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      .login,
       .signup {
         font-size: 1.3em;
+        margin-bottom: -10px;
       }
     }
   }
 }
-// TODO: Voir dans le P5 comment a été géré le formulaire :
 // TODO: Afficher les messages d'erreurs générés par le back. backend\controllers\user.js pour le mail et backend\utils\common.js pour le mdp. Cf P6
 // TODO: https://www.youtube.com/watch?v=W2ZWbE45vkg
 </style>

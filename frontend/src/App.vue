@@ -24,6 +24,10 @@ export default {
 @import url("./style/reset.css");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
 #app {
+  background-image: url(assets/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
   font-family: "Roboto", sans-serif;
   h1,
   h2,
