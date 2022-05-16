@@ -1,18 +1,19 @@
 <template>
   <!--Bloc "Login"-->
-  <div id="login">
-    <h2>Me connecter</h2>
-    <form method="post" action="traitement.org">
+  <div id="login_form">
+    <h1>Connexion</h1>
+    <div class="form">
       <p>
         <label for="email">Mail professionnel : </label>
         <input
-          class="input"
+          class="input email"
           type="email"
           name="email"
           id="email"
           placeholder="prenom.nom@groupomania.com"
           pattern=".+@groupomania\.com"
           required
+          v-model="email"
         />
       </p>
       <p>
@@ -23,48 +24,140 @@
           name="password"
           id="password"
           required
+          title="Minimun 8 caractères, 1 majuscule, 1
+        minuscule et 2 chiffres."
+          v-model="password"
         />
       </p>
-      <input type="submit" value="Envoyer" class="button send" />
-    </form>
+      <div v-if="status == 'error_login'">
+        Adresse mail et/ou mot de passe invalide.
+      </div>
+      <input
+        type="submit"
+        value="Envoyer"
+        class="button send"
+        :class="{ 'button--disabled': !validatedFields }"
+        @click="login()"
+      />
+      <span v-if="status == 'loading'">Connexion en cours...</span>
+      <span v-else>Connexion</span>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "BoxLogin",
+  data: function () {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  computed: {
+    validatedFields: function () {
+      if (this.email != "" && this.password != "") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    ...mapState(["status"]),
+  },
+  methods: {
+    login: function () {
+      this.$store
+        .dispatch("login", {
+          email: this.email,
+          password: this.password,
+        })
+        .then(function (response) {
+          console.log(response);
+        }),
+        function (error) {
+          console.log(error);
+        };
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-#login {
-  width: 20vw;
+#login_form {
+  width: 40vw;
+  max-width: 600px;
   margin: auto;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  /* bring your own prefixes */
-  transform: translate(-50%, -50%);
   padding-left: 20px;
   background-color: rgb(207, 207, 207);
   border: 2px solid #091f43;
-  form {
-    display: flex;
-    flex-direction: column;
-    label {
-      display: block;
-      width: 170px;
-      float: left;
-    }
-  }
-  .input {
-    width: 260px;
+  margin-bottom: 30px;
+  h1 {
     text-align: center;
   }
-  .send {
-    margin: 0;
-    margin-bottom: 20px;
-    align-self: center;
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p {
+      font-size: 1.3em;
+      label {
+        display: block;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .input {
+        width: 25vw;
+        max-width: 300px;
+        text-align: center;
+        &::placeholder {
+          font-size: 0.9em;
+        }
+      }
+    }
+    .send {
+      margin: 0;
+      margin-bottom: 20px;
+      align-self: center;
+      padding-right: 15px;
+      padding-left: 15px;
+      font-size: 1.3em;
+    }
+    .button--disabled {
+      background-color: grey;
+      color: lightgrey;
+      border: 1px solid darkgrey;
+    }
+  }
+}
+@media screen and (max-width: 1200px) {
+  #login_form {
+    margin-top: 30px;
+    padding: 0;
+    width: 90vw;
+    h1 {
+      font-size: 1.3em;
+    }
+    .form {
+      margin: 0;
+      p {
+        margin: 0;
+        font-size: 1em;
+        label {
+          margin: 0;
+          margin-bottom: 10px;
+          margin-top: 10px;
+        }
+        .input {
+          width: 80vw;
+        }
+      }
+      .send {
+        margin-top: 20px;
+        font-size: 1em;
+      }
+    }
   }
 }
 </style>

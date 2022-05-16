@@ -2,11 +2,11 @@
   <!--Header-->
   <div id="header">
     <img :src="require('@/assets/logo.png')" />
-    <div id="header__buttons">
-      <button class="button signup">M'enregistrer</button>
-      <button class="button login">Me connecter</button>
-      <!-- <ProfileButton /> -->
-    </div>
+    <a href="mailto:admin@groupomania.com"
+      ><button class="button contact">Contact</button>
+    </a>
+
+    <!-- <ProfileButton /> -->
   </div>
 </template>
 
@@ -28,10 +28,27 @@ export default {
   padding: 10px 20px;
   border-bottom: 3px solid #d1515a;
   background-color: lightgrey;
-  #header__buttons {
-    border: 1px solid red;
-    button {
-      margin-left: 20px;
+  img {
+    margin-left: 20px;
+  }
+  a {
+    .contact {
+      font-size: 1.3em;
+      margin-right: 25px;
+    }
+  }
+}
+@media screen and (max-width: 1200px) {
+  #header {
+    img {
+      width: 35vw;
+      margin-left: -10px;
+    }
+    a {
+      .contact {
+        font-size: 1em;
+        margin-right: -10px;
+      }
     }
   }
 }

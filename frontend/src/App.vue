@@ -1,15 +1,18 @@
 <template>
   <div id="app">
-    <PageHome />
+    <BoxHeader />
+    <ViewHome />
   </div>
 </template>
 
 <script>
-import PageHome from "./page/PageHome.vue";
+import BoxHeader from "./components/others/BoxHeader.vue";
+import ViewHome from "./views/ViewHome.vue";
 export default {
   name: "App",
   components: {
-    PageHome,
+    BoxHeader,
+    ViewHome,
   },
 };
 // let body = document.querySelector("body");
@@ -21,6 +24,10 @@ export default {
 @import url("./style/reset.css");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
 #app {
+  background-image: url(assets/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
   font-family: "Roboto", sans-serif;
   h1,
   h2,
@@ -28,7 +35,7 @@ export default {
     color: #091f43;
   }
   p {
-    font-size: 1.1em;
+    font-size: 1.2em;
   }
 }
 // Design des boutons
