@@ -30,7 +30,7 @@ export default {
   display: flex;
   flex-direction: row-reverse;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 50px;
   #cards {
     margin: auto;
     display: flex;

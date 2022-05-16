@@ -1,7 +1,9 @@
 <template>
   <!--Header-->
   <div id="header">
-    <img :src="require('@/assets/logo.png')" />
+    <router-link to="/post">
+      <img :src="require('@/assets/logo.png')" />
+    </router-link>
     <a href="mailto:admin@groupomania.com"
       ><button class="button contact">Contact</button>
     </a>

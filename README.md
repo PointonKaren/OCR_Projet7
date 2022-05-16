@@ -71,6 +71,9 @@ Pour chaque niveau d'utilisateurs :
 
 * **0 simple utilisateur:**
 
+  - S'enregistrer et se connecter
+  - Consulter tous les posts 
+  - Consulter le détail et les commendaires d'un post
   - 
   - 
   - 
@@ -80,14 +83,12 @@ Pour chaque niveau d'utilisateurs :
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  
 * **1 : modérateur : idem +**
   
   - 
   - 
-  - 
+  
 * **2 : administrateur : idem +**
   
   - 
@@ -102,12 +103,9 @@ Pour chaque niveau d'utilisateurs :
 
 * **0 : simple utilisateur :**
 
-  - S'enregistrer et se connecter
   - Poster un post
   - Supprimer un de ses posts
-  - Consulter tous les posts
   - Liker un post
-  - Consulter le détail et les commendaires d'un post
   - Commenter un post
   - Editer ses commentaires
   - Supprimer ses commentaires
@@ -115,6 +113,7 @@ Pour chaque niveau d'utilisateurs :
   - Modifier son mot de passe
   - Supprimer son compte
   - Accéder à un trombinoscope
+  
 * **1 : modérateur : idem +**
   
   - Modifier un titre de post

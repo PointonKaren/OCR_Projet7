@@ -1,23 +1,18 @@
 <template>
   <div id="app">
     <BoxHeader />
-    <ViewHome />
+    <router-view />
   </div>
 </template>
 
 <script>
 import BoxHeader from "./components/others/BoxHeader.vue";
-import ViewHome from "./views/ViewHome.vue";
 export default {
   name: "App",
   components: {
     BoxHeader,
-    ViewHome,
   },
 };
-// let body = document.querySelector("body");
-
-// body.style.backgroundColor = "#eee";
 </script>
 
 <style lang="scss">
@@ -25,9 +20,11 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
 #app {
   background-image: url(assets/background.jpg);
+  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
+  padding-bottom: 25px;
   font-family: "Roboto", sans-serif;
   h1,
   h2,

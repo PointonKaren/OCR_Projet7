@@ -47,7 +47,6 @@ const store = createStore({
         .then(function (response) {
           commit("setStatus", "");
           commit("logUser", response.data);
-          console.log(response);
         })
         .catch(function () {
           commit("setStatus", "error_login");

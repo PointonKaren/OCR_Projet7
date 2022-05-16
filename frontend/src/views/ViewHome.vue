@@ -13,9 +13,6 @@
       </button>
       <BoxLogin />
     </div>
-
-    <!-- <DetailPost /> -->
-    <!-- <PostsCascade /> -->
   </div>
 </template>
 
@@ -23,16 +20,12 @@
 import BoxPresentation from "../components/others/BoxPresentation.vue";
 import BoxSignup from "../components/others/BoxSignup.vue";
 import BoxLogin from "../components/others/BoxLogin.vue";
-// import DetailPost from "../components/posts/DetailPost.vue";
-// import PostsCascade from "../components/posts/PostsCascade.vue";
 export default {
   name: "ViewHome",
   components: {
     BoxPresentation,
     BoxSignup,
     BoxLogin,
-    // DetailPost,
-    // PostsCascade,
   },
   data: function () {
     return {

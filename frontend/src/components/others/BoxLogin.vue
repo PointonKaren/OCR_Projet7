@@ -67,17 +67,20 @@ export default {
   },
   methods: {
     login: function () {
+      const self = this;
       this.$store
         .dispatch("login", {
           email: this.email,
           password: this.password,
         })
-        .then(function (response) {
-          console.log(response);
-        }),
-        function (error) {
-          console.log(error);
-        };
+        .then(
+          function () {
+            self.$router.push("/post");
+          },
+          function (error) {
+            console.log(error);
+          }
+        );
     },
   },
 };

@@ -7,13 +7,16 @@
     <BoxComment />
     <BoxComment />
     <BoxComment />
+    <BoxComment />
+    <BoxComment />
+    <BoxComment />
   </div>
 </template>
 
 <script>
 import BoxComment from "./BoxComment.vue";
 export default {
-  name: "Comments__Card",
+  name: "CommentsCard",
   components: {
     BoxComment,
   },
