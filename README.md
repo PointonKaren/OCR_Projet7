@@ -15,6 +15,7 @@
 ### Packages installés :
 
 * bcrypt : https://www.npmjs.com/package/bcrypt
+* cors : https://www.npmjs.com/package/cors
 * dotenv : https://www.npmjs.com/package/dotenv
 * email-validator : https://www.npmjs.com/package/email-validator
 * express : https://www.npmjs.com/package/express
@@ -60,6 +61,7 @@ Pour chaque niveau d'utilisateurs :
 ### Packages installés :
 
 * axios : https://www.npmjs.com/package/axios
+* es6-promise : https://www.npmjs.com/package/es6-promise
 * sass : https://www.npmjs.com/package/sass
 * sass-loader : https://www.npmjs.com/package/sass-loader
 * vue-router : https://router.vuejs.org/installation.html

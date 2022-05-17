@@ -14,20 +14,20 @@
       <img :src="require('@/assets/background.jpg')" />
     </div>
     <div class="post__react">
-      <router-link to="/:id/comment">
-        <div class="comments">
-          <button class="button comment">Commenter</button>
-          <p class="number_of_comments">42</p>
-        </div>
-      </router-link>
-      <router-link to="/:id/like">
-        <div class="likes">
-          <button class="button heart">
-            <i class="fa-regular fa-heart"></i>
-          </button>
-          <p class="number_of_likes">42</p>
-        </div>
-      </router-link>
+      <!-- <router-link to="/:id/comment"> -->
+      <div class="comments">
+        <button class="button comment">Commenter</button>
+        <p class="number_of_comments">42</p>
+      </div>
+      <!-- </router-link> -->
+      <!-- <router-link to="/:id/like"> -->
+      <div class="likes">
+        <button class="button heart">
+          <i class="fa-regular fa-heart"></i>
+        </button>
+        <p class="number_of_likes">42</p>
+      </div>
+      <!-- </router-link> -->
     </div>
   </div>
 </template>

@@ -2,22 +2,22 @@
   <!--Header-->
   <div id="header">
     <router-link to="/post">
-      <img :src="require('@/assets/logo.png')" />
+      <img :src="require('@/assets/logo.png')" alt="Logo de Groupomania" />
     </router-link>
     <a href="mailto:admin@groupomania.com"
       ><button class="button contact">Contact</button>
     </a>
 
-    <!-- <ProfileButton /> -->
+    <ProfileButton />
   </div>
 </template>
 
 <script>
-// import ProfileButton from "../others/ProfileButton.vue";
+import ProfileButton from "../others/ProfileButton.vue";
 export default {
   name: "BoxHeader",
   components: {
-    // ProfileButton,
+    ProfileButton,
   },
 };
 </script>

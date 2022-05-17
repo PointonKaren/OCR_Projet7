@@ -8,10 +8,10 @@
         <input
           class="input"
           type="text"
-          name="firstname"
-          id="firstname"
+          name="firstName"
+          id="firstName"
           required
-          v-model="firstname"
+          v-model="firstName"
         />
       </p>
       <p>
@@ -51,6 +51,7 @@
           v-model="password"
         />
       </p>
+      <div v-if="status == 'error_create'">Adresse mail déjà utilisée.</div>
       <input
         type="submit"
         value="Envoyer"
@@ -58,16 +59,19 @@
         :class="{ 'button--disabled': !validatedFields }"
         @click="createAccount()"
       />
+      <!-- <span v-if="status == 'loading'">Enregistrement en cours...</span>
+      <span v-else>Connexion</span> -->
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "BoxSignup",
   data: function () {
     return {
-      firstname: "",
+      firstName: "",
       surname: "",
       email: "",
       password: "",
@@ -76,7 +80,7 @@ export default {
   computed: {
     validatedFields: function () {
       if (
-        this.firstname != "" &&
+        this.firstName != "" &&
         this.surname != "" &&
         this.email != "" &&
         this.password != ""
@@ -86,13 +90,14 @@ export default {
         return false;
       }
     },
+    ...mapState(["status"]),
   },
   methods: {
     createAccount: function () {
       const self = this;
       this.$store
         .dispatch("createAccount", {
-          firstName: this.firstname,
+          firstName: this.firstName,
           surname: this.surname,
           email: this.email,
           password: this.password,

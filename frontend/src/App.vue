@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <BoxHeader />
+    <!-- <AddPost /> -->
     <router-view />
   </div>
 </template>
 
 <script>
 import BoxHeader from "./components/others/BoxHeader.vue";
+// import AddPost from "./components/posts/AddPost.vue";
 export default {
   name: "App",
   components: {
     BoxHeader,
+    // AddPost,
   },
 };
 </script>

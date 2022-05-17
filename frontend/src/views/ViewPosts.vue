@@ -11,13 +11,6 @@ export default {
   components: {
     PostsCascade,
   },
-  data: function () {
-    return {
-      mode: "login",
-    };
-  },
-  // methods: {
-  // },
 };
 </script>
 

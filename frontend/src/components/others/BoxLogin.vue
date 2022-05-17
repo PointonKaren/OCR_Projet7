@@ -39,8 +39,8 @@
         :class="{ 'button--disabled': !validatedFields }"
         @click="login()"
       />
-      <span v-if="status == 'loading'">Connexion en cours...</span>
-      <span v-else>Connexion</span>
+      <!-- <span v-if="status == 'loading'">Connexion en cours...</span>
+      <span v-else>Connexion</span> -->
     </div>
   </div>
 </template>
@@ -54,6 +54,12 @@ export default {
       email: "",
       password: "",
     };
+  },
+  mounted: function () {
+    if (this.$store.state.user.userId != -1) {
+      this.$router.push("/post");
+      return;
+    }
   },
   computed: {
     validatedFields: function () {

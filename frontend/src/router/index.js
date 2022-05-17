@@ -1,7 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import ViewHome from "@/views/ViewHome.vue";
-// import BoxSignup from "../components/others/BoxSignup.vue";
-import ViewPosts from "../views/ViewPosts.vue";
+// import ViewPosts from "../views/ViewPosts.vue";
+import ViewProfile from "../views/ViewProfile.vue";
 import ViewPost from "../views/ViewPost.vue";
 
 const routes = [
@@ -10,15 +10,23 @@ const routes = [
     path: "/",
     component: ViewHome,
     meta: {
-      title: "Accueil",
+      title: "Se connecter",
     },
   },
+  // {
+  //   name: "posts",
+  //   path: "/post/",
+  //   component: ViewPosts,
+  //   meta: {
+  //     title: "Accueil",
+  //   },
+  // },
   {
     name: "posts",
     path: "/post/",
-    component: ViewPosts,
+    component: ViewProfile,
     meta: {
-      title: "Accueil",
+      title: "Page de profil",
     },
   },
   {
@@ -26,7 +34,7 @@ const routes = [
     path: "/post/:id",
     component: ViewPost,
     meta: {
-      title: "Post",
+      title: "Titre de l'image",
     },
   },
 ];
@@ -36,4 +44,7 @@ const router = createRouter({
   routes,
 });
 
+router.afterEach((from) => {
+  document.title = from.meta.title;
+});
 export default router;
