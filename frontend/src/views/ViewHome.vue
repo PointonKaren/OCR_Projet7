@@ -2,13 +2,21 @@
   <div id="home">
     <BoxPresentation />
     <div id="create" v-if="mode == 'create'">
-      <button class="button login" @click="switchToLogin()">
+      <button
+        aria-label="Me connecter"
+        class="button login"
+        @click="switchToLogin()"
+      >
         Me connecter
       </button>
       <BoxSignup />
     </div>
     <div id="login" v-else>
-      <button class="button signup" @click="switchToCreateAccount()">
+      <button
+        aria-label=" "
+        class="button signup"
+        @click="switchToCreateAccount()"
+      >
         M'enregistrer
       </button>
       <BoxLogin />

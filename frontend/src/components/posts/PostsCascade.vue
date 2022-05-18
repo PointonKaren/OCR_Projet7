@@ -3,7 +3,10 @@
   <div id="posts__cascade">
     <h1 id="posts__cascade__title">Dernières publications</h1>
     <a href="#posts__cascade"
-      ><button class="button arrow_up">
+      ><button
+        aria-label="Retourner en haut de la page"
+        class="button arrow_up"
+      >
         <i class="fa-solid fa-arrow-up"></i></button
     ></a>
     <div id="cascade">

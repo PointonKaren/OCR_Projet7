@@ -5,9 +5,9 @@
       <img :src="require('@/assets/logo.png')" alt="Logo de Groupomania" />
     </router-link>
     <div id="header__buttons">
-      <a href="mailto:admin@groupomania.com"
-        ><button class="button contact">Contact</button>
-        <button class="button contact__icon">
+      <a href="mailto:admin@groupomania.com" title="contact"
+        ><button aria-label="Contact" class="button contact">Contact</button>
+        <button aria-label="Contact" class="button contact__icon">
           <i class="fa-regular fa-envelope"></i>
         </button>
       </a>

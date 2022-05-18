@@ -2,27 +2,30 @@
   <!--Carte de l'image-->
   <div class="post__card">
     <div class="post__buttons">
-      <button class="button delete post__delete">
+      <button
+        aria-label="Supprimer la publication"
+        class="button delete post__delete"
+      >
         <i class="fa-regular fa-trash-can"></i>
       </button>
-      <button class="button edit">
+      <button aria-label="Modifier la publication" class="button edit">
         <i class="fa-regular fa-pen-to-square"></i>
       </button>
     </div>
     <h2 class="post__title">Titre de l'image</h2>
     <div class="post__image">
-      <img :src="require('@/assets/background.jpg')" />
+      <img :src="require('@/assets/background.jpg')" alt="Titre" />
     </div>
     <div class="post__react">
       <!-- <router-link to="/:id/comment"> -->
       <div class="comments">
-        <button class="button comment">Commenter</button>
+        <button aria-label="Commenter" class="button comment">Commenter</button>
         <p class="number_of_comments">42</p>
       </div>
       <!-- </router-link> -->
       <!-- <router-link to="/:id/like"> -->
       <div class="likes">
-        <button class="button heart">
+        <button aria-label="Aimer la publication" class="button heart">
           <i class="fa-regular fa-heart"></i>
         </button>
         <p class="number_of_likes">42</p>

@@ -2,10 +2,6 @@
   <!--Bouton "Profil"-->
   <div id="profile__button">
     <div class="profile__button__picture"></div>
-    <div class="profile__buttons">
-      <!-- <button class="button logout">Me déconnecter</button>
-      <button class="button delete__account">Supprimer mon compte</button> -->
-    </div>
   </div>
 </template>
 

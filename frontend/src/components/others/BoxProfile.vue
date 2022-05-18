@@ -6,7 +6,10 @@
       class="profile__picture"
     />
     <div class="profile__datas">
-      <button class="button edit profile__edit__button">
+      <button
+        aria-label="Modifier le profil"
+        class="button edit profile__edit__button"
+      >
         <i class="fa-regular fa-pen-to-square"></i>
       </button>
       <p class="profile__name">Prénom Nom</p>

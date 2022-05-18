@@ -1,7 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 import ViewHome from "@/views/ViewHome.vue";
-// import ViewPosts from "../views/ViewPosts.vue";
-import ViewProfile from "../views/ViewProfile.vue";
+import ViewPosts from "../views/ViewPosts.vue";
 import ViewPost from "../views/ViewPost.vue";
 
 const routes = [
@@ -13,20 +12,12 @@ const routes = [
       title: "Se connecter",
     },
   },
-  // {
-  //   name: "posts",
-  //   path: "/post/",
-  //   component: ViewPosts,
-  //   meta: {
-  //     title: "Accueil",
-  //   },
-  // },
   {
     name: "posts",
     path: "/post/",
-    component: ViewProfile,
+    component: ViewPosts,
     meta: {
-      title: "Page de profil",
+      title: "Accueil",
     },
   },
   {
