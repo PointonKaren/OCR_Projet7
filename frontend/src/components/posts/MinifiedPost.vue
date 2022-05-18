@@ -1,11 +1,7 @@
 <template>
   <!--Post minifié -->
-  <router-link to="/post/:id">
-    <div class="minified__post">
-      <div class="minified__card">
-        <PostCard />
-      </div>
-    </div>
+  <router-link to="/post/:id" class="minified__post">
+    <PostCard />
   </router-link>
 </template>
 
@@ -23,14 +19,19 @@ export default {
 .minified__post {
   background-color: rgb(207, 207, 207);
   border: 2px solid #091f43;
-  width: 900px;
+  width: 35vw;
+  max-width: 900px;
   padding-top: 10px;
   display: flex;
   flex-direction: row-reverse;
+  justify-content: center;
   margin: auto;
   margin-bottom: 20px;
-  .minified__card {
-    margin: auto;
+  text-decoration: none;
+}
+@media screen and (max-width: 1200px) {
+  .minified__post {
+    width: 95vw;
   }
 }
 </style>

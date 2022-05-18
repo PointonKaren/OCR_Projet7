@@ -31,9 +31,25 @@ export default {
     text-align: center;
   }
   .arrow_up {
+    border-radius: 50px;
     position: fixed;
     bottom: 20px;
     right: 20px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  #posts__cascade {
+    #posts__cascade__title {
+      color: white;
+    }
+    .arrow_up {
+      z-index: 10;
+      padding: 7px 8px 5px 8px;
+      font-size: 12px;
+      bottom: 0px;
+      right: 0px;
+    }
+    margin-bottom: -50px;
   }
 }
 </style>

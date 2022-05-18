@@ -43,9 +43,6 @@ export default {
   p {
     color: #091f43;
   }
-  p {
-    font-size: 1.2em;
-  }
 }
 // Design des boutons
 .button {
