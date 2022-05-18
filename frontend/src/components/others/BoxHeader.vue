@@ -4,11 +4,12 @@
     <router-link to="/post">
       <img :src="require('@/assets/logo.png')" alt="Logo de Groupomania" />
     </router-link>
-    <a href="mailto:admin@groupomania.com"
-      ><button class="button contact">Contact</button>
-    </a>
-
-    <ProfileButton />
+    <div id="header__buttons">
+      <a href="mailto:admin@groupomania.com"
+        ><button class="button contact">Contact</button>
+      </a>
+      <ProfileButton />
+    </div>
   </div>
 </template>
 
@@ -33,23 +34,32 @@ export default {
   img {
     margin-left: 20px;
   }
-  a {
-    .contact {
-      font-size: 1.3em;
-      margin-right: 25px;
+  #header__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 8vw;
+    a {
+      .contact {
+        font-size: 1.3em;
+        margin-right: 25px;
+      }
     }
   }
 }
 @media screen and (max-width: 1200px) {
   #header {
     img {
-      width: 35vw;
+      width: 40vw;
       margin-left: -10px;
     }
-    a {
-      .contact {
-        font-size: 1em;
-        margin-right: -10px;
+    #header__buttons {
+      width: 35vw;
+      a {
+        .contact {
+          font-size: 1em;
+          // margin-right: -10px;
+        }
       }
     }
   }

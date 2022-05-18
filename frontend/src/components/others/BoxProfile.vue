@@ -1,15 +1,23 @@
 <template>
   <div id="profile">
-    <!-- <p>Prénom{{ user.firstName }} Nom{{ user.surname }}</p> -->
     <img
       src="@/assets/profile-picture.png"
       alt="Photo de profil"
       class="profile__picture"
     />
-    <!-- <p>jobTitle {{ user.jobTitle }}</p> -->
-    <!-- <p>bio {{ user.bio }}</p> -->
-    <p class="profile__modify__account">Modifier mon compte</p>
-    <p class="profile__delete__account">Supprimer mon compte</p>
+    <div class="profile__datas">
+      <p class="profile__firsName">Prénom</p>
+      <!-- <p>{{ user.firstName }}</p> -->
+      <p class="profile__surname">Nom</p>
+      <!-- <p>{{ user.surname }}</p> -->
+      <p class="profile__jobtitle">jobTitle</p>
+      <!-- <p>{{ user.jobTitle }}</p> -->
+      <!-- <p>bio {{ user.bio }}</p> -->
+      <div class="profile__setup">
+        <p class="profile__modify__account">Modifier mon compte</p>
+        <p class="profile__delete__account">Supprimer mon compte</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -22,17 +30,19 @@ export default {
       this.$router.push("/");
       return;
     }
-    this.$store.dispatch("getUserInfos");
+    // this.$store.dispatch("getUserInfos");
   },
 };
 </script>
 
 <style lang="scss">
 #profile {
+  display: flex;
+  justify-content: space-between;
   width: 40vw;
-  max-width: 600px;
+  max-width: 500px;
   margin: auto;
-  padding-left: 20px;
+  padding: 20px;
   background-color: rgb(207, 207, 207);
   border: 2px solid #091f43;
   margin-bottom: 30px;

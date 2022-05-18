@@ -1,15 +1,15 @@
 <template>
   <div>
-    <BoxProfile />
+    <!-- <BoxProfile /> -->
   </div>
 </template>
 
 <script>
-import BoxProfile from "../components/others/BoxProfile.vue";
+// import BoxProfile from "../components/others/BoxProfile.vue";
 export default {
   name: "ViewProfile",
   components: {
-    BoxProfile,
+    // BoxProfile,
   },
 };
 </script>

@@ -5,7 +5,6 @@
     <div class="profile__buttons">
       <!-- <button class="button logout">Me déconnecter</button>
       <button class="button delete__account">Supprimer mon compte</button> -->
-      <p class="my__profile">Mon profil</p>
     </div>
   </div>
 </template>
@@ -14,26 +13,6 @@
 export default {
   name: "ProfileButton",
 };
-// const profile = document.getElementById("profile");
-// const profileButtons = document.getElementById("profile__button");
-
-// const openBox = () => {
-//   profileButtons.style.display = "block";
-// };
-
-// const closeBox = () => {
-//   profileButtons.style.display = "none";
-// };
-// const addProfileEvents = () => {
-//   profile.addEventListener("click", () => {
-//     openBox();
-//   });
-
-//   profile.addEventListener("click", () => {
-//     closeBox();
-//   });
-// };
-// addProfileEvents();
 </script>
 
 <style lang="scss">
@@ -46,6 +25,15 @@ export default {
     background-size: cover;
     background-position: center;
     border-radius: 50px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  #profile__button {
+    width: 35px;
+    .profile__button__picture {
+      height: 35px;
+      width: 35px;
+    }
   }
 }
 </style>

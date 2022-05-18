@@ -95,16 +95,16 @@ const store = createStore({
           });
       });
     },
-    getUserInfos: ({ commit }) => {
-      instance
-        .get("/user/2")
-        .then(function (response) {
-          commit("userInfos", response.data.user);
-        })
-        .catch(function () {
-          commit("setStatus", "error_create");
-        });
-    },
+    // getUserInfos: ({ commit }) => {
+    //   instance
+    //     .get("/user/2")
+    //     .then(function (response) {
+    //       commit("userInfos", response.data.user);
+    //     })
+    //     .catch(function () {
+    //       commit("setStatus", "error_create");
+    //     });
+    // },
   },
 });
 
