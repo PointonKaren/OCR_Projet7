@@ -8,9 +8,9 @@
 // import BoxProfile from "../components/others/BoxProfile.vue";
 export default {
   name: "ViewProfile",
-  components: {
-    // BoxProfile,
-  },
+  // components: {
+  //   BoxProfile,
+  // },
 };
 </script>
 

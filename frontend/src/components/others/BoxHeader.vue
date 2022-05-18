@@ -7,23 +7,21 @@
     <div id="header__buttons">
       <a href="mailto:admin@groupomania.com"
         ><button class="button contact">Contact</button>
+        <button class="button contact__icon">
+          <i class="fa-regular fa-envelope"></i>
+        </button>
       </a>
-      <ProfileButton />
     </div>
   </div>
 </template>
 
 <script>
-import ProfileButton from "../others/ProfileButton.vue";
 export default {
   name: "BoxHeader",
-  components: {
-    ProfileButton,
-  },
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 #header {
   display: flex;
   align-items: center;
@@ -35,14 +33,13 @@ export default {
     margin-left: 20px;
   }
   #header__buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 8vw;
     a {
       .contact {
         font-size: 1.3em;
         margin-right: 25px;
+      }
+      .contact__icon {
+        display: none;
       }
     }
   }
@@ -51,14 +48,16 @@ export default {
   #header {
     img {
       width: 40vw;
-      margin-left: -10px;
     }
     #header__buttons {
-      width: 35vw;
       a {
         .contact {
-          font-size: 1em;
-          // margin-right: -10px;
+          display: none;
+        }
+        .contact__icon {
+          border-radius: 50px;
+          padding-right: 9px;
+          display: inline;
         }
       }
     }

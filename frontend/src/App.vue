@@ -1,18 +1,27 @@
 <template>
   <div id="app">
-    <BoxHeader />
+    <!-- <div id="unlogged" v-if="mode == 'unlogged'">
+      <BoxHeader />
+    </div> -->
+    <!-- <div id="logged" v-else>
+      <BoxHeaderLogged />
+    </div> -->
+    <BoxHeaderLogged />
+
     <!-- <AddPost /> -->
     <router-view />
   </div>
 </template>
 
 <script>
-import BoxHeader from "./components/others/BoxHeader.vue";
+// import BoxHeader from "./components/others/BoxHeader.vue";
+import BoxHeaderLogged from "./components/others/BoxHeaderLogged.vue";
 // import AddPost from "./components/posts/AddPost.vue";
 export default {
   name: "App",
   components: {
-    BoxHeader,
+    // BoxHeader,
+    BoxHeaderLogged,
     // AddPost,
   },
 };

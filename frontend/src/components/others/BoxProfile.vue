@@ -6,17 +6,21 @@
       class="profile__picture"
     />
     <div class="profile__datas">
-      <p class="profile__firsName">Prénom</p>
-      <!-- <p>{{ user.firstName }}</p> -->
-      <p class="profile__surname">Nom</p>
-      <!-- <p>{{ user.surname }}</p> -->
+      <button class="button edit profile__edit__button">
+        <i class="fa-regular fa-pen-to-square"></i>
+      </button>
+      <p class="profile__name">Prénom Nom</p>
+      <!-- <p>{{ user.firstName }} {{ user.surname }}</p> -->
       <p class="profile__jobtitle">jobTitle</p>
       <!-- <p>{{ user.jobTitle }}</p> -->
+      <p class="profile__bio">
+        Bio : Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+        Mollitia, voluptatibus dolore voluptas id fugiat amet doloremque veniam
+        labore ut quae.
+      </p>
       <!-- <p>bio {{ user.bio }}</p> -->
-      <div class="profile__setup">
-        <p class="profile__modify__account">Modifier mon compte</p>
-        <p class="profile__delete__account">Supprimer mon compte</p>
-      </div>
+      <p class="profile__logout">Se déconnecter</p>
+      <p class="profile__delete__account">Supprimer mon compte</p>
     </div>
   </div>
 </template>
@@ -37,17 +41,46 @@ export default {
 
 <style lang="scss">
 #profile {
+  position: absolute;
+  right: 40px;
+  top: 120px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 40vw;
   max-width: 500px;
-  margin: auto;
   padding: 20px;
   background-color: rgb(207, 207, 207);
   border: 2px solid #091f43;
-  margin-bottom: 30px;
   .profile__picture {
     border: 2px solid #091f43;
+  }
+  .profile__datas {
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+    .profile__edit__button {
+      position: absolute;
+      align-self: flex-end;
+    }
+  }
+}
+@media screen and (max-width: 1200px) {
+  #profile {
+    right: 12px;
+    top: 85px;
+    width: 85vw;
+    padding: 0;
+    padding: 15px;
+    img {
+      width: 25vw;
+      height: 15vh;
+    }
+    .profile__datas {
+      .profile__edit__button {
+        align-self: flex-end;
+      }
+    }
   }
 }
 </style>
