@@ -105,22 +105,22 @@ export default {
     margin-top: -10px;
     margin-bottom: 5px;
     .post__buttons {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      // display: flex;
+      // flex-direction: column;
+      // justify-content: space-between;
       align-items: flex-end;
-      height: 14vh;
+      height: 11vh;
       right: 0;
 
       .post__delete {
         font-size: 12px;
         width: 35px;
-        padding: 8px 7px 7px 7px;
+        padding: 6px 4px 6px 4px;
         // padding: haut droit bas gauche;
       }
       .post__edit {
         font-size: 12px;
-        padding: 6px 7px 6px 10px;
+        padding: 6px 6px 6px 9px;
       }
     }
     .post__title {

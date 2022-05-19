@@ -44,6 +44,7 @@ export default {
 
 <style lang="scss">
 #profile {
+  z-index: 2;
   position: absolute;
   right: 40px;
   top: 120px;
@@ -70,8 +71,8 @@ export default {
 }
 @media screen and (max-width: 1200px) {
   #profile {
-    right: 12px;
-    top: 85px;
+    right: 7px;
+    top: 18vh;
     width: 85vw;
     padding: 0;
     padding: 15px;

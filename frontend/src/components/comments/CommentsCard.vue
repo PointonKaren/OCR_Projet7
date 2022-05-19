@@ -40,4 +40,10 @@ export default {
     }
   }
 }
+@media screen and (max-width: 1200px) {
+  .comments__card {
+    margin: 0;
+    width: 80vw;
+  }
+}
 </style>

@@ -43,4 +43,9 @@ export default {
     text-align: center;
   }
 }
+@media screen and (max-width: 1200px) {
+  .comment__card {
+    width: 80vw;
+  }
+}
 </style>
