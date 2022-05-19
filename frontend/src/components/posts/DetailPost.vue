@@ -30,7 +30,7 @@ export default {
   display: flex;
   flex-direction: row-reverse;
   margin: auto;
-  margin-top: 12vh;
+  margin-top: 5vh;
   #cards {
     margin: auto;
     display: flex;
@@ -41,7 +41,6 @@ export default {
 @media screen and (max-width: 1200px) {
   #detailed__post {
     width: 95vw;
-    border: 1px solid red;
     margin-top: 2vh;
   }
 }

@@ -31,15 +31,12 @@ export default {
   width: 45vw;
   display: flex;
   position: relative;
-  border: 1px solid yellow;
   .button__back {
     border-radius: 50px;
     position: absolute;
     left: 2vw;
-    top: 2vh;
-    padding-bottom: 8px;
-    padding-top: 8px;
-    padding-right: 9px;
+    top: 6vh;
+    padding: 9px 9px 6px 9px;
   }
 }
 
@@ -50,10 +47,7 @@ export default {
       top: 3vh;
       left: 1vw;
       font-size: 12px;
-      padding-bottom: 6px;
-      padding-top: 8px;
-      padding-left: 8px;
-      padding-right: 8px;
+      padding: 8px 8px 6px 8px;
     }
   }
 }

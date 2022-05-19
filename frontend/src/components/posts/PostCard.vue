@@ -116,7 +116,6 @@ export default {
         font-size: 12px;
         width: 35px;
         padding: 6px 4px 6px 4px;
-        // padding: haut droit bas gauche;
       }
       .post__edit {
         font-size: 12px;
@@ -159,7 +158,6 @@ export default {
         .heart {
           font-size: 12px;
           padding: 6px 8px 4px 8px;
-          // padding: haut droit bas gauche;
         }
       }
     }
