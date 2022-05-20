@@ -6,7 +6,7 @@
     <!-- <div id="logged" v-else>
       <BoxHeaderLogged />
     </div> -->
-    <BoxHeaderLogged />
+    <!-- <BoxHeaderLogged /> -->
 
     <!-- <AddPost /> -->
     <router-view />
@@ -15,13 +15,13 @@
 
 <script>
 // import BoxHeader from "./components/others/BoxHeader.vue";
-import BoxHeaderLogged from "./components/others/BoxHeaderLogged.vue";
+// import BoxHeaderLogged from "./components/others/BoxHeaderLogged.vue";
 // import AddPost from "./components/posts/AddPost.vue";
 export default {
   name: "App",
   components: {
     // BoxHeader,
-    BoxHeaderLogged,
+    // BoxHeaderLogged,
     // AddPost,
   },
 };

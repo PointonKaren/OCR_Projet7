@@ -5,7 +5,9 @@ const axios = require("axios").default;
 const instance = axios.create({
   baseURL: "http://localhost:3000/api",
 });
+
 let user = localStorage.getItem("user");
+
 if (!user) {
   user = {
     userId: -1,
@@ -13,14 +15,14 @@ if (!user) {
     token: "",
     firstName: "",
     surname: "",
-    pictureUrl: "",
+    pictureUrl: "@/assets/profile-picture.png",
     jobTitle: "",
     bio: "",
   };
 } else {
   try {
     user = JSON.parse(user);
-    instance.defaults.headers.common["Authorization"] = user.token;
+    instance.defaults.headers.common["Authorization"] = "Bearer " + user.token;
   } catch (ex) {
     user = {
       userId: -1,
@@ -54,12 +56,20 @@ const store = createStore({
       state.status = status;
     },
     logUser: function (state, user) {
-      instance.defaults.headers.common["Authorization"] = user.token;
+      instance.defaults.headers.common["Authorization"] =
+        "Bearer " + user.token;
       localStorage.setItem("user", JSON.stringify(user));
       state.user = user;
     },
     userInfos: function (state, userInfos) {
       state.userInfos = userInfos;
+    },
+    logout: function (state) {
+      state.user = {
+        userId: -1,
+        token: "",
+      };
+      localStorage.removeItem("user");
     },
   },
   actions: {
@@ -95,17 +105,48 @@ const store = createStore({
           });
       });
     },
-    // getUserInfos: ({ commit }) => {
-    //   instance
-    //     .get("/user/2")
-    //     .then(function (response) {
-    //       commit("userInfos", response.data.user);
-    //     })
-    //     .catch(function () {
-    //       commit("setStatus", "error_create");
-    //     });
-    // },
+    getUserInfos: ({ commit }) => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user.userId;
+
+      let data = {
+        data: {
+          userId: userId,
+        },
+      };
+
+      instance.defaults.headers["Content-Type"] = "application/json";
+
+      instance
+        .get(`/user/${userId}`, data)
+        .then(function (response) {
+          commit("userInfos", response.data.user);
+        })
+        .catch(function () {
+          commit("setStatus", "error_create");
+        });
+    },
+    deleteAccount: ({ commit }) => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user.userId;
+
+      let data = {
+        data: {
+          userId: userId,
+        },
+      };
+
+      instance.defaults.headers["Content-Type"] = "application/json";
+
+      instance
+        .delete(`/user/${userId}`, data)
+        .then(function (response) {
+          commit("userInfos", response.data.user);
+        })
+        .catch(function () {
+          commit("setStatus", "error_create");
+        });
+    },
   },
 });
-
 export default store;

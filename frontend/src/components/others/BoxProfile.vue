@@ -1,7 +1,12 @@
 <template>
   <div id="profile">
-    <img
+    <!-- <img
       src="@/assets/profile-picture.png"
+      alt="Photo de profil"
+      class="profile__picture"
+    /> -->
+    <img
+      :src="user.pictureUrl"
       alt="Photo de profil"
       class="profile__picture"
     />
@@ -12,32 +17,60 @@
       >
         <i class="fa-regular fa-pen-to-square"></i>
       </button>
-      <p class="profile__name">Prénom Nom</p>
-      <!-- <p>{{ user.firstName }} {{ user.surname }}</p> -->
-      <p class="profile__jobtitle">jobTitle</p>
-      <!-- <p>{{ user.jobTitle }}</p> -->
+      <p class="profile__name">
+        {{ user.firstName }}
+        {{ user.surname }}
+      </p>
+      <p class="profile__jobtitle">{{ user.jobTitle }}</p>
       <p class="profile__bio">
         Bio : Lorem ipsum dolor sit amet consectetur, adipisicing elit.
         Mollitia, voluptatibus dolore voluptas id fugiat amet doloremque veniam
         labore ut quae.
+        {{ this.$store.state.user.bio }}
       </p>
-      <!-- <p>bio {{ user.bio }}</p> -->
-      <p class="profile__logout">Se déconnecter</p>
+      <p class="profile__logout" @click="logout()">Se déconnecter</p>
       <p class="profile__delete__account">Supprimer mon compte</p>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "BoxProfile",
   mounted: function () {
-    console.log(this.$store.state.user);
     if (this.$store.state.user.userId == -1) {
       this.$router.push("/");
       return;
     }
-    // this.$store.dispatch("getUserInfos");
+    this.$store.dispatch("getUserInfos");
+  },
+  computed: {
+    ...mapState({
+      user: "userInfos",
+    }),
+  },
+  methods: {
+    logout: function () {
+      this.$store.commit("logout");
+      this.$router.push("/");
+    },
+    deleteAccount: function () {
+      const self = this;
+      this.$store
+        .dispatch("deleteAccount", {
+          firstName: this.firstName,
+          surname: this.surname,
+          email: this.email,
+          password: this.password,
+        })
+        .then(function () {
+          self.$router.push("/post");
+        }),
+        function (error) {
+          console.log(error);
+        };
+    },
   },
 };
 </script>
@@ -66,6 +99,10 @@ export default {
     .profile__edit__button {
       position: absolute;
       align-self: flex-end;
+    }
+    .profile__logout,
+    .profile__delete__account {
+      cursor: pointer;
     }
   }
 }

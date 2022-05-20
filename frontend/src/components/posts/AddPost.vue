@@ -1,24 +1,53 @@
 <template>
   <!--Post minifié -->
   <div id="add__post">
-    <form method="post" action="traitement.org">
-      <label class="label__add__post" for="url">Envoyer un gif:</label>
-      <input
-        class="input__add__post"
-        type="url"
-        name="url"
-        id="url"
-        value="http://"
-      />
-      <input type="submit" value="Envoyer" class="button send" />
-    </form>
+    <div>
+      <h2>Single File</h2>
+      <hr />
+      <label
+        >File
+        <input type="file" @change="handleFileUpload($event)" />
+      </label>
+      <br />
+      <button v-on:click="submitFile()">Submit</button>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "AddPost",
   components: {},
+  data() {
+    return {
+      file: "",
+    };
+  },
+  methods: {
+    handleFileUpload(event) {
+      this.file = event.target.files[0];
+    },
+
+    submitFile() {
+      let formData = new FormData();
+
+      formData.append("file", this.file);
+
+      axios
+        .post("http://localhost:3000/api/post/", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then(function () {
+          console.log("SUCCESS!!");
+        })
+        .catch(function () {
+          console.log("FAILURE!!");
+        });
+    },
+  },
 };
 </script>
 

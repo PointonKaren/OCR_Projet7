@@ -1,5 +1,6 @@
 <template>
   <div id="home">
+    <BoxHeader />
     <BoxPresentation />
     <div id="create" v-if="mode == 'create'">
       <button
@@ -25,12 +26,14 @@
 </template>
 
 <script>
+import BoxHeader from "../components/others/BoxHeader.vue";
 import BoxPresentation from "../components/others/BoxPresentation.vue";
 import BoxSignup from "../components/others/BoxSignup.vue";
 import BoxLogin from "../components/others/BoxLogin.vue";
 export default {
   name: "ViewHome",
   components: {
+    BoxHeader,
     BoxPresentation,
     BoxSignup,
     BoxLogin,
