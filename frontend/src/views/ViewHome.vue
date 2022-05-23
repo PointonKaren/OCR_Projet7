@@ -56,7 +56,6 @@ export default {
 
 <style lang="scss">
 #home {
-  margin-top: 30px;
   #create,
   #login {
     display: flex;
@@ -70,16 +69,18 @@ export default {
     }
   }
   @media screen and (max-width: 1200px) {
-    #create,
-    #login {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      .login,
-      .signup {
-        font-size: 1.3em;
-        margin-bottom: -10px;
+    #home {
+      #create,
+      #login {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        .login,
+        .signup {
+          font-size: 1.3em;
+          margin-bottom: -10px;
+        }
       }
     }
   }
