@@ -2,7 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import ViewHome from "@/views/ViewHome.vue";
 import ViewPosts from "../views/ViewPosts.vue";
 import ViewPost from "../views/ViewPost.vue";
-// import BoxProfile from "../components/others/BoxProfile.vue";
+// import AddPost from "../components/posts/AddPost.vue";
 
 const routes = [
   {
@@ -26,7 +26,7 @@ const routes = [
   // {
   //   name: "posts",
   //   path: "/post/",
-  //   component: BoxProfile,
+  //   component: AddPost,
   //   meta: {
   //     title: "Accueil",
   //   },

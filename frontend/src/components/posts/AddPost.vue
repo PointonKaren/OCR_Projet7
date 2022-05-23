@@ -2,20 +2,18 @@
   <!--Bloc "Création de publication" -->
   <div id="add__post">
     <div>
-      <h2>Single File</h2>
-      <hr />
-      <label
-        >File
-        <input type="file" @change="handleFileUpload($event)" />
-      </label>
+      <h2>Importer une image</h2>
+      <label>Sélectionner un fichier :</label
+      ><input type="file" @change="handleFileUpload($event)" />
       <br />
-      <button v-on:click="submitFile()">Submit</button>
+      <button class="button" v-on:click="submitFile()">Envoyer</button>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+
 export default {
   name: "AddPost",
 
