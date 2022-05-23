@@ -45,21 +45,31 @@
 
 <script>
 import { mapState } from "vuex";
+
 export default {
   name: "BoxLogin",
+
   data: function () {
     return {
       email: "",
       password: "",
     };
   },
+
   mounted: function () {
+    /**
+     * Si l'utilisateur est log -> redirection vers la cascade de publications
+     */
     if (this.$store.state.user.userId != -1) {
       this.$router.push("/post");
       return;
     }
   },
+
   computed: {
+    /**
+     * Si le mail et le mot de passe ne sont pas identiques aux attentes, login refusé
+     */
     validatedFields: function () {
       if (this.email != "" && this.password != "") {
         return true;
@@ -69,16 +79,22 @@ export default {
     },
     ...mapState(["status"]),
   },
+
   methods: {
+    /**
+     * Fonction de login
+     */
     login: function () {
       const self = this;
       this.$store
+        // Ajout au store vuex du mail et du mdp utilisateur
         .dispatch("login", {
           email: this.email,
           password: this.password,
         })
         .then(
           function () {
+            // Redirection de l'utilisateur sur la cascade de publications
             self.$router.push("/post");
           },
           function (error) {

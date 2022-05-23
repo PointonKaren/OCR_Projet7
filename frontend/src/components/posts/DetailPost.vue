@@ -11,8 +11,10 @@
 <script>
 import PostCard from "../posts/PostCard.vue";
 import CommentsCard from "../comments/CommentsCard.vue";
+
 export default {
   name: "DetailPost",
+
   components: {
     PostCard,
     CommentsCard,

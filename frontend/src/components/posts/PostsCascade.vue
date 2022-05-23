@@ -1,5 +1,5 @@
 <template>
-  <!--Détail du post : carte image + carte commentaires -->
+  <!-- Cascade des publications -->
   <div id="posts__cascade">
     <h1 id="posts__cascade__title">Dernières publications</h1>
     <a href="#posts__cascade"
@@ -17,8 +17,10 @@
 
 <script>
 import MinifiedPost from "./MinifiedPost.vue";
+
 export default {
   name: "PostsCascade",
+
   components: {
     MinifiedPost,
   },

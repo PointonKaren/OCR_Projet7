@@ -27,17 +27,27 @@
 <script>
 import ProfileButton from "../others/ProfileButton.vue";
 import BoxProfile from "../others/BoxProfile.vue";
+
 export default {
   name: "BoxHeaderLogged",
+
   components: {
     ProfileButton,
     BoxProfile,
   },
+
+  /**
+   * Par défaut, le profil utilisateur n'est pas visible
+   */
   data() {
     return {
       profile_is_here: false,
     };
   },
+
+  /**
+   * Bascule le profil de visible à non visible
+   */
   methods: {
     toggle() {
       this.profile_is_here = !this.profile_is_here;

@@ -65,8 +65,10 @@
 
 <script>
 import { mapState } from "vuex";
+
 export default {
   name: "BoxSignup",
+
   data: function () {
     return {
       firstName: "",
@@ -75,7 +77,11 @@ export default {
       password: "",
     };
   },
+
   computed: {
+    /**
+     * Si les champs obligatoires sont remplis, renvoyer true (valide le formulaire)
+     */
     validatedFields: function () {
       if (
         this.firstName != "" &&
@@ -90,8 +96,13 @@ export default {
     },
     ...mapState(["status"]),
   },
+
   methods: {
+    /**
+     * Créer un compte
+     */
     createAccount: function () {
+      // Ajoute au store vuex les données entrées par l'utilisateur et le redirige vers la cascade de publications
       const self = this;
       this.$store
         .dispatch("createAccount", {

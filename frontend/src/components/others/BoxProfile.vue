@@ -1,10 +1,5 @@
 <template>
   <div id="profile">
-    <!-- <img
-      src="@/assets/profile-picture.png"
-      alt="Photo de profil"
-      class="profile__picture"
-    /> -->
     <img
       :src="user.pictureUrl"
       alt="Photo de profil"
@@ -17,6 +12,7 @@
       >
         <i class="fa-regular fa-pen-to-square"></i>
       </button>
+      <!-- Infos utilisateur dynamiques -->
       <p class="profile__name">
         {{ user.firstName }}
         {{ user.surname }}
@@ -36,26 +32,41 @@
 
 <script>
 import { mapState } from "vuex";
+
 export default {
   name: "BoxProfile",
+
   mounted: function () {
+    /**
+     * Si l'utilisateur n'est pas log, retour forcé à la page login/signup
+     */
     if (this.$store.state.user.userId == -1) {
       this.$router.push("/");
       return;
     }
     this.$store.dispatch("getUserInfos");
   },
+
   computed: {
     ...mapState({
       user: "userInfos",
     }),
   },
+
   methods: {
+    /**
+     * Quand l'utilisateur se delog, retour à la page login/signup
+     */
     logout: function () {
       this.$store.commit("logout");
       this.$router.push("/");
     },
+
+    /**
+     * Fonction delete account
+     */
     deleteAccount: function () {
+      // TODO: 1er jet pour deleteAccount, à modifier (non fonctionnel)
       const self = this;
       this.$store
         .dispatch("deleteAccount", {

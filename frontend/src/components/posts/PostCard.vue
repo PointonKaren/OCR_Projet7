@@ -1,5 +1,5 @@
 <template>
-  <!--Carte de l'image-->
+  <!--Carte de la publication-->
   <div class="post__card">
     <div class="post__buttons">
       <button
@@ -30,15 +30,12 @@
         </button>
         <p class="number_of_comments">42</p>
       </div>
-      <!-- </router-link> -->
-      <!-- <router-link to="/:id/like"> -->
       <div class="likes">
         <p class="number_of_likes">42</p>
         <button aria-label="Aimer la publication" class="button heart">
           <i class="fa-regular fa-heart"></i>
         </button>
       </div>
-      <!-- </router-link> -->
     </div>
   </div>
 </template>

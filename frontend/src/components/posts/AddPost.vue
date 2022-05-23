@@ -1,5 +1,5 @@
 <template>
-  <!--Post minifié -->
+  <!--Bloc "Création de publication" -->
   <div id="add__post">
     <div>
       <h2>Single File</h2>
@@ -18,17 +18,21 @@
 import axios from "axios";
 export default {
   name: "AddPost",
-  components: {},
+
   data() {
     return {
       file: "",
     };
   },
+
   methods: {
     handleFileUpload(event) {
       this.file = event.target.files[0];
     },
 
+    /**
+     * Créer une publication
+     */
     submitFile() {
       let formData = new FormData();
 

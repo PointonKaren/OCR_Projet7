@@ -1,5 +1,5 @@
 <template>
-  <!--Post minifié -->
+  <!--Post minifié, utlisé pour la cascade de publications -->
   <router-link to="/post/:id" class="minified__post">
     <PostCard />
   </router-link>
@@ -7,8 +7,10 @@
 
 <script>
 import PostCard from "../posts/PostCard.vue";
+
 export default {
   name: "MinifiedPost",
+
   components: {
     PostCard,
   },
