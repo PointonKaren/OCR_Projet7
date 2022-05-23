@@ -30,12 +30,18 @@ export default {
   display: flex;
   flex-direction: row-reverse;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 5vh;
   #cards {
     margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+}
+@media screen and (max-width: 1200px) {
+  #detailed__post {
+    width: 95vw;
+    margin-top: 2vh;
   }
 }
 </style>

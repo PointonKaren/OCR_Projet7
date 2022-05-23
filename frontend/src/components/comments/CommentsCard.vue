@@ -7,13 +7,16 @@
     <BoxComment />
     <BoxComment />
     <BoxComment />
+    <BoxComment />
+    <BoxComment />
+    <BoxComment />
   </div>
 </template>
 
 <script>
 import BoxComment from "./BoxComment.vue";
 export default {
-  name: "Comments__Card",
+  name: "CommentsCard",
   components: {
     BoxComment,
   },
@@ -35,6 +38,12 @@ export default {
       margin: auto;
       margin-top: 15px;
     }
+  }
+}
+@media screen and (max-width: 1200px) {
+  .comments__card {
+    margin: 0;
+    width: 80vw;
   }
 }
 </style>

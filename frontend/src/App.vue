@@ -1,23 +1,30 @@
 <template>
   <div id="app">
-    <BoxHeader />
-    <ViewHome />
+    <!-- <div id="unlogged" v-if="mode == 'unlogged'">
+      <BoxHeader />
+    </div> -->
+    <!-- <div id="logged" v-else>
+      <BoxHeaderLogged />
+    </div> -->
+    <!-- <BoxHeaderLogged /> -->
+
+    <!-- <AddPost /> -->
+    <router-view />
   </div>
 </template>
 
 <script>
-import BoxHeader from "./components/others/BoxHeader.vue";
-import ViewHome from "./views/ViewHome.vue";
+// import BoxHeader from "./components/others/BoxHeader.vue";
+// import BoxHeaderLogged from "./components/others/BoxHeaderLogged.vue";
+// import AddPost from "./components/posts/AddPost.vue";
 export default {
   name: "App",
   components: {
-    BoxHeader,
-    ViewHome,
+    // BoxHeader,
+    // BoxHeaderLogged,
+    // AddPost,
   },
 };
-// let body = document.querySelector("body");
-
-// body.style.backgroundColor = "#eee";
 </script>
 
 <style lang="scss">
@@ -25,17 +32,16 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
 #app {
   background-image: url(assets/background.jpg);
+  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
+  padding-bottom: 25px;
   font-family: "Roboto", sans-serif;
   h1,
   h2,
   p {
     color: #091f43;
-  }
-  p {
-    font-size: 1.2em;
   }
 }
 // Design des boutons

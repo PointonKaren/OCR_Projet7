@@ -1,38 +1,42 @@
 <template>
   <div id="home">
+    <BoxHeader />
     <BoxPresentation />
     <div id="create" v-if="mode == 'create'">
-      <button class="button login" @click="switchToLogin()">
+      <button
+        aria-label="Me connecter"
+        class="button login"
+        @click="switchToLogin()"
+      >
         Me connecter
       </button>
       <BoxSignup />
     </div>
     <div id="login" v-else>
-      <button class="button signup" @click="switchToCreateAccount()">
+      <button
+        aria-label=" "
+        class="button signup"
+        @click="switchToCreateAccount()"
+      >
         M'enregistrer
       </button>
       <BoxLogin />
     </div>
-
-    <!-- <DetailPost /> -->
-    <!-- <PostsCascade /> -->
   </div>
 </template>
 
 <script>
+import BoxHeader from "../components/others/BoxHeader.vue";
 import BoxPresentation from "../components/others/BoxPresentation.vue";
 import BoxSignup from "../components/others/BoxSignup.vue";
 import BoxLogin from "../components/others/BoxLogin.vue";
-// import DetailPost from "../components/posts/DetailPost.vue";
-// import PostsCascade from "../components/posts/PostsCascade.vue";
 export default {
   name: "ViewHome",
   components: {
+    BoxHeader,
     BoxPresentation,
     BoxSignup,
     BoxLogin,
-    // DetailPost,
-    // PostsCascade,
   },
   data: function () {
     return {
@@ -52,7 +56,6 @@ export default {
 
 <style lang="scss">
 #home {
-  margin-top: 30px;
   #create,
   #login {
     display: flex;
@@ -66,16 +69,18 @@ export default {
     }
   }
   @media screen and (max-width: 1200px) {
-    #create,
-    #login {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      .login,
-      .signup {
-        font-size: 1.3em;
-        margin-bottom: -10px;
+    #home {
+      #create,
+      #login {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        .login,
+        .signup {
+          font-size: 1.3em;
+          margin-bottom: -10px;
+        }
       }
     }
   }

@@ -1,11 +1,41 @@
 import { createWebHistory, createRouter } from "vue-router";
-import BoxSignup from "../components/others/BoxSignup.vue";
+import ViewHome from "@/views/ViewHome.vue";
+import ViewPosts from "../views/ViewPosts.vue";
+import ViewPost from "../views/ViewPost.vue";
+// import BoxProfile from "../components/others/BoxProfile.vue";
 
 const routes = [
   {
-    name: "signup",
-    path: "/user/signup",
-    component: BoxSignup,
+    name: "ViewHome",
+    path: "/",
+    component: ViewHome,
+    meta: {
+      title: "Se connecter",
+    },
+  },
+  {
+    name: "posts",
+    path: "/post/",
+    component: ViewPosts,
+    meta: {
+      title: "Accueil",
+    },
+  },
+  // {
+  //   name: "posts",
+  //   path: "/post/",
+  //   component: BoxProfile,
+  //   meta: {
+  //     title: "Accueil",
+  //   },
+  // },
+  {
+    name: "post",
+    path: "/post/:id",
+    component: ViewPost,
+    meta: {
+      title: "Titre de l'image",
+    },
   },
 ];
 
@@ -14,4 +44,7 @@ const router = createRouter({
   routes,
 });
 
+router.afterEach((from) => {
+  document.title = from.meta.title;
+});
 export default router;

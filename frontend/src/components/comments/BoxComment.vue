@@ -2,10 +2,13 @@
   <!-- Bloc "Commentaire" -->
   <div class="comment__card">
     <div class="comment__buttons">
-      <button class="button delete post__delete">
+      <button
+        aria-label="Supprimer le commentaire"
+        class="button delete post__delete"
+      >
         <i class="fa-regular fa-trash-can"></i>
       </button>
-      <button class="button edit">
+      <button aria-label="Modifier le commentaire" class="button edit">
         <i class="fa-regular fa-pen-to-square"></i>
       </button>
     </div>
@@ -38,6 +41,11 @@ export default {
   }
   .comment__text {
     text-align: center;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .comment__card {
+    width: 80vw;
   }
 }
 </style>

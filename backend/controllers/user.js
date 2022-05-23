@@ -132,19 +132,21 @@ const getUsers = (req, res, next) => {
 const getUser = (req, res, next) => {
   const currentUserId = req.params.id;
 
+  console.log(req.body);
+
   User.findOne({ where: { id: currentUserId } })
     .then((user) => {
       if (!user) {
         return res.status(404).json({ message: "L'utilisateur n'existe pas." });
       }
 
-      if(currentUserId === req.auth.userId || req.auth.userRole === 2 ) {
+      if (currentUserId === req.auth.userId || req.auth.userRole === 2) {
         return res
           .status(200)
           .json({ message: "Utilisateur trouvé.", user: user });
       } else {
-        return res.status(200).json({ 
-          message: "Utilisateur trouvé.", 
+        return res.status(200).json({
+          message: "Utilisateur trouvé.",
           user: {
             id: user.id,
             email: user.email,
@@ -156,7 +158,8 @@ const getUser = (req, res, next) => {
             bio: user.bio,
             createdAt: user.createdAt,
             updatedAt: user.updatedAt,
-        } });
+          },
+        });
       }
     })
     .catch((error) => {
@@ -197,54 +200,59 @@ const modifyUser = (req, res, next) => {
     .then((user) => {
       if (currentUserId === req.auth.userId || req.auth.userRole === 2) {
         if (req.file) {
-          if(user.pictureUrl) {
+          if (user.pictureUrl) {
             const pictureName = user.pictureUrl.split("images/")[1];
             fileSystem.unlink(`images/${pictureName}`, () => {});
           }
           user.pictureUrl = updatedUser.pictureUrl;
         }
 
-        bcrypt.compare(updatedUser.password, user.password).then((samePassword) => {
-          if (!samePassword) {
-            bcrypt.hash(updatedUser.password, 10).then((hashedPassword) => {
+        bcrypt
+          .compare(updatedUser.password, user.password)
+          .then((samePassword) => {
+            if (!samePassword) {
+              bcrypt
+                .hash(updatedUser.password, 10)
+                .then((hashedPassword) => {
+                  user.email = updatedUser.email;
+                  user.firstName = updatedUser.firstName;
+                  user.surname = updatedUser.surname;
+                  user.jobTitle = updatedUser.jobTitle;
+                  user.bio = updatedUser.bio;
+                  user.password = hashedPassword;
+
+                  user
+                    .save()
+                    .then(() =>
+                      res
+                        .status(200)
+                        .json({ message: "Utilisateur modifié.", user: user })
+                    )
+                    .catch((error) => res.status(400).json({ message: error }));
+                })
+                .catch((error) => {
+                  return res.status(500).json({ message: error });
+                });
+            } else {
               user.email = updatedUser.email;
               user.firstName = updatedUser.firstName;
               user.surname = updatedUser.surname;
               user.jobTitle = updatedUser.jobTitle;
               user.bio = updatedUser.bio;
-              user.password = hashedPassword;
 
               user
-                  .save()
-                  .then(() =>
-                      res
-                          .status(200)
-                          .json({ message: "Utilisateur modifié.", user: user })
-                  )
-                  .catch((error) => res.status(400).json({ message: error }));
-            }).catch((error) => {
-              return res.status(500).json({ message: error });
-            });
-          }
-          else {
-            user.email = updatedUser.email;
-            user.firstName = updatedUser.firstName;
-            user.surname = updatedUser.surname;
-            user.jobTitle = updatedUser.jobTitle;
-            user.bio = updatedUser.bio;
-
-            user
                 .save()
                 .then(() =>
-                    res
-                        .status(200)
-                        .json({ message: "Utilisateur modifié.", user: user })
+                  res
+                    .status(200)
+                    .json({ message: "Utilisateur modifié.", user: user })
                 )
                 .catch((error) => res.status(400).json({ message: error }));
-          }
-        }).catch((error) => {
-          return res.status(500).json({ message: error });
-        });
+            }
+          })
+          .catch((error) => {
+            return res.status(500).json({ message: error });
+          });
       } else {
         return res.status(403).json({ message: "Requête non autorisée." });
       }

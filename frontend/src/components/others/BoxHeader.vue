@@ -1,26 +1,27 @@
 <template>
   <!--Header-->
   <div id="header">
-    <img :src="require('@/assets/logo.png')" />
-    <a href="mailto:admin@groupomania.com"
-      ><button class="button contact">Contact</button>
-    </a>
-
-    <!-- <ProfileButton /> -->
+    <router-link to="/post">
+      <img :src="require('@/assets/logo.png')" alt="Logo de Groupomania" />
+    </router-link>
+    <div id="header__buttons">
+      <a href="mailto:admin@groupomania.com" title="contact"
+        ><button aria-label="Contact" class="button contact">Contact</button>
+        <button aria-label="Contact" class="button contact__icon">
+          <i class="fa-regular fa-envelope"></i>
+        </button>
+      </a>
+    </div>
   </div>
 </template>
 
 <script>
-// import ProfileButton from "../others/ProfileButton.vue";
 export default {
   name: "BoxHeader",
-  components: {
-    // ProfileButton,
-  },
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 #header {
   display: flex;
   align-items: center;
@@ -31,23 +32,33 @@ export default {
   img {
     margin-left: 20px;
   }
-  a {
-    .contact {
-      font-size: 1.3em;
-      margin-right: 25px;
+  #header__buttons {
+    a {
+      .contact {
+        font-size: 1.3em;
+        margin-right: 25px;
+      }
+      .contact__icon {
+        display: none;
+      }
     }
   }
 }
 @media screen and (max-width: 1200px) {
   #header {
     img {
-      width: 35vw;
-      margin-left: -10px;
+      width: 40vw;
     }
-    a {
-      .contact {
-        font-size: 1em;
-        margin-right: -10px;
+    #header__buttons {
+      a {
+        .contact {
+          display: none;
+        }
+        .contact__icon {
+          border-radius: 50px;
+          padding-right: 9px;
+          display: inline;
+        }
       }
     }
   }

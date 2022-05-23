@@ -15,6 +15,7 @@
 ### Packages installés :
 
 * bcrypt : https://www.npmjs.com/package/bcrypt
+* cors : https://www.npmjs.com/package/cors
 * dotenv : https://www.npmjs.com/package/dotenv
 * email-validator : https://www.npmjs.com/package/email-validator
 * express : https://www.npmjs.com/package/express
@@ -60,6 +61,7 @@ Pour chaque niveau d'utilisateurs :
 ### Packages installés :
 
 * axios : https://www.npmjs.com/package/axios
+* es6-promise : https://www.npmjs.com/package/es6-promise
 * sass : https://www.npmjs.com/package/sass
 * sass-loader : https://www.npmjs.com/package/sass-loader
 * vue-router : https://router.vuejs.org/installation.html
@@ -71,6 +73,10 @@ Pour chaque niveau d'utilisateurs :
 
 * **0 simple utilisateur:**
 
+  - S'enregistrer, se connecter et se déconnecter
+  - Consulter tous les posts 
+  - Consulter le détail et les commendaires d'un post
+  - Consulter son profil utilisateur
   - 
   - 
   - 
@@ -79,15 +85,12 @@ Pour chaque niveau d'utilisateurs :
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  
 * **1 : modérateur : idem +**
   
   - 
   - 
-  - 
+  
 * **2 : administrateur : idem +**
   
   - 
@@ -102,19 +105,17 @@ Pour chaque niveau d'utilisateurs :
 
 * **0 : simple utilisateur :**
 
-  - S'enregistrer et se connecter
   - Poster un post
   - Supprimer un de ses posts
-  - Consulter tous les posts
   - Liker un post
-  - Consulter le détail et les commendaires d'un post
   - Commenter un post
   - Editer ses commentaires
   - Supprimer ses commentaires
-  - Consulter et modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
+  - Modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
   - Modifier son mot de passe
   - Supprimer son compte
   - Accéder à un trombinoscope
+  
 * **1 : modérateur : idem +**
   
   - Modifier un titre de post
