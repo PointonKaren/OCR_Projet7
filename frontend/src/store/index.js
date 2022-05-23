@@ -74,7 +74,7 @@ const store = createStore({
   },
   actions: {
     login: ({ commit }, userInfos) => {
-      commit("setStatus", "loading");
+      commit("setStatus");
       return new Promise((resolve, reject) => {
         instance
           .post("/user/login", userInfos)
@@ -90,7 +90,7 @@ const store = createStore({
       });
     },
     createAccount: ({ commit }, userInfos) => {
-      commit("setStatus", "loading");
+      commit("setStatus");
       return new Promise((resolve, reject) => {
         commit;
         instance

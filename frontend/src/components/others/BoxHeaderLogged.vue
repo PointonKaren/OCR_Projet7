@@ -1,5 +1,5 @@
 <template>
-  <!--Header-->
+  <!--Header une fois l'utilisateur connecté-->
   <div>
     <div id="header">
       <router-link to="/post">
@@ -15,6 +15,7 @@
         <ProfileButton @click="toggle" />
       </div>
     </div>
+    <!-- Apparition progressive du profil au clic sur le bouton -->
     <Transition>
       <div v-if="profile_is_here">
         <BoxProfile />

@@ -1,5 +1,5 @@
 <template>
-  <!--Header-->
+  <!--Header non connecté-->
   <div id="header">
     <router-link to="/post">
       <img :src="require('@/assets/logo.png')" alt="Logo de Groupomania" />

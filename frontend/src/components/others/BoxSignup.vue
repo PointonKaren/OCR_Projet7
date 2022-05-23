@@ -59,8 +59,6 @@
         :class="{ 'button--disabled': !validatedFields }"
         @click="createAccount()"
       />
-      <!-- <span v-if="status == 'loading'">Enregistrement en cours...</span>
-      <span v-else>Connexion</span> -->
     </div>
   </div>
 </template>

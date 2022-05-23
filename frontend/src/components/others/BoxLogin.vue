@@ -39,8 +39,6 @@
         :class="{ 'button--disabled': !validatedFields }"
         @click="login()"
       />
-      <!-- <span v-if="status == 'loading'">Connexion en cours...</span>
-      <span v-else>Connexion</span> -->
     </div>
   </div>
 </template>
