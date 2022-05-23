@@ -75,7 +75,7 @@ Pour chaque niveau d'utilisateurs :
 
   - S'enregistrer, se connecter et se déconnecter
   - Consulter tous les posts 
-  - Consulter le détail et les commendaires d'un post
+  - Consulter le détail et les commentaires d'un post
   - Consulter son profil utilisateur
   - 
   - 
