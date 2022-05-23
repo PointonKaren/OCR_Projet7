@@ -73,10 +73,10 @@ Pour chaque niveau d'utilisateurs :
 
 * **0 simple utilisateur:**
 
-  - S'enregistrer et se connecter
+  - S'enregistrer, se connecter et se déconnecter
   - Consulter tous les posts 
   - Consulter le détail et les commendaires d'un post
-  - 
+  - Consulter son profil utilisateur
   - 
   - 
   - 
@@ -111,7 +111,7 @@ Pour chaque niveau d'utilisateurs :
   - Commenter un post
   - Editer ses commentaires
   - Supprimer ses commentaires
-  - Consulter et modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
+  - Modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
   - Modifier son mot de passe
   - Supprimer son compte
   - Accéder à un trombinoscope
