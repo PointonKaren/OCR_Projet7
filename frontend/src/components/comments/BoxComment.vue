@@ -46,7 +46,8 @@ export default {
     margin-left: 10px;
   }
   .comment__text {
-    text-align: center;
+    padding-left: 6px;
+    padding-right: 3px;
   }
 }
 @media screen and (max-width: 1200px) {

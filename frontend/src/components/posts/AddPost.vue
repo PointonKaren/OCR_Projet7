@@ -1,13 +1,13 @@
 <template>
   <!--Bloc "Création de publication" -->
   <div id="add__post">
-    <div>
-      <h2>Importer une image</h2>
-      <label>Sélectionner un fichier :</label
-      ><input type="file" @change="handleFileUpload($event)" />
-      <br />
-      <button class="button" v-on:click="submitFile()">Envoyer</button>
-    </div>
+    <h2 class="add__post__title">Importer une image</h2>
+    <label>Sélectionner un fichier :</label
+    ><input type="file" @change="handleFileUpload($event)" />
+    <br />
+    <button class="button button__submit__file" v-on:click="submitFile()">
+      Envoyer
+    </button>
   </div>
 </template>
 
@@ -59,8 +59,17 @@ export default {
   border: 2px solid #091f43;
   width: 400px;
   margin: auto;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   label {
     padding-right: 20px;
+    padding-bottom: 20px;
+  }
+  .button__submit__file {
+    margin-bottom: 20px;
   }
 }
 </style>

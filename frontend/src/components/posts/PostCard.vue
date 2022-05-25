@@ -89,16 +89,6 @@ export default {
 </script>
 
 <style lang="scss">
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-
 .post__card {
   position: relative;
   max-height: 800px;
