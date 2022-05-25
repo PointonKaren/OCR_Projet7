@@ -34,8 +34,6 @@ export default {
 #comment {
   display: flex;
   align-items: center;
-  // width: 40vw;
-  // max-width: 600px;
   margin: auto;
   padding-top: 15px;
   .comment__form {
@@ -74,14 +72,12 @@ export default {
   #comment {
     width: 90vw;
     .comment__form {
-      border: 1px solid red;
       .comment__title {
         text-align: center;
       }
       #comment__textarea {
         height: 10vh;
         width: 80vw;
-        // max-width: 500px;
       }
       .comment__button {
         display: none;

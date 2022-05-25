@@ -28,7 +28,6 @@ export default {
 <style lang="scss">
 .comments__card {
   width: 30vw;
-  border: 1px solid yellow;
   .comments__header {
     padding-left: 10px;
     display: flex;
@@ -38,9 +37,6 @@ export default {
     .comments__title {
       margin: auto;
     }
-  }
-  .post__comments {
-    border: 1px solid blue;
   }
 }
 @media screen and (max-width: 1200px) {
