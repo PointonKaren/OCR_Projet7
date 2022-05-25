@@ -4,12 +4,9 @@
     <div class="comments__header">
       <h2 class="comments__title">Commentaires</h2>
     </div>
-    <BoxComment />
-    <BoxComment />
-    <BoxComment />
-    <BoxComment />
-    <BoxComment />
-    <BoxComment />
+    <div class="post__comments">
+      <BoxComment v-for="(card, index) in 8" :key="index" />
+    </div>
   </div>
 </template>
 
@@ -25,7 +22,6 @@ export default {
 
 <style lang="scss">
 .comments__card {
-  margin: 0;
   width: 30vw;
   .comments__header {
     padding-left: 10px;
@@ -34,15 +30,13 @@ export default {
     justify-content: space-between;
     padding-bottom: 20px;
     .comments__title {
-      margin: 0;
       margin: auto;
-      margin-top: 15px;
+      margin-top: 20px;
     }
   }
 }
 @media screen and (max-width: 1200px) {
   .comments__card {
-    margin: 0;
     width: 80vw;
   }
 }

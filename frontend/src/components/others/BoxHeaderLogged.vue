@@ -1,5 +1,5 @@
 <template>
-  <!--Header-->
+  <!--Header une fois l'utilisateur connecté-->
   <div>
     <div id="header">
       <router-link to="/post">
@@ -15,6 +15,7 @@
         <ProfileButton @click="toggle" />
       </div>
     </div>
+    <!-- Apparition progressive du profil au clic sur le bouton -->
     <Transition>
       <div v-if="profile_is_here">
         <BoxProfile />
@@ -26,17 +27,27 @@
 <script>
 import ProfileButton from "../others/ProfileButton.vue";
 import BoxProfile from "../others/BoxProfile.vue";
+
 export default {
   name: "BoxHeaderLogged",
+
   components: {
     ProfileButton,
     BoxProfile,
   },
+
+  /**
+   * Par défaut, le profil utilisateur n'est pas visible
+   */
   data() {
     return {
       profile_is_here: false,
     };
   },
+
+  /**
+   * Bascule le profil de visible à non visible
+   */
   methods: {
     toggle() {
       this.profile_is_here = !this.profile_is_here;
@@ -72,15 +83,7 @@ export default {
     }
   }
 }
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
 
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
 @media screen and (max-width: 1200px) {
   #header {
     padding-left: 0;

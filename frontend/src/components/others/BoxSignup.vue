@@ -15,14 +15,14 @@
         />
       </p>
       <p>
-        <label for="surname">Nom : </label>
+        <label for="lastName">Nom : </label>
         <input
           class="input"
           type="text"
-          name="surname"
-          id="surname"
+          name="lastName"
+          id="lastName"
           required
-          v-model="surname"
+          v-model="lastName"
         />
       </p>
       <p>
@@ -38,11 +38,11 @@
           v-model="email"
         />
       </p>
-      <p>
+      <p id="password__field">
         <label for="password">Mot de passe : </label>
         <input
           class="input"
-          type="password"
+          :type="show ? 'password' : 'text'"
           name="password"
           id="password"
           required
@@ -50,7 +50,14 @@
         minuscule et 2 chiffres."
           v-model="password"
         />
+        <button class="button show_password" @click="show = !show">
+          <i class="fa-regular fa-eye" v-show="!show"></i>
+          <i class="fa-regular fa-eye-slash" v-show="show"></i>
+        </button>
       </p>
+      <div v-if="status == 'error_login'">
+        Adresse mail et/ou mot de passe invalide.
+      </div>
       <div v-if="status == 'error_create'">Adresse mail déjà utilisée.</div>
       <input
         type="submit"
@@ -59,29 +66,34 @@
         :class="{ 'button--disabled': !validatedFields }"
         @click="createAccount()"
       />
-      <!-- <span v-if="status == 'loading'">Enregistrement en cours...</span>
-      <span v-else>Connexion</span> -->
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+
 export default {
   name: "BoxSignup",
+
   data: function () {
     return {
       firstName: "",
-      surname: "",
+      lastName: "",
       email: "",
       password: "",
+      show: false,
     };
   },
+
   computed: {
+    /**
+     * Si les champs obligatoires sont remplis, renvoyer true (valide le formulaire)
+     */
     validatedFields: function () {
       if (
         this.firstName != "" &&
-        this.surname != "" &&
+        this.lastName != "" &&
         this.email != "" &&
         this.password != ""
       ) {
@@ -92,13 +104,18 @@ export default {
     },
     ...mapState(["status"]),
   },
+
   methods: {
+    /**
+     * Créer un compte
+     */
     createAccount: function () {
+      // Ajoute au store vuex les données entrées par l'utilisateur et le redirige vers la cascade de publications
       const self = this;
       this.$store
         .dispatch("createAccount", {
           firstName: this.firstName,
-          surname: this.surname,
+          lastName: this.lastName,
           email: this.email,
           password: this.password,
         })
@@ -159,6 +176,16 @@ export default {
       color: lightgrey;
       border: 1px solid darkgrey;
     }
+    #password__field {
+      #password {
+        margin-right: 5px;
+        width: 250px;
+      }
+      .show_password {
+        border-radius: 0;
+        font-size: 0.75em;
+      }
+    }
   }
 }
 @media screen and (max-width: 1200px) {
@@ -186,6 +213,16 @@ export default {
       .send {
         margin-top: 20px;
         font-size: 1em;
+      }
+      #password__field {
+        #password {
+          width: 70vw;
+        }
+        .show_password {
+          border-radius: 0;
+          font-size: 0.7em;
+          padding: 6px;
+        }
       }
     }
   }

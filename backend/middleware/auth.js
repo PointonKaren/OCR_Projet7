@@ -16,26 +16,23 @@ const verifyToken = (req, res, next) => {
     // Vérifiaction du content type de la requête
 
     const contentType = req.headers["content-type"].split(";")[0];
-    console.log(req);
     let userId = "";
 
     if (contentType === "multipart/form-data") {
       userId = JSON.parse(req.body.data).userId;
     } else {
-      userId = req.body.userId;
+      userId = req.body.data.userId;
     }
 
-    if (
-      userId &&
-      (userId === req.auth.userId ||
-        req.auth.userRole === 2 ||
-        req.auth.userRole === 1)
-    ) {
+    // On parse le body pour récupérer l'id de l'utilisateur sous forme de nombre
+    const authUserId = parseInt(req.auth.userId);
+    const authUserRole = parseInt(req.auth.userRole);
+
+    if (userId && (userId === authUserId || authUserRole === 2 || authUserRole === 1)) {
       // S'il y a un userId dans le corps de la requête et qu'il est le même que celui contenu dans le token
       next();
     } else {
-      next();
-      //return res.status(403).json({ message: "Requête non autorisée." });
+      return res.status(400).json({ message: "Requête non autorisée." });
     }
   } catch (error) {
     res.status(500).json({ message: error });

@@ -1,5 +1,5 @@
 <template>
-  <!--Bloc "Présentaiton"-->
+  <!--Bloc "Présentation du site"-->
   <div id="presentation">
     <h1>GroupoNetwork</h1>
     <h2>

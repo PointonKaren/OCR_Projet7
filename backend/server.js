@@ -56,7 +56,7 @@ Comment.associate(models);
 Like.associate(models);
 
 sequelize
-  .sync()
+  .sync({ force: false })
   .then(() => {
     console.log("Base de données synchronisée");
     // Se synchronise d'abord à la BDD avant de lancer le serveur

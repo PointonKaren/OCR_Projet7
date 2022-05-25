@@ -1,15 +1,5 @@
 <template>
   <div id="profile">
-    <!-- <img
-      src="@/assets/profile-picture.png"
-      alt="Photo de profil"
-      class="profile__picture"
-    /> -->
-    <img
-      :src="user.pictureUrl"
-      alt="Photo de profil"
-      class="profile__picture"
-    />
     <div class="profile__datas">
       <button
         aria-label="Modifier le profil"
@@ -17,50 +7,68 @@
       >
         <i class="fa-regular fa-pen-to-square"></i>
       </button>
+      <!-- Infos utilisateur dynamiques -->
       <p class="profile__name">
         {{ user.firstName }}
-        {{ user.surname }}
+        {{ user.lastName }}
       </p>
-      <p class="profile__jobtitle">{{ user.jobTitle }}</p>
-      <p class="profile__bio">
-        Bio : Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        Mollitia, voluptatibus dolore voluptas id fugiat amet doloremque veniam
-        labore ut quae.
-        {{ this.$store.state.user.bio }}
-      </p>
+      <p class="profile__jobtitle">Intitulé de poste : {{ user.jobTitle }}</p>
+      <!-- <p class="profile__bio">
+        Bio : Lorem ipsum dolor sit amet consectetur, adipisicing
+        elit. Mollitia, voluptatibus dolore voluptas id fugiat amet doloremque
+        veniam labore ut quae.
+      </p> -->
+      <p class="profile__bio">Bio : {{ user.bio }}</p>
       <p class="profile__logout" @click="logout()">Se déconnecter</p>
-      <p class="profile__delete__account">Supprimer mon compte</p>
+      <p class="profile__delete__account" @click="deleteAccount()">
+        Supprimer mon compte
+      </p>
     </div>
+    <img
+      :src="user.pictureUrl"
+      alt="Photo de profil"
+      class="profile__picture"
+    />
+    <!-- <img
+      src="@/assets/profile-picture.png"
+      alt="Photo de profil"
+      class="profile__picture"
+    /> -->
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+
 export default {
   name: "BoxProfile",
-  mounted: function () {
-    if (this.$store.state.user.userId == -1) {
-      this.$router.push("/");
-      return;
-    }
-    this.$store.dispatch("getUserInfos");
-  },
+
   computed: {
     ...mapState({
       user: "userInfos",
     }),
   },
+
   methods: {
+    /**
+     * Quand l'utilisateur se delog, retour à la page login/signup
+     */
     logout: function () {
       this.$store.commit("logout");
       this.$router.push("/");
     },
+
+    /**
+     * Fonction delete account
+     */
     deleteAccount: function () {
+      // TODO: 1er jet pour deleteAccount, à modifier (non fonctionnel)
+      // TODO : voir pour faire passer le data
       const self = this;
       this.$store
         .dispatch("deleteAccount", {
           firstName: this.firstName,
-          surname: this.surname,
+          lastName: this.lastName,
           email: this.email,
           password: this.password,
         })
@@ -82,16 +90,13 @@ export default {
   right: 40px;
   top: 120px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  width: 40vw;
+  width: 20vw;
   max-width: 500px;
   padding: 20px;
   background-color: rgb(207, 207, 207);
   border: 2px solid #091f43;
-  .profile__picture {
-    border: 2px solid #091f43;
-  }
   .profile__datas {
     display: flex;
     flex-direction: column;
@@ -105,6 +110,10 @@ export default {
       cursor: pointer;
     }
   }
+  .profile__picture {
+    border: 2px solid #091f43;
+    max-width: 200px;
+  }
 }
 @media screen and (max-width: 1200px) {
   #profile {
@@ -113,14 +122,14 @@ export default {
     width: 85vw;
     padding: 0;
     padding: 15px;
-    img {
-      width: 25vw;
-      height: 15vh;
-    }
     .profile__datas {
       .profile__edit__button {
         align-self: flex-end;
       }
+    }
+    .profile__picture {
+      width: 40vw;
+      max-width: 150px;
     }
   }
 }
