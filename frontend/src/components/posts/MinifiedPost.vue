@@ -38,7 +38,7 @@ export default {
   .minified__post__react {
     display: flex;
     width: 30vw;
-    max-width: 900px;
+    max-width: 800px;
     justify-content: space-between;
     margin-bottom: 20px;
   }
