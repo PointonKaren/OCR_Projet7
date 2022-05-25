@@ -85,6 +85,4 @@ export default {
     }
   }
 }
-// TODO: Afficher les messages d'erreurs générés par le back. backend\controllers\user.js pour le mail et backend\utils\common.js pour le mdp. Cf P6
-// TODO: https://www.youtube.com/watch?v=W2ZWbE45vkg
 </style>

@@ -12,6 +12,7 @@
         <i class="fa-regular fa-pen-to-square"></i>
       </button>
     </div>
+    <p class="comment__user">Prénom Nom</p>
     <p class="comment__text">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
       consequuntur.
@@ -38,6 +39,13 @@ export default {
     padding-top: 10px;
     display: flex;
     justify-content: flex-end;
+  }
+  .comment__user {
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: #d1515a;
+    margin-left: 10px;
   }
   .comment__text {
     text-align: center;

@@ -22,7 +22,11 @@
     <div class="post__react">
       <!-- <router-link to="/:id/comment"> -->
       <div class="comments">
-        <button aria-label="Commenter" class="button comment comment__button">
+        <button
+          aria-label="Commenter"
+          class="button comment comment__button"
+          @click="toggle"
+        >
           Commenter
         </button>
         <button aria-label="Commenter" class="button comment comment__icon">
@@ -37,16 +41,48 @@
         </button>
       </div>
     </div>
+    <Transition>
+      <div v-if="comment_form_is_here">
+        <CommentForm />
+      </div>
+    </Transition>
   </div>
 </template>
 
 <script>
+import CommentForm from "../comments/CommentForm.vue";
 export default {
   name: "PostCard",
+
+  components: {
+    CommentForm,
+  },
+
+  data() {
+    return {
+      comment_form_is_here: false,
+    };
+  },
+
+  methods: {
+    toggle() {
+      this.comment_form_is_here = !this.comment_form_is_here;
+    },
+  },
 };
 </script>
 
 <style lang="scss">
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
 .post__card {
   position: relative;
   max-height: 800px;

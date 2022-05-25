@@ -17,6 +17,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-// TODO : Permettre l'ajout d'un post
-</style>
+<style lang="scss"></style>

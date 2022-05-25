@@ -57,7 +57,7 @@ export default {
     return {
       email: "",
       password: "",
-      show: false,
+      show: true,
     };
   },
 
