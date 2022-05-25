@@ -14,6 +14,7 @@ export default {
 <style lang="scss">
 #profile__button {
   width: 50px;
+  cursor: pointer;
   .profile__button__picture {
     background-image: url("@/assets/profile-picture.png");
     height: 50px;

@@ -14,8 +14,11 @@
     </div>
     <p class="comment__user">Prénom Nom</p>
     <p class="comment__text">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-      consequuntur.
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates vitae
+      fugiat dolorum quidem dolorem optio nobis repellat molestiae, at a
+      laboriosam totam autem modi voluptate. Fuga earum odio ipsam, labore
+      molestias dicta natus nam eligendi. Sapiente aperiam nihil molestias
+      perferendis?
     </p>
   </div>
 </template>
@@ -46,8 +49,8 @@ export default {
     margin-left: 10px;
   }
   .comment__text {
-    padding-left: 6px;
-    padding-right: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 @media screen and (max-width: 1200px) {

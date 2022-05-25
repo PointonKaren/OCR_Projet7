@@ -2,6 +2,12 @@
   <!--Post minifié, utlisé pour la cascade de publications -->
   <router-link to="/post/:id" class="minified__post">
     <PostCard />
+    <div class="minified__post__react">
+      <p class="number__of__comments__per__post">42 commentaires</p>
+      <p class="number__of__likes__per__post">
+        42 <i class="fa-regular fa-heart"></i>
+      </p>
+    </div>
   </router-link>
 </template>
 
@@ -23,17 +29,26 @@ export default {
   border: 2px solid #091f43;
   width: 35vw;
   max-width: 900px;
-  padding-top: 10px;
   display: flex;
-  flex-direction: row-reverse;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin: auto;
   margin-bottom: 20px;
   text-decoration: none;
+  .minified__post__react {
+    display: flex;
+    width: 30vw;
+    max-width: 900px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
 }
 @media screen and (max-width: 1200px) {
   .minified__post {
     width: 95vw;
+    .minified__post__react {
+      width: 90vw;
+    }
   }
 }
 </style>

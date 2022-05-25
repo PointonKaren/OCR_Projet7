@@ -5,12 +5,7 @@
       <h2 class="comments__title">Commentaires</h2>
     </div>
     <div class="post__comments">
-      <BoxComment />
-      <BoxComment />
-      <BoxComment />
-      <BoxComment />
-      <BoxComment />
-      <BoxComment />
+      <BoxComment v-for="(card, index) in 8" :key="index" />
     </div>
   </div>
 </template>
@@ -36,6 +31,7 @@ export default {
     padding-bottom: 20px;
     .comments__title {
       margin: auto;
+      margin-top: 20px;
     }
   }
 }

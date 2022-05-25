@@ -45,7 +45,6 @@ export default {
       border: 1px solid #d1515a;
       padding-top: 5px;
       padding-left: 5px;
-      margin-top: 20px;
       border-radius: 10px;
       width: 30vw;
       max-width: 500px;
