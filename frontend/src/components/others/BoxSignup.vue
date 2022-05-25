@@ -42,7 +42,7 @@
         <label for="password">Mot de passe : </label>
         <input
           class="input"
-          :type="show ? 'text' : 'password'"
+          :type="show ? 'password' : 'text'"
           name="password"
           id="password"
           required

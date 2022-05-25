@@ -19,8 +19,21 @@ const {
  * @returns
  */
 const signup = (req, res, next) => {
-  const passwordValidation = validatePassword(req.body.password);
-  const emailValidation = validateEmail(req.body.email);
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+  } = req.body;
+
+  if (!firstName || !lastName || !email || !password) {
+    return res.status(400).json({
+      message: "Veuillez remplir tous les champs.",
+    });
+  }
+
+  const passwordValidation = validatePassword(password);
+  const emailValidation = validateEmail(email);
 
   if (!passwordValidation.valid) {
     return res.status(400).json({
@@ -31,12 +44,12 @@ const signup = (req, res, next) => {
   if (emailValidation.valid) {
     // Si la syntaxe du mail utilisé est correcte
     bcrypt
-      .hash(req.body.password, 10)
+      .hash(password, 10)
       .then((hashedPassword) => {
         const user = new User({
-          email: req.body.email,
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
           password: hashedPassword,
         });
         user
@@ -44,9 +57,9 @@ const signup = (req, res, next) => {
           .then(() =>
             res.status(201).json({
               message: "Utilisateur créé.",
-              email: req.body.email,
-              firstName: req.body.firstName,
-              lastName: req.body.lastName,
+              email: email,
+              firstName: firstName,
+              lastName: lastName,
             })
           )
           .catch((error) => res.status(400).json({ message: error }));
@@ -64,7 +77,9 @@ const signup = (req, res, next) => {
  * @param {*} next
  */
 const login = (req, res, next) => {
-  User.findOne({ where: { email: req.body.email } }) // Est-ce que l'utilisateur existe ?
+  const { email, password } = req.body;
+  
+  User.findOne({ where: { email: email } }) // Est-ce que l'utilisateur existe ?
     .then((user) => {
       if (!user) {
         return res
@@ -72,7 +87,7 @@ const login = (req, res, next) => {
           .json({ message: "Mail et/ou mot de passe incorrect." });
       }
       bcrypt
-        .compare(req.body.password, user.password)
+        .compare(password, user.password)
         .then((samePassword) => {
           if (!samePassword) {
             return res
@@ -131,8 +146,6 @@ const getUsers = (req, res, next) => {
  */
 const getUser = (req, res, next) => {
   const currentUserId = req.params.id;
-
-  console.log(req.body);
 
   User.findOne({ where: { id: currentUserId } })
     .then((user) => {
@@ -194,11 +207,13 @@ const modifyUser = (req, res, next) => {
     }
   }
 
-  const currentUserId = req.params.id;
+  const currentUserId = parseInt(req.params.id);
+  const reqAuthUserId = parseInt(req.auth.userId);
+  const authUserRole = parseInt(req.auth.userRole);
 
   User.findOne({ where: { id: currentUserId } })
     .then((user) => {
-      if (currentUserId === req.auth.userId || req.auth.userRole === 2) {
+      if (currentUserId === reqAuthUserId || authUserRole === 2) {
         if (req.file) {
           if (user.pictureUrl) {
             const pictureName = user.pictureUrl.split("images/")[1];

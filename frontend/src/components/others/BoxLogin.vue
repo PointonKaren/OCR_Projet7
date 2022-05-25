@@ -29,8 +29,8 @@
           v-model="password"
         />
         <button class="button show_password" @click="show = !show">
-          <i class="fa-regular fa-eye" v-show="show"></i>
-          <i class="fa-regular fa-eye-slash" v-show="!show"></i>
+          <i class="fa-regular fa-eye" v-show="!show"></i>
+          <i class="fa-regular fa-eye-slash" v-show="show"></i>
         </button>
       </p>
       <div v-if="status == 'error_login'">

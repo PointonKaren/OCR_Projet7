@@ -15,8 +15,8 @@ const {
 
 router.post("/signup", signup);
 router.post("/login", login);
-router.get("/", auth.verifyToken, getUsers);
-router.get("/:id", auth.verifyToken, getUser);
+router.post("/", auth.verifyToken, getUsers);
+router.post("/:id", auth.verifyToken, getUser);
 router.put("/:id", multer, auth.verifyToken, modifyUser);
 router.delete("/:id", auth.verifyToken, deleteUser);
 

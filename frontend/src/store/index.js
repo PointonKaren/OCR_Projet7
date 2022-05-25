@@ -61,6 +61,7 @@ const store = createStore({
       bio: "",
     },
   },
+  
   mutations: {
     setStatus: function (state, status) {
       state.status = status;
@@ -152,7 +153,7 @@ const store = createStore({
       instance.defaults.headers["Content-Type"] = "application/json";
 
       instance
-        .get(`/user/${userId}`, data)
+        .post(`/user/${userId}`, data)
         .then(function (response) {
           commit("userInfos", response.data.user);
         })

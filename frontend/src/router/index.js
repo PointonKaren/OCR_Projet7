@@ -2,8 +2,6 @@ import { createWebHistory, createRouter } from "vue-router";
 import ViewHome from "@/views/ViewHome.vue";
 import ViewPosts from "../views/ViewPosts.vue";
 import ViewPost from "../views/ViewPost.vue";
-// import AddPost from "../components/posts/AddPost.vue";
-// import CommentForm from "../components/comments/CommentForm.vue";
 
 const routes = [
   {
@@ -24,22 +22,6 @@ const routes = [
       title: "Accueil",
     },
   },
-  // {
-  //   name: "posts",
-  //   path: "/post/",
-  //   component: AddPost,
-  //   meta: {
-  //     title: "Accueil",
-  //   },
-  // },
-  // {
-  //   name: "posts",
-  //   path: "/post/",
-  //   component: CommentForm,
-  //   meta: {
-  //     title: "Accueil",
-  //   },
-  // },
   {
     // Détail d'une publication
     name: "post",

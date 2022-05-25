@@ -12,17 +12,17 @@
         {{ user.firstName }}
         {{ user.lastName }}
       </p>
-      <p class="profile__jobtitle">
-        Rôle dans l'entreprise : {{ user.jobTitle }}
-      </p>
-      <p class="profile__bio">
-        Bio : Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        Mollitia, voluptatibus dolore voluptas id fugiat amet doloremque veniam
-        labore ut quae.
-        {{ this.$store.state.user.bio }}
-      </p>
+      <p class="profile__jobtitle">Intitulé de poste : {{ user.jobTitle }}</p>
+      <!-- <p class="profile__bio">
+        Bio : Lorem ipsum dolor sit amet consectetur, adipisicing
+        elit. Mollitia, voluptatibus dolore voluptas id fugiat amet doloremque
+        veniam labore ut quae.
+      </p> -->
+      <p class="profile__bio">Bio : {{ user.bio }}</p>
       <p class="profile__logout" @click="logout()">Se déconnecter</p>
-      <p class="profile__delete__account">Supprimer mon compte</p>
+      <p class="profile__delete__account" @click="deleteAccount()">
+        Supprimer mon compte
+      </p>
     </div>
     <img
       :src="user.pictureUrl"
@@ -42,17 +42,6 @@ import { mapState } from "vuex";
 
 export default {
   name: "BoxProfile",
-
-  mounted: function () {
-    /**
-     * Si l'utilisateur n'est pas log, retour forcé à la page login/signup
-     */
-    if (this.$store.state.user.userId == -1) {
-      this.$router.push("/");
-      return;
-    }
-    this.$store.dispatch("getUserInfos");
-  },
 
   computed: {
     ...mapState({
@@ -74,6 +63,7 @@ export default {
      */
     deleteAccount: function () {
       // TODO: 1er jet pour deleteAccount, à modifier (non fonctionnel)
+      // TODO : voir pour faire passer le data
       const self = this;
       this.$store
         .dispatch("deleteAccount", {
@@ -122,6 +112,7 @@ export default {
   }
   .profile__picture {
     border: 2px solid #091f43;
+    max-width: 200px;
   }
 }
 @media screen and (max-width: 1200px) {
