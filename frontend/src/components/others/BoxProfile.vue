@@ -24,16 +24,16 @@
       <p class="profile__logout" @click="logout()">Se déconnecter</p>
       <p class="profile__delete__account">Supprimer mon compte</p>
     </div>
-    <!-- <img
+    <img
       :src="user.pictureUrl"
       alt="Photo de profil"
       class="profile__picture"
-    /> -->
-    <img
+    />
+    <!-- <img
       src="@/assets/profile-picture.png"
       alt="Photo de profil"
       class="profile__picture"
-    />
+    /> -->
   </div>
 </template>
 
