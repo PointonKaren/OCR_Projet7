@@ -10,7 +10,7 @@
       <!-- Infos utilisateur dynamiques -->
       <p class="profile__name">
         {{ user.firstName }}
-        {{ user.surname }}
+        {{ user.lastName }}
       </p>
       <p class="profile__jobtitle">
         Rôle dans l'entreprise : {{ user.jobTitle }}
@@ -78,7 +78,7 @@ export default {
       this.$store
         .dispatch("deleteAccount", {
           firstName: this.firstName,
-          surname: this.surname,
+          lastName: this.lastName,
           email: this.email,
           password: this.password,
         })

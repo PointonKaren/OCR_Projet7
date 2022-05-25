@@ -36,7 +36,7 @@ const signup = (req, res, next) => {
         const user = new User({
           email: req.body.email,
           firstName: req.body.firstName,
-          surname: req.body.surname,
+          lastName: req.body.lastName,
           password: hashedPassword,
         });
         user
@@ -46,7 +46,7 @@ const signup = (req, res, next) => {
               message: "Utilisateur créé.",
               email: req.body.email,
               firstName: req.body.firstName,
-              surname: req.body.surname,
+              lastName: req.body.lastName,
             })
           )
           .catch((error) => res.status(400).json({ message: error }));
@@ -84,7 +84,7 @@ const login = (req, res, next) => {
             role: user.role,
             token: generateToken(user),
             firstName: user.firstName,
-            surname: user.surname,
+            lastName: user.lastName,
             pictureUrl: user.pictureUrl,
             jobTitle: user.jobTitle,
             bio: user.bio,
@@ -152,7 +152,7 @@ const getUser = (req, res, next) => {
             email: user.email,
             role: user.role,
             firstName: user.firstName,
-            surname: user.surname,
+            lastName: user.lastName,
             pictureUrl: user.pictureUrl,
             jobTitle: user.jobTitle,
             bio: user.bio,
@@ -216,7 +216,7 @@ const modifyUser = (req, res, next) => {
                 .then((hashedPassword) => {
                   user.email = updatedUser.email;
                   user.firstName = updatedUser.firstName;
-                  user.surname = updatedUser.surname;
+                  user.lastName = updatedUser.lastName;
                   user.jobTitle = updatedUser.jobTitle;
                   user.bio = updatedUser.bio;
                   user.password = hashedPassword;
@@ -236,7 +236,7 @@ const modifyUser = (req, res, next) => {
             } else {
               user.email = updatedUser.email;
               user.firstName = updatedUser.firstName;
-              user.surname = updatedUser.surname;
+              user.lastName = updatedUser.lastName;
               user.jobTitle = updatedUser.jobTitle;
               user.bio = updatedUser.bio;
 

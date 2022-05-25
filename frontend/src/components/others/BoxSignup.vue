@@ -15,14 +15,14 @@
         />
       </p>
       <p>
-        <label for="surname">Nom : </label>
+        <label for="lastName">Nom : </label>
         <input
           class="input"
           type="text"
-          name="surname"
-          id="surname"
+          name="lastName"
+          id="lastName"
           required
-          v-model="surname"
+          v-model="lastName"
         />
       </p>
       <p>
@@ -79,7 +79,7 @@ export default {
   data: function () {
     return {
       firstName: "",
-      surname: "",
+      lastName: "",
       email: "",
       password: "",
       show: false,
@@ -93,7 +93,7 @@ export default {
     validatedFields: function () {
       if (
         this.firstName != "" &&
-        this.surname != "" &&
+        this.lastName != "" &&
         this.email != "" &&
         this.password != ""
       ) {
@@ -115,7 +115,7 @@ export default {
       this.$store
         .dispatch("createAccount", {
           firstName: this.firstName,
-          surname: this.surname,
+          lastName: this.lastName,
           email: this.email,
           password: this.password,
         })

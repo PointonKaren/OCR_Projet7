@@ -33,7 +33,7 @@ const User = sequelize.define("User", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  surname: {
+  lastName: {
     type: Sequelize.STRING,
     allowNull: false,
   },
