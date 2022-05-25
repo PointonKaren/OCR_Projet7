@@ -1,10 +1,5 @@
 <template>
   <div id="profile">
-    <img
-      :src="user.pictureUrl"
-      alt="Photo de profil"
-      class="profile__picture"
-    />
     <div class="profile__datas">
       <button
         aria-label="Modifier le profil"
@@ -17,7 +12,9 @@
         {{ user.firstName }}
         {{ user.surname }}
       </p>
-      <p class="profile__jobtitle">{{ user.jobTitle }}</p>
+      <p class="profile__jobtitle">
+        Rôle dans l'entreprise : {{ user.jobTitle }}
+      </p>
       <p class="profile__bio">
         Bio : Lorem ipsum dolor sit amet consectetur, adipisicing elit.
         Mollitia, voluptatibus dolore voluptas id fugiat amet doloremque veniam
@@ -27,6 +24,16 @@
       <p class="profile__logout" @click="logout()">Se déconnecter</p>
       <p class="profile__delete__account">Supprimer mon compte</p>
     </div>
+    <!-- <img
+      :src="user.pictureUrl"
+      alt="Photo de profil"
+      class="profile__picture"
+    /> -->
+    <img
+      src="@/assets/profile-picture.png"
+      alt="Photo de profil"
+      class="profile__picture"
+    />
   </div>
 </template>
 
@@ -93,16 +100,13 @@ export default {
   right: 40px;
   top: 120px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  width: 40vw;
+  width: 20vw;
   max-width: 500px;
   padding: 20px;
   background-color: rgb(207, 207, 207);
   border: 2px solid #091f43;
-  .profile__picture {
-    border: 2px solid #091f43;
-  }
   .profile__datas {
     display: flex;
     flex-direction: column;
@@ -116,6 +120,9 @@ export default {
       cursor: pointer;
     }
   }
+  .profile__picture {
+    border: 2px solid #091f43;
+  }
 }
 @media screen and (max-width: 1200px) {
   #profile {
@@ -124,14 +131,14 @@ export default {
     width: 85vw;
     padding: 0;
     padding: 15px;
-    img {
-      width: 25vw;
-      height: 15vh;
-    }
     .profile__datas {
       .profile__edit__button {
         align-self: flex-end;
       }
+    }
+    .profile__picture {
+      width: 40vw;
+      max-width: 150px;
     }
   }
 }
