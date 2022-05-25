@@ -4,12 +4,14 @@
     <div class="comments__header">
       <h2 class="comments__title">Commentaires</h2>
     </div>
-    <BoxComment />
-    <BoxComment />
-    <BoxComment />
-    <BoxComment />
-    <BoxComment />
-    <BoxComment />
+    <div class="post__comments">
+      <BoxComment />
+      <BoxComment />
+      <BoxComment />
+      <BoxComment />
+      <BoxComment />
+      <BoxComment />
+    </div>
   </div>
 </template>
 
@@ -25,8 +27,8 @@ export default {
 
 <style lang="scss">
 .comments__card {
-  margin: 0;
   width: 30vw;
+  border: 1px solid yellow;
   .comments__header {
     padding-left: 10px;
     display: flex;
@@ -34,15 +36,15 @@ export default {
     justify-content: space-between;
     padding-bottom: 20px;
     .comments__title {
-      margin: 0;
       margin: auto;
-      margin-top: 15px;
     }
+  }
+  .post__comments {
+    border: 1px solid blue;
   }
 }
 @media screen and (max-width: 1200px) {
   .comments__card {
-    margin: 0;
     width: 80vw;
   }
 }

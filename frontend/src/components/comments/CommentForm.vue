@@ -1,19 +1,11 @@
 <template>
   <!-- Formulaire de commentaire -->
   <div id="comment" v-show="!here">
-    <!-- <router-link to="/post/:id">
-      <button aria-label="Retour à la publication" class="button button__back">
-        <i class="fa-solid fa-reply"></i></button
-    ></router-link> -->
     <form class="comment__form" @submit.prevent="submitComment">
-      <label for="comment__textarea"> Poster un commentaire : </label>
+      <label for="comment__textarea"
+        ><h2 class="comment__title">Ecrivez votre commentaire :</h2>
+      </label>
       <textarea id="comment__textarea" v-model="comment"></textarea>
-      <button type="submit" class="button comment__button">
-        Poster le commentaire
-      </button>
-      <button aria-label="Commenter" class="button comment comment__icon">
-        <i class="fa-regular fa-comment-dots"></i>
-      </button>
     </form>
   </div>
 </template>
@@ -42,15 +34,10 @@ export default {
 #comment {
   display: flex;
   align-items: center;
-  width: 40vw;
-  max-width: 600px;
+  // width: 40vw;
+  // max-width: 600px;
   margin: auto;
-  background-color: rgb(207, 207, 207);
-  border: 2px solid #091f43;
   padding-top: 15px;
-  position: absolute;
-  top: 580px;
-  left: 5vw;
   .comment__form {
     display: flex;
     flex-direction: column;
@@ -64,7 +51,8 @@ export default {
       border-radius: 10px;
       width: 30vw;
       max-width: 500px;
-      height: 10vw;
+      height: 10vh;
+      max-height: 100px;
       resize: none;
       &:focus {
         color: white;
@@ -81,23 +69,19 @@ export default {
       display: none;
     }
   }
-  .button__back {
-    border-radius: 50px;
-    position: absolute;
-    left: 2vw;
-    top: 6vh;
-    padding: 9px 9px 6px 9px;
-  }
 }
 @media screen and (max-width: 1200px) {
   #comment {
-    height: 70vh;
-    width: 85vw;
+    width: 90vw;
     .comment__form {
+      border: 1px solid red;
+      .comment__title {
+        text-align: center;
+      }
       #comment__textarea {
-        height: 50vh;
-        width: 75vw;
-        max-width: 500px;
+        height: 10vh;
+        width: 80vw;
+        // max-width: 500px;
       }
       .comment__button {
         display: none;
@@ -108,7 +92,6 @@ export default {
         border-radius: 50px;
         height: 35px;
         display: inline;
-
         padding: 4px 8px 4px 8px;
       }
     }

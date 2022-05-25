@@ -22,14 +22,29 @@
     <div class="post__react">
       <!-- <router-link to="/:id/comment"> -->
       <div class="comments">
+        <span @click="show = !show">
+          <button
+            aria-label="Commenter"
+            class="button comment comment__button"
+            @click="toggle"
+            v-show="show"
+          >
+            Commenter
+          </button>
+          <button
+            type="submit"
+            class="button comment__button"
+            @click="toggle"
+            v-show="!show"
+          >
+            Poster le commentaire
+          </button>
+        </span>
         <button
           aria-label="Commenter"
-          class="button comment comment__button"
+          class="button comment comment__icon"
           @click="toggle"
         >
-          Commenter
-        </button>
-        <button aria-label="Commenter" class="button comment comment__icon">
           <i class="fa-regular fa-comment-dots"></i>
         </button>
         <p class="number_of_comments">42</p>
@@ -42,7 +57,7 @@
       </div>
     </div>
     <Transition>
-      <div v-if="comment_form_is_here">
+      <div v-if="comment_form_is_here" class="add__comment">
         <CommentForm />
       </div>
     </Transition>
@@ -61,6 +76,7 @@ export default {
   data() {
     return {
       comment_form_is_here: false,
+      show: true,
     };
   },
 

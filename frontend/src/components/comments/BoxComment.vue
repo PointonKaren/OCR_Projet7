@@ -43,8 +43,6 @@ export default {
   .comment__user {
     font-size: 1.1em;
     font-weight: bold;
-    text-decoration: underline;
-    text-decoration-color: #d1515a;
     margin-left: 10px;
   }
   .comment__text {
