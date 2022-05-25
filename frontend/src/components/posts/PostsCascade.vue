@@ -79,6 +79,8 @@ export default {
 }
 #posts__cascade {
   #posts__cascade__header {
+    width: 35vw;
+    margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,8 +107,16 @@ export default {
 }
 @media screen and (max-width: 1200px) {
   #posts__cascade {
-    #posts__cascade__title {
-      color: white;
+    #posts__cascade__header {
+      width: 95vw;
+      #posts__cascade__title {
+        color: white;
+      }
+      .add__post__button,
+      .add__post__cancel {
+        margin: 0;
+        margin-right: 5vw;
+      }
     }
     .arrow_up {
       z-index: 10;

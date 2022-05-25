@@ -2,8 +2,13 @@
   <!--Bloc "Création de publication" -->
   <div id="add__post">
     <h2 class="add__post__title">Importer une image</h2>
-    <label>Sélectionner un fichier :</label
-    ><input type="file" @change="handleFileUpload($event)" />
+    <label>Sélectionner un fichier : </label>
+    <input
+      class="select__file"
+      type="file"
+      accept="image/*"
+      @change="handleFileUpload($event)"
+    />
     <br />
     <button class="button button__submit__file" v-on:click="submitFile()">
       Envoyer
@@ -57,7 +62,8 @@ export default {
 #add__post {
   background-color: rgb(207, 207, 207);
   border: 2px solid #091f43;
-  width: 400px;
+  width: 35vw;
+  max-width: 900px;
   margin: auto;
   margin-bottom: 20px;
   display: flex;
@@ -68,8 +74,21 @@ export default {
     padding-right: 20px;
     padding-bottom: 20px;
   }
+  .select__file {
+    width: 25vw;
+    max-width: 300px;
+  }
   .button__submit__file {
     margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  #add__post {
+    width: 95vw;
+    .select__file {
+      margin: auto;
+      width: 90vw;
+    }
   }
 }
 </style>
