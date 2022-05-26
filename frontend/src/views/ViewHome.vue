@@ -9,7 +9,7 @@
       >
         Me connecter
       </button>
-      <BoxSignup />
+      <SignupForm />
     </div>
     <div id="login" v-else>
       <button
@@ -19,21 +19,21 @@
       >
         M'enregistrer
       </button>
-      <BoxLogin />
+      <LoginForm />
     </div>
   </div>
 </template>
 
 <script>
 import BoxPresentation from "../components/others/BoxPresentation.vue";
-import BoxSignup from "../components/others/BoxSignup.vue";
-import BoxLogin from "../components/others/BoxLogin.vue";
+import SignupForm from "../components/user/SignupForm.vue";
+import LoginForm from "../components/user/LoginForm.vue";
 export default {
   name: "ViewHome",
   components: {
     BoxPresentation,
-    BoxSignup,
-    BoxLogin,
+    SignupForm,
+    LoginForm,
   },
   data: function () {
     return {

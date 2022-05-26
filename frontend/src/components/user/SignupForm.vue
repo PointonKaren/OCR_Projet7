@@ -1,12 +1,34 @@
 <template>
-  <!--Bloc "Login"-->
-  <div id="login_form">
-    <h1>Connexion</h1>
+  <!--Bloc "Signup"-->
+  <div id="signup">
+    <h1>Inscription</h1>
     <div class="form">
+      <p>
+        <label for="firstName">Prénom : </label>
+        <input
+          class="input"
+          type="text"
+          name="firstName"
+          id="firstName"
+          required
+          v-model="firstName"
+        />
+      </p>
+      <p>
+        <label for="lastName">Nom : </label>
+        <input
+          class="input"
+          type="text"
+          name="lastName"
+          id="lastName"
+          required
+          v-model="lastName"
+        />
+      </p>
       <p>
         <label for="email">Mail professionnel : </label>
         <input
-          class="input email"
+          class="input"
           type="email"
           name="email"
           id="email"
@@ -36,12 +58,13 @@
       <div v-if="status == 'error_login'">
         Adresse mail et/ou mot de passe invalide.
       </div>
+      <div v-if="status == 'error_create'">Adresse mail déjà utilisée.</div>
       <input
         type="submit"
         value="Envoyer"
         class="button send"
         :class="{ 'button--disabled': !validatedFields }"
-        @click="login()"
+        @click="createAccount()"
       />
     </div>
   </div>
@@ -51,32 +74,29 @@
 import { mapState } from "vuex";
 
 export default {
-  name: "BoxLogin",
+  name: "SignupForm",
 
   data: function () {
     return {
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
-      show: true,
+      show: false,
     };
-  },
-
-  mounted: function () {
-    /**
-     * Si l'utilisateur est log -> redirection vers la cascade de publications
-     */
-    if (this.$store.state.user.userId != -1) {
-      this.$router.push("/post");
-      return;
-    }
   },
 
   computed: {
     /**
-     * Si le mail et le mot de passe ne sont pas identiques aux attentes, login refusé
+     * Si les champs obligatoires sont remplis, renvoyer true (valide le formulaire)
      */
     validatedFields: function () {
-      if (this.email != "" && this.password != "") {
+      if (
+        this.firstName != "" &&
+        this.lastName != "" &&
+        this.email != "" &&
+        this.password != ""
+      ) {
         return true;
       } else {
         return false;
@@ -87,33 +107,32 @@ export default {
 
   methods: {
     /**
-     * Fonction de login
+     * Créer un compte
      */
-    login: function () {
+    createAccount: function () {
+      // Ajoute au store vuex les données entrées par l'utilisateur et le redirige vers la cascade de publications
       const self = this;
       this.$store
-        // Ajout au store vuex du mail et du mdp utilisateur
-        .dispatch("login", {
+        .dispatch("createAccount", {
+          firstName: this.firstName,
+          lastName: this.lastName,
           email: this.email,
           password: this.password,
         })
-        .then(
-          function () {
-            // Redirection de l'utilisateur sur la cascade de publications
-            self.$router.push("/post");
-          },
-          function (error) {
-            console.log(error);
-          }
-        );
+        .then(function () {
+          self.$router.push("/post");
+        }),
+        function (error) {
+          console.log(error);
+        };
     },
   },
 };
 </script>
 
 <style lang="scss">
-#login_form {
-  width: 40vw;
+#signup {
+  width: 35vw;
   max-width: 600px;
   margin: auto;
   padding-left: 20px;
@@ -128,7 +147,7 @@ export default {
     flex-direction: column;
     align-items: center;
     p {
-      font-size: 1.3em;
+      font-size: 1.1em;
       label {
         display: block;
         text-align: center;
@@ -170,7 +189,7 @@ export default {
   }
 }
 @media screen and (max-width: 1200px) {
-  #login_form {
+  #signup {
     margin-top: 30px;
     padding: 0;
     width: 90vw;

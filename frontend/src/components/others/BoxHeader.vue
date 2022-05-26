@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import ProfileButton from "../others/ProfileButton.vue";
-import BoxProfile from "../others/BoxProfile.vue";
+import ProfileButton from "../user/ProfileButton.vue";
+import BoxProfile from "../user/BoxProfile.vue";
 import { mapState } from "vuex";
 
 export default {

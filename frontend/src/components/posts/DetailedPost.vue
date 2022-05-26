@@ -80,7 +80,7 @@ import CommentForm from "../comments/CommentForm.vue";
 import CommentsCard from "../comments/CommentsCard.vue";
 
 export default {
-  name: "DetailPost",
+  name: "DetailedPost",
 
   data() {
     return {

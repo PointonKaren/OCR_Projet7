@@ -5,17 +5,17 @@
       <h2 class="comments__title">Commentaires</h2>
     </div>
     <div class="post__comments">
-      <BoxComment v-for="(card, index) in 8" :key="index" />
+      <CommentCard v-for="(card, index) in 8" :key="index" />
     </div>
   </div>
 </template>
 
 <script>
-import BoxComment from "./BoxComment.vue";
+import CommentCard from "./CommentCard.vue";
 export default {
   name: "CommentsCard",
   components: {
-    BoxComment,
+    CommentCard,
   },
 };
 </script>

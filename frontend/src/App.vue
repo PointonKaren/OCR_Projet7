@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <BoxHeader />
+    <!-- <EditProfile /> -->
     <router-view />
   </div>
 </template>
 
 <script>
 import BoxHeader from "./components/others/BoxHeader.vue";
+// import EditProfile from "./components/user/EditProfile.vue";
 export default {
   name: "App",
   components: {
     BoxHeader,
+    // EditProfile,
   },
 };
 </script>

@@ -4,16 +4,16 @@
       <button aria-label="Retour à l'accueil" class="button button__back">
         <i class="fa-solid fa-reply"></i></button
     ></router-link>
-    <DetailPost />
+    <DetailedPost />
   </div>
 </template>
 
 <script>
-import DetailPost from "../components/posts/DetailPost.vue";
+import DetailedPost from "../components/posts/DetailedPost.vue";
 export default {
   name: "ViewPost",
   components: {
-    DetailPost,
+    DetailedPost,
   },
   data: function () {
     return {
