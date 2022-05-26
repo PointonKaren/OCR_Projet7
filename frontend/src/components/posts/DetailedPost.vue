@@ -29,6 +29,7 @@
               Commenter
             </button>
             <button
+              aria-label="Poster le commentaire"
               type="submit"
               class="button comment__button"
               @click="toggle"
@@ -47,7 +48,7 @@
               <i class="fa-regular fa-comment-dots"></i>
             </button>
             <button
-              aria-label="Commenter"
+              aria-label="Poster le commentaire"
               class="button comment comment__icon"
               @click="toggle"
               v-show="!show"

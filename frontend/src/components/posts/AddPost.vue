@@ -10,7 +10,11 @@
       @change="handleFileUpload($event)"
     />
     <br />
-    <button class="button button__submit__file" v-on:click="submitFile()">
+    <button
+      aria-label="Envoyer le fichier"
+      class="button button__submit__file"
+      v-on:click="submitFile()"
+    >
       Envoyer
     </button>
   </div>

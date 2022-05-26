@@ -28,7 +28,11 @@
         minuscule et 2 chiffres."
           v-model="password"
         />
-        <button class="button show_password" @click="show = !show">
+        <button
+          aria-label="Montrer/masquer le mot de passe"
+          class="button show_password"
+          @click="show = !show"
+        >
           <i class="fa-regular fa-eye" v-show="!show"></i>
           <i class="fa-regular fa-eye-slash" v-show="show"></i>
         </button>

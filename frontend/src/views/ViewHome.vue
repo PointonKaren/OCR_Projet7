@@ -13,7 +13,7 @@
     </div>
     <div id="login" v-else>
       <button
-        aria-label=" "
+        aria-label="M'enregistrer"
         class="button signup"
         @click="switchToCreateAccount()"
       >
