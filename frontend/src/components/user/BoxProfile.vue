@@ -79,12 +79,16 @@ export default {
     deleteAccount: function () {
       const self = this;
 
-      this.$store.dispatch("deleteAccount").then(function () {
-        self.$router.push("/post");
-      }),
-        function (error) {
+      this.$store
+        .dispatch("deleteAccount")
+        .then(function (response) {
+          if (response.success) {
+            self.$router.push("/");
+          }
+        })
+        .catch(function (error) {
           console.log(error);
-        };
+        });
     },
     toggle() {
       this.edit_profile_is_here = !this.edit_profile_is_here;

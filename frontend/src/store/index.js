@@ -33,7 +33,6 @@ if (!user) {
     user = {
       userId: -1,
       role: 0,
-      token: "",
       firstName: "",
       lastName: "",
       pictureUrl: "",
@@ -90,7 +89,6 @@ const store = createStore({
     logout: function (state) {
       state.user = {
         userId: -1,
-        token: "",
         id: "",
         role: "",
         firstName: "",
@@ -174,27 +172,52 @@ const store = createStore({
     /**
      * Supprimer le compte utilisateur
      */
-    deleteAccount: ({ commit }) => {
-      // on récupère les données de l'utilisateur
-      const user = JSON.parse(localStorage.getItem("user"));
-      const userId = user.userId;
+    deleteAccount: async ({ commit }) => {
+      try {
+        const user = JSON.parse(localStorage.getItem("user"));
+        const userId = user.userId;
 
-      let data = {
-        data: {
-          userId: userId,
-        },
-      };
+        let data = {
+          data: {
+            userId: userId,
+          },
+        };
 
-      instance.defaults.headers["Content-Type"] = "application/json";
+        instance.defaults.headers["Content-Type"] = "application/json";
 
-      instance
-        .delete(`/user/${userId}`, data)
-        .then(function (response) {
-          commit("userInfos", response.data.user);
-        })
-        .catch(function () {
-          commit("setStatus", "error_create");
-        });
+        const delRes = await instance.delete(`/user/${userId}`, data);
+
+        if (delRes.status === 200) {
+          const userData = {
+            userId: -1,
+            token: "",
+            id: "",
+            role: "",
+            firstName: "",
+            lastName: "",
+            email: "",
+            pictureUrl: "",
+            jobTitle: "",
+            bio: "",
+          };
+
+          commit("userInfos", userData);
+          commit("logout");
+
+          return {
+            success: true,
+          };
+        } else {
+          return {
+            success: false,
+          };
+        }
+      } catch (error) {
+        console.log(error);
+        return {
+          success: false,
+        };
+      }
     },
   },
 });

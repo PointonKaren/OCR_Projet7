@@ -280,15 +280,32 @@ const modifyUser = (req, res, next) => {
  * @param {*} next
  */
 const deleteUser = (req, res, next) => {
-  const currentUserId = req.params.id;
-  User.findOne({ where: { id: currentUserId } })
+  const currentUserId = parseInt(req.params.id);
+  User.findOne({ where: { id: req.params.id } })
     .then((user) => {
+      console.log(user);
       if (!user) {
         res.status(404).json({ message: "L'utilisateur n'existe pas." });
       }
-      if (currentUserId === req.auth.userId || req.auth.userRole === 2) {
+
+      const authUserId = parseInt(req.auth.userId);
+      const authUserRole = parseInt(req.auth.userRole);
+
+      if (currentUserId === authUserId || authUserRole === 2) {
         const filename = user.pictureUrl.split("/images/")[1];
-        fileSystem.unlink(`images/${filename}`, () => {
+        console.log(filename);
+        if (filename !== "default_profile_picture.png") {
+          fileSystem.unlink(`images/${filename}`, () => {
+            user
+              .destroy()
+              .then(() => {
+                res.status(200).json({ message: "Utilisateur supprimé." });
+              })
+              .catch((error) => {
+                res.status(400).json({ message: error });
+              });
+          });
+        } else {
           user
             .destroy()
             .then(() => {
@@ -297,7 +314,7 @@ const deleteUser = (req, res, next) => {
             .catch((error) => {
               res.status(400).json({ message: error });
             });
-        });
+        }
       } else {
         res.status(403).json({ message: "Requête non autorisée." });
       }

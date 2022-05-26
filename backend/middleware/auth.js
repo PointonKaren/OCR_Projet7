@@ -18,15 +18,23 @@ const verifyToken = (req, res, next) => {
     const contentType = req.headers["content-type"].split(";")[0];
     let userId = "";
 
+    console.log(req.body);
+
     if (contentType === "multipart/form-data") {
       userId = JSON.parse(req.body.data).userId;
     } else {
-      userId = req.body.data.userId;
+      if (req.body?.data) {
+        userId = req.body.data.userId;
+      } else {
+        userId = req.body.userId;
+      }
     }
 
     // On parse le body pour récupérer l'id de l'utilisateur sous forme de nombre
     const authUserId = parseInt(req.auth.userId);
     const authUserRole = parseInt(req.auth.userRole);
+
+    //console.log(contentType, userId, authUserId, authUserRole);
 
     if (
       userId &&
