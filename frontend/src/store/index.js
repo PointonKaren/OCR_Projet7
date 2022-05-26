@@ -61,7 +61,7 @@ const store = createStore({
       bio: "",
     },
   },
-  
+
   mutations: {
     setStatus: function (state, status) {
       state.status = status;
@@ -91,7 +91,16 @@ const store = createStore({
       state.user = {
         userId: -1,
         token: "",
+        id: "",
+        role: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        pictureUrl: "",
+        jobTitle: "",
+        bio: "",
       };
+
       localStorage.removeItem("user");
     },
   },
@@ -166,6 +175,7 @@ const store = createStore({
      * Supprimer le compte utilisateur
      */
     deleteAccount: ({ commit }) => {
+      // on récupère les données de l'utilisateur
       const user = JSON.parse(localStorage.getItem("user"));
       const userId = user.userId;
 

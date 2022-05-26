@@ -1,18 +1,23 @@
 <template>
-  <div id="post">
-    <router-link to="/post">
-      <button aria-label="Retour à l'accueil" class="button button__back">
-        <i class="fa-solid fa-reply"></i></button
-    ></router-link>
-    <DetailedPost />
+  <div>
+    <BoxHeaderLogged />
+    <div id="post">
+      <router-link to="/post">
+        <button aria-label="Retour à l'accueil" class="button button__back">
+          <i class="fa-solid fa-reply"></i></button
+      ></router-link>
+      <DetailedPost />
+    </div>
   </div>
 </template>
 
 <script>
+import BoxHeaderLogged from "../components/others/BoxHeaderLogged.vue";
 import DetailedPost from "../components/posts/DetailedPost.vue";
 export default {
   name: "ViewPost",
   components: {
+    BoxHeaderLogged,
     DetailedPost,
   },
   data: function () {

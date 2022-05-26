@@ -28,7 +28,10 @@ const verifyToken = (req, res, next) => {
     const authUserId = parseInt(req.auth.userId);
     const authUserRole = parseInt(req.auth.userRole);
 
-    if (userId && (userId === authUserId || authUserRole === 2 || authUserRole === 1)) {
+    if (
+      userId &&
+      (userId === authUserId || authUserRole === 2 || authUserRole === 1)
+    ) {
       // S'il y a un userId dans le corps de la requête et qu'il est le même que celui contenu dans le token
       next();
     } else {

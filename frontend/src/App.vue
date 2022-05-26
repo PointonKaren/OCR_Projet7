@@ -1,17 +1,12 @@
 <template>
   <div id="app">
-    <BoxHeader />
     <router-view />
   </div>
 </template>
 
 <script>
-import BoxHeader from "./components/others/BoxHeader.vue";
 export default {
   name: "App",
-  components: {
-    BoxHeader,
-  },
 };
 </script>
 

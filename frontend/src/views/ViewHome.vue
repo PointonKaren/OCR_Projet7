@@ -1,5 +1,6 @@
 <template>
   <div id="home">
+    <BoxHeader />
     <BoxPresentation />
     <div id="create" v-if="mode == 'create'">
       <button
@@ -25,12 +26,14 @@
 </template>
 
 <script>
+import BoxHeader from "../components/others/BoxHeader.vue";
 import BoxPresentation from "../components/others/BoxPresentation.vue";
 import SignupForm from "../components/user/SignupForm.vue";
 import LoginForm from "../components/user/LoginForm.vue";
 export default {
   name: "ViewHome",
   components: {
+    BoxHeader,
     BoxPresentation,
     SignupForm,
     LoginForm,
@@ -40,6 +43,7 @@ export default {
       mode: "login",
     };
   },
+
   methods: {
     switchToCreateAccount: function () {
       this.mode = "create";

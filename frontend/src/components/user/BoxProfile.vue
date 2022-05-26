@@ -77,19 +77,11 @@ export default {
      * Fonction delete account
      */
     deleteAccount: function () {
-      // TODO: 1er jet pour deleteAccount, à modifier (non fonctionnel)
-      // TODO : voir pour faire passer le data
       const self = this;
-      this.$store
-        .dispatch("deleteAccount", {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          email: this.email,
-          password: this.password,
-        })
-        .then(function () {
-          self.$router.push("/post");
-        }),
+
+      this.$store.dispatch("deleteAccount").then(function () {
+        self.$router.push("/post");
+      }),
         function (error) {
           console.log(error);
         };

@@ -19,12 +19,7 @@ const {
  * @returns
  */
 const signup = (req, res, next) => {
-  const {
-    firstName,
-    lastName,
-    email,
-    password,
-  } = req.body;
+  const { firstName, lastName, email, password } = req.body;
 
   if (!firstName || !lastName || !email || !password) {
     return res.status(400).json({
@@ -51,6 +46,9 @@ const signup = (req, res, next) => {
           lastName: lastName,
           email: email,
           password: hashedPassword,
+          pictureUrl: `${req.protocol}://${req.get(
+            "host"
+          )}/images/default_profile_picture.png`,
         });
         user
           .save()
@@ -78,7 +76,7 @@ const signup = (req, res, next) => {
  */
 const login = (req, res, next) => {
   const { email, password } = req.body;
-  
+
   User.findOne({ where: { email: email } }) // Est-ce que l'utilisateur existe ?
     .then((user) => {
       if (!user) {
@@ -305,7 +303,7 @@ const deleteUser = (req, res, next) => {
       }
     })
     .catch((error) => {
-      res.status(500).json({ message: error });
+      res.status(500).json({ message: "L'utilisateur n'existe pas !" });
     });
 };
 

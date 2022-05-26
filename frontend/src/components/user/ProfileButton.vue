@@ -15,18 +15,24 @@ export default {
     };
   },
 
-  mounted: function () {
+  beforeMount() {
+    this.checkLogin();
+  },
+
+  methods: {
     /**
      * Si l'utilisateur n'est pas log, retour forcé à la page login/signup
      */
-    if (this.$store.state.user.userId == -1) {
-      this.$router.push("/");
-      this.isVisible = "invisible";
-      return;
-    } else {
-      this.isVisible = "visible";
-    }
-    this.$store.dispatch("getUserInfos");
+    checkLogin() {
+      if (this.$store.state.user.userId == -1) {
+        this.$router.push("/");
+        this.isVisible = "invisible";
+        return;
+      } else {
+        this.isVisible = "visible";
+      }
+      this.$store.dispatch("getUserInfos");
+    },
   },
 
   computed: {
