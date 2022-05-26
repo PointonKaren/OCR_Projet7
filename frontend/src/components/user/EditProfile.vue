@@ -4,7 +4,7 @@
     <h2>Modifier le profil</h2>
     <div class="form">
       <p>
-        <label for="firstName">Prénom : </label>
+        <label for="firstName">Prénom :</label>
         <input
           class="input"
           type="text"
@@ -15,7 +15,7 @@
       </p>
 
       <p>
-        <label for="lastName">Nom : </label>
+        <label for="lastName">Nom :</label>
         <input
           class="input"
           type="text"
@@ -25,7 +25,7 @@
         />
       </p>
       <p>
-        <label for="email">Mail professionnel : </label>
+        <label for="email">Mail professionnel :</label>
         <input
           class="input"
           type="email"
@@ -36,7 +36,15 @@
         />
       </p>
       <p id="password__field">
-        <label for="password">Mot de passe : </label>
+        <label for="password">Mot de passe :</label>
+        <button
+          aria-label="Montrer/masquer le mot de passe"
+          class="button show_password"
+          @click="show = !show"
+        >
+          <i class="fa-regular fa-eye" v-show="!show"></i>
+          <i class="fa-regular fa-eye-slash" v-show="show"></i>
+        </button>
         <input
           class="input"
           :type="show ? 'password' : 'text'"
@@ -46,17 +54,9 @@
         minuscule et 2 chiffres."
           v-model="password"
         />
-        <button
-          aria-label="Montrer/masquer le mot de passe"
-          class="button show_password"
-          @click="show = !show"
-        >
-          <i class="fa-regular fa-eye" v-show="!show"></i>
-          <i class="fa-regular fa-eye-slash" v-show="show"></i>
-        </button>
       </p>
       <p>
-        <label for="jobTitle">Intitulé de poste : </label>
+        <label for="jobTitle">Intitulé de poste :</label>
         <input
           class="input"
           type="text"
@@ -68,7 +68,7 @@
       <p>
         <label for="jobTitle">Présentation rapide :</label>
         <textarea
-          class="input"
+          class="edit__profile__textarea"
           type="text"
           name="Bio"
           id="Bio"
@@ -76,7 +76,7 @@
         ></textarea>
       </p>
       <p id="picture__field">
-        <label for="picture">Photo de profil </label>
+        <label for="picture">Changer la photo de profil :</label>
         <input type="file" accept="image/*" name="pictureUrl" id="pictureUrl" />
       </p>
       <input
@@ -132,7 +132,7 @@ export default {
 
   methods: {
     /**
-     * Créer un compte
+     * Modifier un compte
      */
     editAccount: function () {
       // Ajoute au store vuex les données entrées par l'utilisateur et le redirige vers la cascade de publications
@@ -166,28 +166,35 @@ export default {
   background-color: rgb(207, 207, 207);
   border: 2px solid #091f43;
   margin-bottom: 30px;
-  h1 {
+  h2 {
     text-align: center;
   }
   .form {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: space-evenly;
+
     p {
       font-size: 1.1em;
       label {
-        display: block;
-        text-align: center;
-        margin-bottom: 20px;
+        display: flex;
       }
 
       .input {
+        height: 2vh;
+        max-height: 25px;
         width: 25vw;
-        max-width: 300px;
+        max-width: 250px;
         text-align: center;
         &::placeholder {
           font-size: 0.9em;
         }
+      }
+      .edit__profile__textarea {
+        height: 50px;
+        width: 10vw;
+        resize: none;
       }
     }
     .send {

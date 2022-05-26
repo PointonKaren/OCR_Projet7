@@ -4,6 +4,7 @@
       <button
         aria-label="Modifier le profil"
         class="button edit profile__edit__button"
+        @click="toggle"
       >
         <i class="fa-regular fa-pen-to-square"></i>
       </button>
@@ -34,14 +35,28 @@
       alt="Photo de profil"
       class="profile__picture"
     /> -->
+    <Transition>
+      <div v-if="edit_profile_is_here">
+        <EditProfile />
+      </div>
+    </Transition>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import EditProfile from "./EditProfile.vue";
 
 export default {
   name: "BoxProfile",
+  components: {
+    EditProfile,
+  },
+  data() {
+    return {
+      edit_profile_is_here: false,
+    };
+  },
 
   computed: {
     ...mapState({
@@ -78,6 +93,9 @@ export default {
         function (error) {
           console.log(error);
         };
+    },
+    toggle() {
+      this.edit_profile_is_here = !this.edit_profile_is_here;
     },
   },
 };
