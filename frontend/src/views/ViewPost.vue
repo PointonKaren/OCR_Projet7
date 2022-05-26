@@ -1,23 +1,18 @@
 <template>
-  <div>
-    <BoxHeaderLogged />
-    <div id="post">
-      <router-link to="/post">
-        <button aria-label="Retour à l'accueil" class="button button__back">
-          <i class="fa-solid fa-reply"></i></button
-      ></router-link>
-      <DetailPost />
-    </div>
+  <div id="post">
+    <router-link to="/post">
+      <button aria-label="Retour à l'accueil" class="button button__back">
+        <i class="fa-solid fa-reply"></i></button
+    ></router-link>
+    <DetailPost />
   </div>
 </template>
 
 <script>
-import BoxHeaderLogged from "../components/others/BoxHeaderLogged.vue";
 import DetailPost from "../components/posts/DetailPost.vue";
 export default {
   name: "ViewPost",
   components: {
-    BoxHeaderLogged,
     DetailPost,
   },
   data: function () {
@@ -25,8 +20,6 @@ export default {
       mode: "login",
     };
   },
-  // methods: {
-  // },
 };
 </script>
 
