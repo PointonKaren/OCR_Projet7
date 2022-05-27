@@ -30,12 +30,14 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
   fileFilter: (req, file, callback) => {
-
     const token = req.headers.authorization.split(" ")[1];
     try {
       const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
-      req.auth = {userId: decodedToken.userId, userRole: decodedToken.userRole};
-    }catch (err) {
+      req.auth = {
+        userId: decodedToken.userId,
+        userRole: decodedToken.userRole,
+      };
+    } catch (err) {
       return callback(null, false);
     }
 
@@ -49,7 +51,7 @@ const upload = multer({
 
     let maxSize = 2 * 1000 * 1000; // 2Mo
 
-    if(file.size > maxSize) {
+    if (file.size > maxSize) {
       return callback(null, false);
     }
 

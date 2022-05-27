@@ -49,6 +49,8 @@ const signup = (req, res, next) => {
           pictureUrl: `${req.protocol}://${req.get(
             "host"
           )}/images/default_profile_picture.png`,
+          jobTitle: "Non connu",
+          bio: "A définir",
         });
         user
           .save()
@@ -188,7 +190,7 @@ const getUser = (req, res, next) => {
 const modifyUser = (req, res, next) => {
   let updatedUser;
 
-  // 2 cas possibles : soit l'utilisateur modifie notamment l'image, soit il ne touche pas à l'image et ne modifie que le contenu du formulaire
+  // 2 cas possibles : soit l'utilisateur modifie notamment l'image, soit il ne touche pas à l'image et ne modifie que le contenu du formulair
 
   if (req.file) {
     updatedUser = {

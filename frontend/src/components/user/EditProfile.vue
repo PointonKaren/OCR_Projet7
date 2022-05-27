@@ -2,91 +2,100 @@
   <!--Bloc "Modifier le profil"-->
   <div id="edit__profile">
     <h2>Modifier le profil</h2>
-    <div class="form">
-      <p>
-        <label for="firstName">Prénom :</label>
-        <input
-          class="input"
-          type="text"
-          name="firstName"
-          id="firstName"
-          v-model="firstName"
-        />
-      </p>
-
-      <p>
-        <label for="lastName">Nom :</label>
-        <input
-          class="input"
-          type="text"
-          name="lastName"
-          id="lastName"
-          v-model="lastName"
-        />
-      </p>
-      <p>
-        <label for="email">Mail professionnel :</label>
-        <input
-          class="input"
-          type="email"
-          name="email"
-          id="email"
-          pattern=".+@groupomania\.com"
-          v-model="email"
-        />
-      </p>
-      <p id="password__field">
-        <label for="password">Mot de passe :</label>
-        <button
-          aria-label="Montrer/masquer le mot de passe"
-          class="button show_password"
-          @click="show = !show"
-        >
-          <i class="fa-regular fa-eye" v-show="!show"></i>
-          <i class="fa-regular fa-eye-slash" v-show="show"></i>
-        </button>
-        <input
-          class="input"
-          :type="show ? 'password' : 'text'"
-          name="password"
-          id="password"
-          title="Minimun 8 caractères, 1 majuscule, 1
+    <form
+      id="form"
+      @submit.prevent="editAccount()"
+      enctype="multipart/form-data"
+    >
+      <div class="edit__name">
+        <p>
+          <label for="firstName">Prénom :</label>
+          <br />
+          <input
+            class="input"
+            type="text"
+            name="firstName"
+            id="firstName"
+            v-model="firstName"
+          />
+        </p>
+        <p>
+          <label for="lastName">Nom :</label>
+          <br />
+          <input
+            class="input"
+            type="text"
+            name="lastName"
+            id="lastName"
+            :value="user.lastName"
+          />
+        </p>
+      </div>
+      <div class="edit__logdatas">
+        <p>
+          <label for="email">Mail professionnel :</label>
+          <br />
+          <input
+            class="input"
+            type="email"
+            name="email"
+            id="email"
+            pattern=".+@groupomania\.com"
+            :value="user.email"
+          />
+        </p>
+        <p class="password__field">
+          <label for="password">Mot de passe :</label>
+          <br />
+          <input
+            class="input"
+            :type="text"
+            name="password"
+            id="password"
+            title="Minimun 8 caractères, 1 majuscule, 1
         minuscule et 2 chiffres."
-          v-model="password"
-        />
-      </p>
-      <p>
-        <label for="jobTitle">Intitulé de poste :</label>
-        <input
-          class="input"
-          type="text"
-          name="jobTitle"
-          id="jobTitle"
-          v-model="jobTitle"
-        />
-      </p>
-      <p>
-        <label for="jobTitle">Présentation rapide :</label>
-        <textarea
-          class="edit__profile__textarea"
-          type="text"
-          name="Bio"
-          id="Bio"
-          v-model="Bio"
-        ></textarea>
-      </p>
-      <p id="picture__field">
-        <label for="picture">Changer la photo de profil :</label>
-        <input type="file" accept="image/*" name="pictureUrl" id="pictureUrl" />
-      </p>
+          />
+        </p>
+      </div>
+      <div class="edit__optional">
+        <p class="edit__jobtitle">
+          <label for="jobTitle">Intitulé de poste :</label>
+          <input
+            class="input"
+            type="text"
+            name="jobTitle"
+            id="jobTitle"
+            :value="user.jobTitle"
+          />
+        </p>
+        <p class="edit__picture">
+          <label for="picture">Photo de profil :</label>
+          <input
+            type="file"
+            accept="image/*"
+            name="pictureUrl"
+            id="pictureUrl"
+            @change="uploadImage"
+          />
+        </p>
+        <p class="edit__bio">
+          <label for="bio">Présentation rapide :</label>
+          <textarea
+            class="edit__profile__textarea"
+            type="text"
+            name="bio"
+            id="bio"
+            v-model="bio"
+          ></textarea>
+        </p>
+      </div>
       <input
         type="submit"
         value="Envoyer"
         class="button send"
         :class="{ 'button--disabled': !validatedFields }"
-        @click="editAccount()"
       />
-    </div>
+    </form>
   </div>
 </template>
 
@@ -103,7 +112,7 @@ export default {
       email: "",
       password: "",
       jobTitle: "",
-      Bio: "",
+      bio: "",
       pictureUrl: "",
       show: false,
     };
@@ -120,7 +129,7 @@ export default {
         this.email != "" ||
         this.password != "" ||
         this.jobTitle != "" ||
-        this.Bio != ""
+        this.bio != ""
       ) {
         return true;
       } else {
@@ -128,24 +137,48 @@ export default {
       }
     },
     ...mapState(["status"]),
+    ...mapState({
+      user: "userInfos",
+    }),
   },
 
   methods: {
+    /**
+     * Ajouter l'image de profil
+     */
+
+    uploadImage: function (e) {
+      this.pictureUrl = e.target.files[0];
+    },
+
     /**
      * Modifier un compte
      */
     editAccount: function () {
       // Ajoute au store vuex les données entrées par l'utilisateur et le redirige vers la cascade de publications
+
+      var formData = new FormData();
+
+      let formContainImage = false;
+
+      if (this.pictureUrl) {
+        formData.append("image", this.pictureUrl);
+        formContainImage = true;
+      }
+
+      const userData = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        password: this.password,
+        jobTitle: this.jobTitle,
+        bio: this.bio,
+      };
+
       const self = this;
+
       this.$store
-        .dispatch("editAccount", {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          email: this.email,
-          password: this.password,
-          jobTitle: this.jobTitle,
-          Bio: this.Bio,
-        })
+        .dispatch("updateUserInfos", { formContainImage, formData, userData })
         .then(function () {
           self.$router.push("/post");
         }),
@@ -159,104 +192,179 @@ export default {
 
 <style lang="scss">
 #edit__profile {
-  width: 35vw;
-  max-width: 600px;
-  margin: auto;
-  padding-left: 20px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 40px;
+  top: 200px;
   background-color: rgb(207, 207, 207);
   border: 2px solid #091f43;
-  margin-bottom: 30px;
+  border-top: none;
+  width: 25vw;
+  max-width: 500px;
+  padding: 20px;
   h2 {
     text-align: center;
+    margin: 0;
   }
-  .form {
+  #form {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: space-evenly;
+    max-width: 500px;
 
-    p {
-      font-size: 1.1em;
-      label {
-        display: flex;
-      }
-
+    .edit__name,
+    .edit__logdatas,
+    .edit__jobtitle,
+    .edit__bio {
       .input {
-        height: 2vh;
-        max-height: 25px;
-        width: 25vw;
-        max-width: 250px;
         text-align: center;
-        &::placeholder {
-          font-size: 0.9em;
+        height: 3vh;
+        max-height: 20px;
+        border: 1px solid #d1515a;
+        padding-left: 5px;
+        border-radius: 8px;
+        &:focus {
+          color: white;
+          background-color: #091f435d;
+          border: 1px solid white;
+          outline: 1px solid white;
         }
       }
-      .edit__profile__textarea {
-        height: 50px;
+    }
+    .edit__name,
+    .edit__logdatas {
+      text-align: center;
+    }
+    .edit__name {
+      width: 7vw;
+      .input {
+        width: 6vw;
+      }
+    }
+    .edit__logdatas {
+      width: 11vw;
+      .input {
         width: 10vw;
-        resize: none;
+      }
+      .password__field {
+        .input {
+          width: 6vw;
+        }
       }
     }
-    .send {
-      margin: 0;
-      margin-bottom: 20px;
-      align-self: center;
-      padding-right: 15px;
-      padding-left: 15px;
-      font-size: 1.3em;
-    }
-    .button--disabled {
-      background-color: grey;
-      color: lightgrey;
-      border: 1px solid darkgrey;
-    }
-    #password__field {
-      #password {
-        margin-right: 5px;
-        width: 250px;
+    .edit__optional {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .edit__jobtitle,
+      .edit__bio {
+        display: flex;
+        flex-wrap: wrap;
+        label {
+          margin: auto;
+          margin-bottom: 10px;
+        }
+        .input {
+          width: 100%;
+        }
       }
-      .show_password {
-        border-radius: 0;
-        font-size: 0.75em;
+      .edit__picture {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .edit__bio {
+        .edit__profile__textarea {
+          width: 18vw;
+          height: 10vh;
+          margin: auto;
+          resize: none;
+          border: 1px solid #d1515a;
+          padding-top: 8px;
+          padding-left: 8px;
+          border-radius: 10px;
+          &:focus {
+            color: white;
+            background-color: #091f435d;
+            border: 1px solid white;
+            outline: 1px solid white;
+          }
+        }
       }
     }
   }
 }
 @media screen and (max-width: 1200px) {
-  #signup {
-    margin-top: 30px;
+  #edit__profile {
+    right: 7px;
+    top: 180px;
+    width: 85vw;
     padding: 0;
-    width: 90vw;
-    h1 {
-      font-size: 1.3em;
-    }
-    .form {
+    padding: 15px;
+    #form {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
       margin: 0;
-      p {
-        margin: 0;
-        font-size: 1em;
-        label {
-          margin: 0;
-          margin-bottom: 10px;
-          margin-top: 10px;
-        }
+      .edit__name {
+        width: 80vw;
+        max-width: 250px;
         .input {
+          width: 80%;
+          max-width: 250px;
+        }
+      }
+      .edit__logdatas {
+        width: 80vw;
+        max-width: 250px;
+        .input {
+          width: 100%;
+          max-width: 390px;
+        }
+        .password__field {
+          .input {
+            width: 80%;
+          }
+        }
+      }
+      .edit__optional {
+        width: 80vw;
+        max-width: 450px;
+
+        .edit__picture {
           width: 80vw;
+          label {
+            margin-bottom: 10px;
+          }
+          input {
+            width: 80vw;
+            max-width: 300px;
+          }
+        }
+        .edit__bio {
+          width: 80vw;
+          max-width: 500px;
+          flex-direction: column;
+          justify-content: center;
+          margin: 0;
+          .edit__profile__textarea {
+            width: 90%;
+            max-width: 320px;
+            height: 20vh;
+            margin-bottom: 10px;
+          }
         }
       }
       .send {
-        margin-top: 20px;
-        font-size: 1em;
-      }
-      #password__field {
-        #password {
-          width: 70vw;
-        }
-        .show_password {
-          border-radius: 0;
-          font-size: 0.7em;
-          padding: 6px;
-        }
+        width: 35vw;
+        max-width: 100px;
+        margin: auto;
       }
     }
   }

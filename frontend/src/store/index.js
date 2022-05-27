@@ -170,6 +170,55 @@ const store = createStore({
     },
 
     /**
+     *
+     * @param {*} param0
+     * @returns
+     */
+
+    updateUserInfos: ({ commit }, { containImage, formData, userData }) => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user.userId;
+
+      const newUserData = {
+        userId: userId,
+        ...userData,
+      };
+
+      console.log(newUserData);
+
+      if (containImage) {
+        formData.append("data", JSON.stringify(newUserData));
+        instance
+          .put(`/user/${userId}`, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then(function (response) {
+            commit("userInfos", response.data);
+          })
+          .catch(function (e) {
+            console.log(e);
+            commit("setStatus", "error_create");
+          });
+      } else {
+        instance
+          .put(`/user/${userId}`, newUserData, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then(function (response) {
+            commit("userInfos", response.data);
+          })
+          .catch(function (e) {
+            console.log(e);
+            commit("setStatus", "error_create");
+          });
+      }
+    },
+
+    /**
      * Supprimer le compte utilisateur
      */
     deleteAccount: async ({ commit }) => {

@@ -1,56 +1,62 @@
 <template>
-  <div id="profile">
-    <div class="profile__datas">
-      <div class="profile__buttons">
-        <button
-          aria-label="Modifier le profil"
-          class="button edit profile__edit__button"
-          @click="toggle"
-        >
-          <i class="fa-regular fa-pen-to-square"></i>
-        </button>
+  <div id="profile__card">
+    <div id="profile">
+      <div class="profile__datas">
+        <div class="profile__buttons">
+          <button
+            aria-label="Modifier le profil"
+            class="button edit profile__edit__button"
+            @click="toggle"
+          >
+            <i class="fa-regular fa-pen-to-square"></i>
+          </button>
 
-        <button class="button profile__logout__button" @click="logout()">
-          Se déconnecter
-        </button>
-        <button class="button profile__logout__button__icon" @click="logout()">
-          <i class="fa-solid fa-right-to-bracket"></i>
-        </button>
-      </div>
-      <!-- Infos utilisateur dynamiques -->
-      <p class="profile__name">
-        {{ user.firstName }}
-        {{ user.lastName }}
-      </p>
-      <p class="profile__jobtitle">
-        <b>Intitulé de poste :</b> {{ user.jobTitle }}
-      </p>
-      <!-- <p class="profile__bio">
-        Bio : Lorem ipsum dolor sit amet consectetur, adipisicing
+          <button class="button profile__logout__button" @click="logout()">
+            Se déconnecter
+          </button>
+          <button
+            class="button profile__logout__button__icon"
+            @click="logout()"
+          >
+            <i class="fa-solid fa-right-to-bracket"></i>
+          </button>
+        </div>
+        <!-- Infos utilisateur dynamiques -->
+        <p class="profile__name">
+          {{ user.firstName }}
+          {{ user.lastName }}
+        </p>
+        <p class="profile__jobtitle">
+          <b>Intitulé de poste :</b> {{ user.jobTitle }}
+        </p>
+        <!-- <p class="profile__bio">
+        bio : Lorem ipsum dolor sit amet consectetur, adipisicing
         elit. Mollitia, voluptatibus dolore voluptas id fugiat amet doloremque
         veniam labore ut quae.
       </p> -->
-      <p class="profile__bio"><b>Bio :</b> {{ user.bio }}</p>
-    </div>
-    <img
-      :src="user.pictureUrl"
-      alt="Photo de profil"
-      class="profile__picture"
-    />
-    <!-- <div class="delete__button" @click="deleteConfirm()"> -->
-    <div class="delete__button">
-      <button class="button profile__delete__account" @click="deleteConfirm()">
-        Supprimer mon compte
-      </button>
-      <confirm-dialogue
-        ref="confirmDialogue"
-        class="delete__popup"
-      ></confirm-dialogue>
+        <p class="profile__bio"><b>bio :</b> {{ user.bio }}</p>
+      </div>
+      <img
+        :src="user.pictureUrl"
+        alt="Photo de profil"
+        class="profile__picture"
+      />
+      <!-- <div class="delete__button" @click="deleteConfirm()"> -->
+      <div class="delete__button">
+        <button
+          class="button profile__delete__account"
+          @click="deleteConfirm()"
+        >
+          Supprimer mon compte
+        </button>
+        <confirm-dialogue
+          ref="confirmDialogue"
+          class="delete__popup"
+        ></confirm-dialogue>
+      </div>
     </div>
     <Transition>
-      <div v-if="edit_profile_is_here">
-        <EditProfile />
-      </div>
+      <EditProfile v-if="edit_profile_is_here" />
     </Transition>
   </div>
 </template>
@@ -124,87 +130,91 @@ export default {
 </script>
 
 <style lang="scss">
-#profile {
-  z-index: 2;
-  position: absolute;
-  right: 40px;
-  top: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 20vw;
-  max-width: 500px;
-  padding: 20px;
-  background-color: rgb(207, 207, 207);
-  border: 2px solid #091f43;
-  .profile__datas {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    padding-left: 15px;
-    .profile__buttons {
-      align-self: flex-end;
-      .profile__edit__button {
-        margin-right: 20px;
-      }
-      .profile__logout__button__icon {
-        display: none;
-      }
-    }
-    .profile__name {
-      font-weight: bold;
-      font-size: 1.2em;
-    }
-  }
-  .profile__picture {
-    border: 2px solid #091f43;
-    max-width: 200px;
-  }
-  .delete__button {
-    height: 60px;
-    margin-top: 20px;
+#profile__card {
+  #profile {
+    z-index: 2;
+    position: absolute;
+    right: 40px;
+    top: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-
-    .profile__delete__account {
-      color: #d1515a;
-      font-weight: bold;
-      border: 1px solid #d1515a;
+    width: 20vw;
+    max-width: 500px;
+    padding: 20px;
+    background-color: rgb(207, 207, 207);
+    border: 2px solid #091f43;
+    .profile__datas {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      padding-left: 15px;
+      .profile__buttons {
+        align-self: flex-end;
+        .profile__edit__button {
+          margin-right: 20px;
+        }
+        .profile__logout__button__icon {
+          display: none;
+        }
+      }
+      .profile__name {
+        font-weight: bold;
+        font-size: 1.2em;
+      }
     }
-    p {
-      margin: 0;
-      color: #d1515a;
-      font-size: 1.2em;
-      font-weight: bold;
+    .profile__picture {
+      border: 2px solid #091f43;
+      max-width: 200px;
+    }
+    .delete__button {
+      height: 60px;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+
+      .profile__delete__account {
+        color: #d1515a;
+        font-weight: bold;
+        border: 1px solid #d1515a;
+      }
+      p {
+        margin: 0;
+        color: #d1515a;
+        font-size: 1.2em;
+        font-weight: bold;
+      }
     }
   }
 }
 @media screen and (max-width: 1200px) {
-  #profile {
-    right: 7px;
-    top: 18vh;
-    width: 85vw;
-    padding: 0;
-    padding: 15px;
-    .profile__datas {
-      .profile__buttons {
-        .profile__edit__button {
-          align-self: flex-end;
-        }
-        .profile__logout__button {
-          display: none;
-        }
-        .profile__logout__button__icon {
-          display: inline;
-          border-radius: 50px;
+  #profile__card {
+    #profile {
+      right: 7px;
+      top: 18vh;
+      width: 85vw;
+      padding: 0;
+      padding: 15px;
+      .profile__datas {
+        .profile__buttons {
+          .profile__edit__button {
+            align-self: flex-end;
+          }
+          .profile__logout__button {
+            display: none;
+          }
+          .profile__logout__button__icon {
+            display: inline;
+            border-radius: 50px;
+          }
         }
       }
-    }
-    .profile__picture {
-      width: 40vw;
-      max-width: 150px;
+      .profile__picture {
+        width: 40vw;
+        max-width: 150px;
+      }
     }
   }
 }
