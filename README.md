@@ -3,8 +3,18 @@
 ## Lancer les serveurs :
 
 1) Télécharger, installer et lancer le logiciel XAMPP : https://www.apachefriends.org/fr/index.html,
-2) Se connecter à la BDD : ,
-// TODO: Ajouter la méthode pour se connecter. Où entrer mdp ?
+2) Se connecter à la BDD : dans le dossier backend, créer un fichier .env et y écrire :
+
+DB_NAME=[Nom de la BDD]
+DB_USER=root
+DB_PASSWORD=[Mot de passe de la BDD]
+DB_HOST=localhost
+DB_PORT=3306
+PORT=3000
+SECRET_KEY=[Clé secrète]
+
+Remplacer les données entre [] par les données réelles.
+
 3) Cliquer sur Start sur les deux premières lignes (Apache et MySQL),
 4) *Facultatif : pour consulter la BDD, cliquer sur le bouton Admin de MySQL (possible uniquement si Apache démarré),*
 5) Sur l'éditeur de code, dans le terminal de commande, lancer le serveur (commande nodemon depuis le dossier backend),
@@ -77,7 +87,7 @@ Pour chaque niveau d'utilisateurs :
   - Consulter tous les posts 
   - Consulter le détail et les commentaires d'un post
   - Consulter son profil utilisateur
-  - 
+  - Supprimer son compte 
   - 
   - 
   - 
@@ -113,7 +123,6 @@ Pour chaque niveau d'utilisateurs :
   - Supprimer ses commentaires
   - Modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
   - Modifier son mot de passe
-  - Supprimer son compte
   - Accéder à un trombinoscope
   
 * **1 : modérateur : idem +**
