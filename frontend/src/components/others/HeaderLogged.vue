@@ -1,5 +1,5 @@
 <template>
-  <!--Header-->
+  <!--Header une fois connecté-->
   <header>
     <div id="header">
       <img :src="require('@/assets/logo.png')" alt="Logo de Groupomania" />
@@ -16,7 +16,7 @@
     <!-- Apparition progressive du profil au clic sur le bouton -->
     <Transition>
       <div v-if="profile_is_here">
-        <BoxProfile />
+        <ProfileCard />
       </div>
     </Transition>
   </header>
@@ -24,15 +24,15 @@
 
 <script>
 import ProfileButton from "../user/ProfileButton.vue";
-import BoxProfile from "../user/BoxProfile.vue";
+import ProfileCard from "../user/ProfileCard.vue";
 import { mapState } from "vuex";
 
 export default {
-  name: "BoxHeaderLogged",
+  name: "HeaderLogged",
 
   components: {
     ProfileButton,
-    BoxProfile,
+    ProfileCard,
   },
 
   computed: {

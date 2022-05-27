@@ -48,7 +48,7 @@ import { mapState } from "vuex";
 import EditProfile from "./EditProfile.vue";
 
 export default {
-  name: "BoxProfile",
+  name: "ProfileCard",
   components: {
     EditProfile,
   },

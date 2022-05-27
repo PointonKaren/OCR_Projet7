@@ -1,17 +1,17 @@
 <template>
   <div>
-    <BoxHeaderLogged />
+    <HeaderLogged />
     <PostsCascade />
   </div>
 </template>
 
 <script>
-import BoxHeaderLogged from "../components/others/BoxHeaderLogged.vue";
+import HeaderLogged from "../components/others/HeaderLogged.vue";
 import PostsCascade from "../components/posts/PostsCascade.vue";
 export default {
   name: "ViewPosts",
   components: {
-    BoxHeaderLogged,
+    HeaderLogged,
     PostsCascade,
   },
 };

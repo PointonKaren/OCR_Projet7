@@ -1,7 +1,7 @@
 <template>
   <div id="home">
-    <BoxHeader />
-    <BoxPresentation />
+    <HeaderHome />
+    <PresentationCard />
     <div id="create" v-if="mode == 'create'">
       <button
         aria-label="Me connecter"
@@ -26,15 +26,15 @@
 </template>
 
 <script>
-import BoxHeader from "../components/others/BoxHeader.vue";
-import BoxPresentation from "../components/others/BoxPresentation.vue";
+import HeaderHome from "../components/others/HeaderHome.vue";
+import PresentationCard from "../components/others/PresentationCard.vue";
 import SignupForm from "../components/user/SignupForm.vue";
 import LoginForm from "../components/user/LoginForm.vue";
 export default {
   name: "ViewHome",
   components: {
-    BoxHeader,
-    BoxPresentation,
+    HeaderHome,
+    PresentationCard,
     SignupForm,
     LoginForm,
   },

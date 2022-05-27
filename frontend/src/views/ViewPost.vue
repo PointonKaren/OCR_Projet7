@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BoxHeaderLogged />
+    <HeaderLogged />
     <div id="post">
       <router-link to="/post">
         <button aria-label="Retour à l'accueil" class="button button__back">
@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import BoxHeaderLogged from "../components/others/BoxHeaderLogged.vue";
+import HeaderLogged from "../components/others/HeaderLogged.vue";
 import DetailedPost from "../components/posts/DetailedPost.vue";
 export default {
   name: "ViewPost",
   components: {
-    BoxHeaderLogged,
+    HeaderLogged,
     DetailedPost,
   },
   data: function () {
