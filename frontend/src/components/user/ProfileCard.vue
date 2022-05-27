@@ -1,40 +1,52 @@
 <template>
   <div id="profile">
     <div class="profile__datas">
-      <button
-        aria-label="Modifier le profil"
-        class="button edit profile__edit__button"
-        @click="toggle"
-      >
-        <i class="fa-regular fa-pen-to-square"></i>
-      </button>
+      <div class="profile__buttons">
+        <button
+          aria-label="Modifier le profil"
+          class="button edit profile__edit__button"
+          @click="toggle"
+        >
+          <i class="fa-regular fa-pen-to-square"></i>
+        </button>
+
+        <button class="button profile__logout__button" @click="logout()">
+          Se déconnecter
+        </button>
+        <button class="button profile__logout__button__icon" @click="logout()">
+          <i class="fa-solid fa-right-to-bracket"></i>
+        </button>
+      </div>
       <!-- Infos utilisateur dynamiques -->
       <p class="profile__name">
         {{ user.firstName }}
         {{ user.lastName }}
       </p>
-      <p class="profile__jobtitle">Intitulé de poste : {{ user.jobTitle }}</p>
+      <p class="profile__jobtitle">
+        <b>Intitulé de poste :</b> {{ user.jobTitle }}
+      </p>
       <!-- <p class="profile__bio">
         Bio : Lorem ipsum dolor sit amet consectetur, adipisicing
         elit. Mollitia, voluptatibus dolore voluptas id fugiat amet doloremque
         veniam labore ut quae.
       </p> -->
-      <p class="profile__bio">Bio : {{ user.bio }}</p>
-      <p class="profile__logout" @click="logout()">Se déconnecter</p>
-      <p class="profile__delete__account" @click="deleteAccount()">
-        Supprimer mon compte
-      </p>
+      <p class="profile__bio"><b>Bio :</b> {{ user.bio }}</p>
     </div>
     <img
       :src="user.pictureUrl"
       alt="Photo de profil"
       class="profile__picture"
     />
-    <!-- <img
-      src="@/assets/profile-picture.png"
-      alt="Photo de profil"
-      class="profile__picture"
-    /> -->
+    <!-- <div class="delete__button" @click="deleteConfirm()"> -->
+    <div class="delete__button">
+      <button class="button profile__delete__account" @click="deleteConfirm()">
+        Supprimer mon compte
+      </button>
+      <confirm-dialogue
+        ref="confirmDialogue"
+        class="delete__popup"
+      ></confirm-dialogue>
+    </div>
     <Transition>
       <div v-if="edit_profile_is_here">
         <EditProfile />
@@ -46,11 +58,13 @@
 <script>
 import { mapState } from "vuex";
 import EditProfile from "./EditProfile.vue";
+import ConfirmDialogue from "../others/ConfirmDialogue.vue";
 
 export default {
   name: "ProfileCard",
   components: {
     EditProfile,
+    ConfirmDialogue,
   },
   data() {
     return {
@@ -74,22 +88,34 @@ export default {
     },
 
     /**
-     * Fonction delete account
+     * Demande de confirmation avant suppression
      */
-    deleteAccount: function () {
-      const self = this;
-
-      this.$store
-        .dispatch("deleteAccount")
-        .then(function (response) {
-          if (response.success) {
-            self.$router.push("/");
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+    async deleteConfirm() {
+      const ok = await this.$refs.confirmDialogue.show({
+        title: "Supprimer le compte",
+        message:
+          "Êtes vous certain(e) de vouloir supprimer votre compte ? \n Cette action est irréversible.",
+        okButton: "Confirmer",
+      });
+      if (ok) {
+        //* Fonction de suppression de compte :
+        const self = this;
+        this.$store
+          .dispatch("deleteAccount")
+          .then(function (response) {
+            if (response.success) {
+              self.$router.push("/");
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        alert("Le compte a été supprimé");
+      } else {
+        alert("Le compte n'a pas été supprimé");
+      }
     },
+
     toggle() {
       this.edit_profile_is_here = !this.edit_profile_is_here;
     },
@@ -112,21 +138,47 @@ export default {
   background-color: rgb(207, 207, 207);
   border: 2px solid #091f43;
   .profile__datas {
+    width: 90%;
     display: flex;
     flex-direction: column;
     padding-left: 15px;
-    .profile__edit__button {
-      position: absolute;
+    .profile__buttons {
       align-self: flex-end;
+      .profile__edit__button {
+        margin-right: 20px;
+      }
+      .profile__logout__button__icon {
+        display: none;
+      }
     }
-    .profile__logout,
-    .profile__delete__account {
-      cursor: pointer;
+    .profile__name {
+      font-weight: bold;
+      font-size: 1.2em;
     }
   }
   .profile__picture {
     border: 2px solid #091f43;
     max-width: 200px;
+  }
+  .delete__button {
+    height: 60px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .profile__delete__account {
+      color: #d1515a;
+      font-weight: bold;
+      border: 1px solid #d1515a;
+    }
+    p {
+      margin: 0;
+      color: #d1515a;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
   }
 }
 @media screen and (max-width: 1200px) {
@@ -137,8 +189,17 @@ export default {
     padding: 0;
     padding: 15px;
     .profile__datas {
-      .profile__edit__button {
-        align-self: flex-end;
+      .profile__buttons {
+        .profile__edit__button {
+          align-self: flex-end;
+        }
+        .profile__logout__button {
+          display: none;
+        }
+        .profile__logout__button__icon {
+          display: inline;
+          border-radius: 50px;
+        }
       }
     }
     .profile__picture {
