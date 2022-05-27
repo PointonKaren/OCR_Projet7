@@ -29,19 +29,13 @@
         <p class="profile__jobtitle">
           <b>Intitulé de poste :</b> {{ user.jobTitle }}
         </p>
-        <!-- <p class="profile__bio">
-        bio : Lorem ipsum dolor sit amet consectetur, adipisicing
-        elit. Mollitia, voluptatibus dolore voluptas id fugiat amet doloremque
-        veniam labore ut quae.
-      </p> -->
-        <p class="profile__bio"><b>bio :</b> {{ user.bio }}</p>
+        <p class="profile__bio"><b>Bio :</b> {{ user.bio }}</p>
       </div>
       <img
         :src="user.pictureUrl"
         alt="Photo de profil"
         class="profile__picture"
       />
-      <!-- <div class="delete__button" @click="deleteConfirm()"> -->
       <div class="delete__button">
         <button
           class="button profile__delete__account"

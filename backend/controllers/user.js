@@ -49,8 +49,8 @@ const signup = (req, res, next) => {
           pictureUrl: `${req.protocol}://${req.get(
             "host"
           )}/images/default_profile_picture.png`,
-          jobTitle: "Non connu",
-          bio: "A définir",
+          jobTitle: "À préciser",
+          bio: "À préciser",
         });
         user
           .save()
