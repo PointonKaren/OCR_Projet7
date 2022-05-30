@@ -2,30 +2,36 @@
   <!--Bloc "Création de publication" -->
   <div id="add__post">
     <h2 class="add__post__title">Importer une image</h2>
-    <form id="form" @submit.prevent="addPost()" enctype="multipart/form-data">
-      <p>
-        <label for="postTitle">Titre :</label>
+    <form
+      method="POST"
+      id="form"
+      @submit.prevent="addPost"
+      enctype="multipart/form-data"
+    >
+      <div>
+        <label for="title">Titre de la publication :</label>
         <br />
         <input
-          class="postTitle"
           type="text"
-          name="postTitle"
-          id="postTitle"
-          v-model="postTitle"
+          placeholder="Ecrire un titre"
+          name="title"
+          v-model="title"
         />
-      </p>
-      <label>Sélectionner un fichier : </label>
-      <input
-        class="select__file"
-        type="file"
-        accept="image/*"
-        @change="handleFileUpload($event)"
-      />
-      <br />
+      </div>
+      <div>
+        <label>Sélectionner un fichier : </label>
+        <input
+          ref="file"
+          v-on:change="handleFileUpload()"
+          type="file"
+          class="select__file"
+          accept="image/*"
+          required
+        />
+      </div>
       <button
         aria-label="Envoyer le fichier"
         class="button button__submit__file"
-        v-on:click="submitFile()"
       >
         Envoyer
       </button>
@@ -34,44 +40,57 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
+import { ref } from "vue";
 
 export default {
   name: "AddPost",
 
-  data() {
+  setup() {
+    const file = ref(null);
+    const handleFileUpload = async () => {
+      // debugger;
+      console.log("selected file", file.value.files);
+      //Upload to server
+    };
+
     return {
-      file: "",
+      handleFileUpload,
+      file,
     };
   },
 
-  methods: {
-    handleFileUpload(event) {
-      this.file = event.target.files[0];
-    },
+  // data() {
+  //   return {
+  //     formData: {
+  //       userId: "",
+  //       title: "",
+  //       file: null,
+  //     },
+  //   };
+  // },
 
-    /**
-     * Créer une publication
-     */
-    submitFile() {
-      let formData = new FormData();
+  /**
+   * Créer une publication
+   */
+  // submitFile() {
+  //   let formData = new FormData();
 
-      formData.append("file", this.file);
+  //   formData.append("file", this.file);
 
-      axios
-        .post("http://localhost:3000/api/post/", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then(function () {
-          console.log("SUCCESS!!");
-        })
-        .catch(function () {
-          console.log("FAILURE!!");
-        });
-    },
-  },
+  //   axios
+  //     .post("http://localhost:3000/api/post/", formData, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     })
+  //     .then(function () {
+  //       console.log("SUCCESS!!");
+  //     })
+  //     .catch(function () {
+  //       console.log("FAILURE!!");
+  //     });
+  // },
 };
 </script>
 

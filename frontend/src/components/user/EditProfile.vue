@@ -16,7 +16,7 @@
             type="text"
             name="firstName"
             id="firstName"
-            v-model="firstName"
+            :value="user.firstName"
           />
         </p>
         <p>
@@ -85,7 +85,7 @@
             type="text"
             name="bio"
             id="bio"
-            v-model="bio"
+            :value="user.bio"
           ></textarea>
         </p>
       </div>
@@ -155,7 +155,7 @@ export default {
      * Modifier un compte
      */
     editAccount: function () {
-      // Ajoute au store vuex les données entrées par l'utilisateur et le redirige vers la cascade de publications
+      // Ajoute au store vuex les données entrées par l'utilisateur
 
       var formData = new FormData();
 
@@ -175,13 +175,12 @@ export default {
         bio: this.bio,
       };
 
-      const self = this;
+      // const self = this;
 
       this.$store
         .dispatch("updateUserInfos", { formContainImage, formData, userData })
         .then(function () {
-          self.$router.put("/user/:id");
-          self.$router.push("/post");
+          console.log("coucou");
         }),
         function (error) {
           console.log(error);

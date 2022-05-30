@@ -106,8 +106,8 @@ export default {
             // Redirection de l'utilisateur sur la cascade de publications
             self.$router.push("/post");
           },
-          function () {
-            //console.log(error);
+          function (error) {
+            console.log(error);
           }
         );
     },
