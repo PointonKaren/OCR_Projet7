@@ -57,10 +57,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 .popup {
   margin-top: 10px;
-  background-color: rgb(207, 207, 207);
-  border: 1px solid #091f43;
+  background-color: $background;
+  border: 1px solid $primaire;
 
   .confirmation__message,
   .confirmation__title {
@@ -84,8 +87,8 @@ export default {
     }
     .cancel-btn {
       background-color: #cea1a4;
-      color: #d1515a;
-      border: 2px solid #d1515a;
+      color: $tertiaire;
+      border: 2px solid $tertiaire;
     }
 
     .ok-btn {

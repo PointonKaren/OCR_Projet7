@@ -180,6 +180,7 @@ export default {
       this.$store
         .dispatch("updateUserInfos", { formContainImage, formData, userData })
         .then(function () {
+          self.$router.put("/user/:id");
           self.$router.push("/post");
         }),
         function (error) {
@@ -191,6 +192,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 #edit__profile {
   z-index: 2;
   display: flex;
@@ -198,8 +202,8 @@ export default {
   position: absolute;
   right: 40px;
   top: 200px;
-  background-color: rgb(207, 207, 207);
-  border: 2px solid #091f43;
+  background-color: $background;
+  border: 2px solid $primaire;
   border-top: none;
   width: 25vw;
   max-width: 500px;
@@ -222,14 +226,11 @@ export default {
         text-align: center;
         height: 3vh;
         max-height: 20px;
-        border: 1px solid #d1515a;
+        border: 1px solid $tertiaire;
         padding-left: 5px;
         border-radius: 8px;
         &:focus {
-          color: white;
-          background-color: #091f435d;
-          border: 1px solid white;
-          outline: 1px solid white;
+          @include focus;
         }
       }
     }
@@ -282,15 +283,12 @@ export default {
           height: 10vh;
           margin: auto;
           resize: none;
-          border: 1px solid #d1515a;
+          border: 1px solid $tertiaire;
           padding-top: 8px;
           padding-left: 8px;
           border-radius: 10px;
           &:focus {
-            color: white;
-            background-color: #091f435d;
-            border: 1px solid white;
-            outline: 1px solid white;
+            @include focus;
           }
         }
       }

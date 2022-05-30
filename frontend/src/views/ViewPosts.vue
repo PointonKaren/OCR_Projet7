@@ -17,4 +17,7 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+</style>

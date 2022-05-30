@@ -29,6 +29,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 #post {
   margin: auto;
   width: 45vw;

@@ -68,6 +68,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.5s ease;

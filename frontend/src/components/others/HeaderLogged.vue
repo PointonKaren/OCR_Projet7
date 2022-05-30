@@ -62,12 +62,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 #header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  border-bottom: 3px solid #d1515a;
+  border-bottom: 3px solid $tertiaire;
   background-color: lightgrey;
   img {
     margin-left: 20px;

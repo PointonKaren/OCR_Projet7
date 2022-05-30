@@ -2,21 +2,34 @@
   <!--Bloc "Création de publication" -->
   <div id="add__post">
     <h2 class="add__post__title">Importer une image</h2>
-    <label>Sélectionner un fichier : </label>
-    <input
-      class="select__file"
-      type="file"
-      accept="image/*"
-      @change="handleFileUpload($event)"
-    />
-    <br />
-    <button
-      aria-label="Envoyer le fichier"
-      class="button button__submit__file"
-      v-on:click="submitFile()"
-    >
-      Envoyer
-    </button>
+    <form id="form" @submit.prevent="addPost()" enctype="multipart/form-data">
+      <p>
+        <label for="postTitle">Titre :</label>
+        <br />
+        <input
+          class="postTitle"
+          type="text"
+          name="postTitle"
+          id="postTitle"
+          v-model="postTitle"
+        />
+      </p>
+      <label>Sélectionner un fichier : </label>
+      <input
+        class="select__file"
+        type="file"
+        accept="image/*"
+        @change="handleFileUpload($event)"
+      />
+      <br />
+      <button
+        aria-label="Envoyer le fichier"
+        class="button button__submit__file"
+        v-on:click="submitFile()"
+      >
+        Envoyer
+      </button>
+    </form>
   </div>
 </template>
 
@@ -63,9 +76,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 #add__post {
-  background-color: rgb(207, 207, 207);
-  border: 2px solid #091f43;
+  background-color: $background;
+  border: 2px solid $primaire;
   width: 35vw;
   max-width: 900px;
   margin: auto;

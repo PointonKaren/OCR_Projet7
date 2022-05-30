@@ -124,6 +124,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 #profile__card {
   #profile {
     z-index: 2;
@@ -136,8 +139,8 @@ export default {
     width: 20vw;
     max-width: 500px;
     padding: 20px;
-    background-color: rgb(207, 207, 207);
-    border: 2px solid #091f43;
+    background-color: $background;
+    border: 2px solid $primaire;
     .profile__datas {
       width: 90%;
       display: flex;
@@ -158,7 +161,7 @@ export default {
       }
     }
     .profile__picture {
-      border: 2px solid #091f43;
+      border: 2px solid $primaire;
       max-width: 200px;
     }
     .delete__button {
@@ -170,13 +173,13 @@ export default {
       justify-content: space-between;
 
       .profile__delete__account {
-        color: #d1515a;
+        color: $tertiaire;
         font-weight: bold;
-        border: 1px solid #d1515a;
+        border: 1px solid $tertiaire;
       }
       p {
         margin: 0;
-        color: #d1515a;
+        color: $tertiaire;
         font-size: 1.2em;
         font-weight: bold;
       }

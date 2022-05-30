@@ -21,6 +21,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 .comments__card {
   width: 30vw;
   .comments__header {

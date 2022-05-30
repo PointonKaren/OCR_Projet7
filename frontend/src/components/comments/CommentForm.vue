@@ -31,6 +31,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 #comment {
   display: flex;
   align-items: center;
@@ -42,7 +45,7 @@ export default {
     align-items: center;
     margin: auto;
     #comment__textarea {
-      border: 1px solid #d1515a;
+      border: 1px solid $tertiaire;
       padding-top: 5px;
       padding-left: 5px;
       border-radius: 10px;
@@ -52,10 +55,7 @@ export default {
       max-height: 100px;
       resize: none;
       &:focus {
-        color: white;
-        background-color: #091f435d;
-        border: 1px solid white;
-        outline: 1px solid white;
+        @include focus;
       }
     }
     .comment__button {

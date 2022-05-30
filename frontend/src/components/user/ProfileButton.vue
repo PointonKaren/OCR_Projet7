@@ -44,11 +44,14 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 .profile__button__picture {
   margin-top: 6px;
   cursor: pointer;
   img {
-    border: 2px solid #091f43;
+    border: 2px solid $primaire;
     height: 60px;
     width: 60px;
     border-radius: 50px;

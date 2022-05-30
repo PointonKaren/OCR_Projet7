@@ -29,6 +29,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 /* css class for the transition */
 .fade-enter-active,
 .fade-leave-active {

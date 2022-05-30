@@ -116,13 +116,16 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 #login_form {
   width: 40vw;
   max-width: 600px;
   margin: auto;
   padding-left: 20px;
-  background-color: rgb(207, 207, 207);
-  border: 2px solid #091f43;
+  background-color: $background;
+  border: 2px solid $primaire;
   margin-bottom: 30px;
   h1 {
     text-align: center;
@@ -157,7 +160,7 @@ export default {
       font-size: 1.3em;
     }
     .button--disabled {
-      background-color: grey;
+      background-color: $secondaire;
       color: lightgrey;
       border: 1px solid darkgrey;
     }

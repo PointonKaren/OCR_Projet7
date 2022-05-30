@@ -33,6 +33,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 #presentation {
   h1 {
     text-align: center;
@@ -41,8 +44,8 @@ export default {
   margin: auto;
   margin-top: 10vh;
   padding-left: 20px;
-  background-color: rgb(207, 207, 207);
-  border: 2px solid #091f43;
+  background-color: $background;
+  border: 2px solid $primaire;
 }
 @media screen and (max-width: 1200px) {
   #presentation {

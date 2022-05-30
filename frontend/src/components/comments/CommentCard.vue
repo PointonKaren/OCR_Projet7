@@ -30,10 +30,13 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 .comment__card {
   border: 1px solid white;
   background-color: white;
-  box-shadow: 3px 4px 7px grey;
+  box-shadow: 3px 4px 7px $secondaire;
   border-radius: 20px;
   margin-bottom: 20px;
   width: 30vw;

@@ -2,6 +2,7 @@
   <!--Carte de la publication-->
   <div class="post__card">
     <h2 class="post__title">Titre de l'image</h2>
+    <h3>Auteur</h3>
     <div class="post__image">
       <img :src="require('@/assets/background.jpg')" alt="Titre" />
     </div>
@@ -15,6 +16,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 .post__card {
   max-height: 800px;
   margin-bottom: 30px;

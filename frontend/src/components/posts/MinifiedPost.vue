@@ -24,9 +24,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 .minified__post {
-  background-color: rgb(207, 207, 207);
-  border: 2px solid #091f43;
+  background-color: $background;
+  border: 2px solid $primaire;
   width: 35vw;
   max-width: 900px;
   display: flex;
