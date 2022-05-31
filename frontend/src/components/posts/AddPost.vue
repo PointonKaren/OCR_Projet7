@@ -2,12 +2,7 @@
   <!--Bloc "Création de publication" -->
   <div id="add__post">
     <h2 class="add__post__title">Importer une image</h2>
-    <form
-      method="POST"
-      id="form"
-      @submit.prevent="addPost"
-      enctype="multipart/form-data"
-    >
+    <form id="form" @submit.prevent="uploadPost()">
       <div>
         <label for="title">Titre de la publication :</label>
         <br />
@@ -16,81 +11,70 @@
           placeholder="Ecrire un titre"
           name="title"
           v-model="title"
+          required
         />
       </div>
       <div>
         <label>Sélectionner un fichier : </label>
         <input
           ref="file"
-          v-on:change="handleFileUpload()"
           type="file"
           class="select__file"
           accept="image/*"
           required
+          @change="uploadImage"
         />
       </div>
-      <button
+      <input
+        type="submit"
+        value="Envoyer"
         aria-label="Envoyer le fichier"
         class="button button__submit__file"
-      >
-        Envoyer
-      </button>
+      />
     </form>
   </div>
 </template>
 
 <script>
 // import axios from "axios";
-import { ref } from "vue";
+import { mapState } from "vuex";
 
 export default {
   name: "AddPost",
 
-  setup() {
-    const file = ref(null);
-    const handleFileUpload = async () => {
-      // debugger;
-      console.log("selected file", file.value.files);
-      //Upload to server
-    };
-
+  data: function () {
     return {
-      handleFileUpload,
-      file,
+      title: "",
+      pictureUrl: "",
     };
   },
 
-  // data() {
-  //   return {
-  //     formData: {
-  //       userId: "",
-  //       title: "",
-  //       file: null,
-  //     },
-  //   };
-  // },
+  computed: {
+    ...mapState({
+      user: "userInfos",
+    }),
+  },
 
-  /**
-   * Créer une publication
-   */
-  // submitFile() {
-  //   let formData = new FormData();
+  methods: {
+    uploadImage: function (e) {
+      this.pictureUrl = e.target.files[0];
+    },
 
-  //   formData.append("file", this.file);
+    uploadPost: function () {
+      const formData = new FormData();
 
-  //   axios
-  //     .post("http://localhost:3000/api/post/", formData, {
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     })
-  //     .then(function () {
-  //       console.log("SUCCESS!!");
-  //     })
-  //     .catch(function () {
-  //       console.log("FAILURE!!");
-  //     });
-  // },
+      const postData = {
+        title: this.title,
+      };
+
+      formData.append("image", this.pictureUrl);
+
+      this.$store.dispatch("addPost", {
+        postData,
+        formData,
+      });
+    },
+  },
 };
 </script>
 

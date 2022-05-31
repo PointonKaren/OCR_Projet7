@@ -41,8 +41,6 @@ const upload = multer({
       return callback(null, false);
     }
 
-    //req.auth = {userId: decodedToken.userId, userRole: decodedToken.userRole};
-
     const ext = path.extname(file.originalname).toLowerCase();
     if (ext !== ".png" && ext !== ".jpg" && ext !== ".jpeg" && ext !== ".gif") {
       // Quelle que soit la casse, seules les extensions png, jpg, jpeg et gif seront acceptées.

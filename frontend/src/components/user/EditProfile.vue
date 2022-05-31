@@ -2,11 +2,7 @@
   <!--Bloc "Modifier le profil"-->
   <div id="edit__profile">
     <h2>Modifier le profil</h2>
-    <form
-      id="form"
-      @submit.prevent="editAccount()"
-      enctype="multipart/form-data"
-    >
+    <form id="form" @submit.prevent="editAccount()">
       <div class="edit__name">
         <p>
           <label for="firstName">Prénom :</label>
@@ -16,7 +12,7 @@
             type="text"
             name="firstName"
             id="firstName"
-            :value="user.firstName"
+            v-model="firstName"
           />
         </p>
         <p>
@@ -27,7 +23,7 @@
             type="text"
             name="lastName"
             id="lastName"
-            :value="user.lastName"
+            v-model="lastName"
           />
         </p>
       </div>
@@ -41,7 +37,7 @@
             name="email"
             id="email"
             pattern=".+@groupomania\.com"
-            :value="user.email"
+            v-model="email"
           />
         </p>
         <p class="password__field">
@@ -65,7 +61,7 @@
             type="text"
             name="jobTitle"
             id="jobTitle"
-            :value="user.jobTitle"
+            v-model="jobTitle"
           />
         </p>
         <p class="edit__picture">
@@ -85,7 +81,7 @@
             type="text"
             name="bio"
             id="bio"
-            :value="user.bio"
+            v-model="bio"
           ></textarea>
         </p>
       </div>
@@ -159,11 +155,11 @@ export default {
 
       var formData = new FormData();
 
-      let formContainImage = false;
+      let containImage = false;
 
       if (this.pictureUrl) {
         formData.append("image", this.pictureUrl);
-        formContainImage = true;
+        containImage = true;
       }
 
       const userData = {
@@ -175,17 +171,24 @@ export default {
         bio: this.bio,
       };
 
-      // const self = this;
-
       this.$store
-        .dispatch("updateUserInfos", { formContainImage, formData, userData })
+        .dispatch("updateUserInfos", { containImage, formData, userData })
         .then(function () {
-          console.log("coucou");
+          // On rafraichit la page pour afficher les modifications
+          window.location.reload();
         }),
         function (error) {
           console.log(error);
         };
     },
+  },
+
+  mounted: function () {
+    this.firstName = this.user.firstName;
+    this.lastName = this.user.lastName;
+    this.email = this.user.email;
+    this.jobTitle = this.user.jobTitle;
+    this.bio = this.user.bio;
   },
 };
 </script>

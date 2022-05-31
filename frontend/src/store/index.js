@@ -184,8 +184,6 @@ const store = createStore({
         ...userData,
       };
 
-      console.log(newUserData);
-
       if (containImage) {
         formData.append("data", JSON.stringify(newUserData));
         instance
@@ -199,7 +197,7 @@ const store = createStore({
           })
           .catch(function (e) {
             console.log(e);
-            commit("setStatus", "error_create");
+            //commit("setStatus", "error_create");
           });
       } else {
         instance
@@ -267,6 +265,37 @@ const store = createStore({
           success: false,
         };
       }
+    },
+
+    /**
+     * Ajouter un post
+     * @param {*} param0
+     * @param {*} post
+     * @returns
+     */
+
+    addPost: ({ commit }, { postData, formData }) => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user.userId;
+
+      instance.defaults.headers["Content-Type"] = "multipart/form-data";
+
+      const newUserData = {
+        userId: userId,
+        ...postData,
+      };
+
+      formData.append("data", JSON.stringify(newUserData));
+
+      instance
+        .post("/post/", formData)
+        .then(function (response) {
+          console.log(response);
+          //commit("userInfos", response.data);
+        })
+        .catch(function () {
+          commit("setStatus", "error_create");
+        });
     },
   },
 });
