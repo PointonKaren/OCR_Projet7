@@ -15,7 +15,7 @@ const getPosts = (req, res, next) => {
   Post.findAll({
     order: [["createdAt", "DESC"]],
     include: [
-      { model: User },
+      { model: User, attributes: ["lastName", "firstName"], required: false },
       { model: Like },
       { model: Comment, include: [{ model: User }] },
     ],
@@ -104,10 +104,14 @@ const modifyPost = (req, res, next) => {
 
   Post.findOne({ where: { id: currentPostId } })
     .then((post) => {
-        if(!post) {
-            return res.status(404).json({ message: "Post introuvable." });
-        }
-      if (currentUserId === post.UserId || currentUserRole === 2 || currentUserRole === 1) {
+      if (!post) {
+        return res.status(404).json({ message: "Post introuvable." });
+      }
+      if (
+        currentUserId === post.UserId ||
+        currentUserRole === 2 ||
+        currentUserRole === 1
+      ) {
         post.title = req.body.title;
 
         post
