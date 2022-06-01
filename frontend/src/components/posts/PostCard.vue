@@ -3,9 +3,9 @@
   <div class="post__card">
     <h2 class="post__title">{{ post_data.title }}</h2>
     <h3>{{ post_data.author }}</h3>
-    <h3>Créé le : {{ post_data.created_at }}</h3>
+    <p>Créé le {{ post_data.created_at }}</p>
     <div class="post__image">
-      <img :src="require('@/assets/background.jpg')" alt="Titre" />
+      <img :src="post_data.image_url" alt="Titre" />
     </div>
   </div>
 </template>

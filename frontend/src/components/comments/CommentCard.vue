@@ -5,27 +5,66 @@
       <button
         aria-label="Supprimer le commentaire"
         class="button delete post__delete"
+        v-if="suppAuth"
       >
         <i class="fa-regular fa-trash-can"></i>
       </button>
-      <button aria-label="Modifier le commentaire" class="button edit">
+      <button aria-label="Modifier le commentaire" class="button edit" v-if="editAuth">
         <i class="fa-regular fa-pen-to-square"></i>
       </button>
     </div>
-    <p class="comment__user">Prénom Nom</p>
+    <p class="comment__user">{{ author }} </p>
     <p class="comment__text">
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates vitae
-      fugiat dolorum quidem dolorem optio nobis repellat molestiae, at a
-      laboriosam totam autem modi voluptate. Fuga earum odio ipsam, labore
-      molestias dicta natus nam eligendi. Sapiente aperiam nihil molestias
-      perferendis?
+      {{ message }}
     </p>
   </div>
 </template>
 
 <script>
+
+import { mapState } from "vuex";
+
 export default {
   name: "CommentCard",
+
+  data() {
+    return {
+      author: "",
+      message: "",
+      postId: "",
+      editAuth: false,
+      suppAuth: false,
+    };
+  },
+
+  computed: {
+    ...mapState({
+      user: "userInfos",
+    }),
+  },
+
+  props: {
+    post_data: Object,
+  },
+
+  beforeMount() {
+    const firstName = this.post_data?.User?.firstName ? this.post_data?.User.firstName : "Utilisateur";
+    const lastName = this.post_data?.User?.lastName ? this.post_data?.User.lastName : "supprimé";
+    this.author = `${firstName} ${lastName}`;
+    this.message = this.post_data.message;
+    this.postId = this.post_data.id;
+
+    if ((this.user.id === this.post_data?.UserId) || (this.user.role === 1) || (this.user.role === 2)) {
+      this.suppAuth = true;
+    }
+
+    if ((this.user.id === this.post_data?.UserId)  || (this.user.role === 2)) {
+      this.editAuth = true;
+    }
+
+  },
+
+
 };
 </script>
 

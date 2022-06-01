@@ -1,13 +1,11 @@
 <template>
-  <!--Post minifié, utlisé pour la cascade de publications -->
-  <router-link to="/post/:id" class="minified__post">
+  <!--Post minifié utlisé pour la cascade de publications -->
+  <router-link :to="{ name: 'post', params: { id: post_data.id }}" class="minified__post">> 
     <PostCard :post_data="post_data" />
     <div class="minified__post__react">
-      <p class="number__of__comments__per__post">
-        {{ post_data.title }} {{ post_data.author }} 1 commentaires
-      </p>
+      <p class="number__of__comments__per__post">{{}} commentaires</p>
       <p class="number__of__likes__per__post">
-        {{ post_data.created_at }} 111 <i class="fa-regular fa-heart"></i>
+        42 <i class="fa-regular fa-heart"></i>
       </p>
     </div>
   </router-link>
@@ -22,8 +20,13 @@ export default {
   props: {
     post_data: Object,
   },
+
   components: {
     PostCard,
+  },
+
+  mounted() {
+    console.log(this.post_data);
   },
 };
 </script>

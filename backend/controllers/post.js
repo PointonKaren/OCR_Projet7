@@ -15,7 +15,7 @@ const getPosts = (req, res, next) => {
   Post.findAll({
     order: [["createdAt", "DESC"]],
     include: [
-      { model: User, attributes: ["lastName", "firstName"], required: false },
+      { model: User, required: false },
       { model: Like },
       { model: Comment, include: [{ model: User }] },
     ],

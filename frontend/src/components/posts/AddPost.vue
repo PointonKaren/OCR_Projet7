@@ -69,6 +69,7 @@ export default {
 
       formData.append("image", this.pictureUrl);
 
+
       this.$store.dispatch("addPost", {
         postData,
         formData,

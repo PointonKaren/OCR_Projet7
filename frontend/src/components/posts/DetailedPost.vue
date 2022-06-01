@@ -16,7 +16,10 @@
           <i class="fa-regular fa-pen-to-square"></i>
         </button>
       </div>
-      <PostCard />
+      <PostCard v-for="(post, index) in postsData"
+        :key="index"
+        :post_data="post"
+      />
       <div class="post__react">
         <div class="comments">
           <span @click="show = !show">
@@ -56,7 +59,9 @@
               <i class="fa-solid fa-check"></i>
             </button>
           </span>
-          <p class="number_of_comments">42</p>
+          <p class="number_of_comments">
+              1
+            </p>
         </div>
         <div class="likes">
           <p class="number_of_likes">42</p>
@@ -70,12 +75,17 @@
           <CommentForm />
         </div>
       </Transition>
-      <CommentsCard />
+      <CommentsCard v-for="(post, index) in postsData"
+        :key="index"
+        :post_data="post"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import { instance } from "../../store/index.js";
+import { ref } from 'vue'
 import PostCard from "../posts/PostCard.vue";
 import CommentForm from "../comments/CommentForm.vue";
 import CommentsCard from "../comments/CommentsCard.vue";
@@ -87,8 +97,12 @@ export default {
     return {
       comment_form_is_here: false,
       show: true,
+      postInfo: null,
+      editAuth: false,
+      suppAuth: false,
     };
   },
+
 
   components: {
     PostCard,
@@ -101,6 +115,83 @@ export default {
       this.comment_form_is_here = !this.comment_form_is_here;
     },
   },
+
+  setup() {
+   class Post {
+      constructor(id, title, author, created_at, image_url, likes, comments) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.created_at = created_at;
+        this.image_url = image_url;
+        this.likes = likes;
+        this.comments = comments;
+      }
+    }
+
+    let postsData = ref([]);
+
+    const makeDataPost = (post) => {
+
+      // convert timestamp to date
+      let date = new Date(post.createdAt);
+
+      // convert date to string
+      let dateString =
+        (date.getDate() > 9 ? date.getDate() : "0" + date.getDate()) +
+        "/" +
+        ((date.getMonth() + 1) > 9
+          ? (date.getMonth() + 1)
+          : "0" + (date.getMonth() + 1)) +
+        "/" +
+        date.getFullYear() +
+        " " +
+        date.getHours() +
+        ":" +
+        date.getMinutes();
+
+      const firstName = post?.User?.firstName === undefined ? "Utilisateur" : post.User.firstName;
+      const lastName = post?.User?.lastName === undefined ? "supprimé" : post.User.lastName;
+
+      const author = firstName + " " + lastName;
+
+      const new_post = new Post(
+        post.id,
+        post.title,
+        author,
+        dateString,
+        post.imageUrl,
+        post.Likes,
+        post.Comments
+      );
+
+      postsData.value.push(new_post);
+    
+    };
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user.userId;
+
+    let data = {
+      data: {
+        userId: userId,
+      },
+    };
+
+    instance.defaults.headers["Content-Type"] = "application/json";
+
+    const postId = window.location.href.split("/")[4];
+
+    instance.post(`/post/${postId}`, data).then((res) => {
+      makeDataPost(res.data.post);
+    });
+
+
+    return {
+      postsData,
+    };
+  },
+
 };
 </script>
 

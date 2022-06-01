@@ -303,7 +303,7 @@ const store = createStore({
         });
     },
 
-    getPosts: async ({ commit }) => {
+    getPosts: ({ commit }) => {
       const user = JSON.parse(localStorage.getItem("user"));
       const userId = user.userId;
 
@@ -315,10 +315,16 @@ const store = createStore({
 
       instance.defaults.headers["Content-Type"] = "application/json";
 
-      const res = await instance.post(`/post/`, data);
+      instance.post(`/post/`, data).then(function (response) {
+        commit("setPosts", response.data.posts);
+      }).catch(function (err) {
+        console.log(err);
+      });
 
-      commit("setPosts", res.data.posts);
     },
   },
 });
+
 export default store;
+
+export { instance };

@@ -40,23 +40,17 @@
         :key="index"
         :post_data="post"
       />
-      <!-- <MinifiedPost
-        v-for="(post, index) in postsData"
-        :post="post"
-        :index="index"
-        :key="post.id"
-      /> -->
-      <!-- <MinifiedPost /> -->
     </div>
   </div>
 </template>
 
 <script>
+import { instance } from "../../store/index.js";
 import MinifiedPost from "./MinifiedPost.vue";
 import AddPost from "../posts/AddPost.vue";
 
-import BDD from "../../BDD";
-import { onMounted, ref } from "vue";
+/* import BDD from "../../BDD";*/
+import { ref } from "vue";
 
 export default {
   name: "PostsCascade",
@@ -70,7 +64,6 @@ export default {
     return {
       show: true,
       add_post_is_here: false,
-      // postsData: [],
     };
   },
 
@@ -82,41 +75,78 @@ export default {
 
   setup() {
     class Post {
-      constructor(title, author, created_at, image_url) {
+      constructor(id, title, author, created_at, image_url, likes, comments) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.created_at = created_at;
         this.image_url = image_url;
+        this.likes = likes;
+        this.comments = comments;
       }
     }
+
     let postsData = ref([]);
 
-    const makeDataPost = () => {
-      for (const post of BDD) {
+    const makeDataPost = (database) => {
+
+      for (const post of database) {
+        // convert timestamp to date
+        let date = new Date(post.createdAt);
+
+        // convert date to string
+        let dateString =
+          (date.getDate() > 9 ? date.getDate() : "0" + date.getDate()) +
+          "/" +
+          ((date.getMonth() + 1) > 9
+            ? (date.getMonth() + 1)
+            : "0" + (date.getMonth() + 1)) +
+          "/" +
+          date.getFullYear() +
+          " " +
+          date.getHours() +
+          ":" +
+          date.getMinutes();
+
+        const firstName = post?.User?.firstName === undefined ? "Utilisateur" : post.User.firstName;
+        const lastName = post?.User?.lastName === undefined ? "supprimé" : post.User.lastName;
+
+        const author = firstName + " " + lastName;
+
         const new_post = new Post(
+          post.id,
           post.title,
-          post.author,
-          post.created_at,
-          post.image_url
+          author,
+          dateString,
+          post.imageUrl,
+          post.Likes,
+          post.Comments
         );
+
         postsData.value.push(new_post);
       }
     };
 
-    onMounted(makeDataPost);
-    console.log(postsData.value);
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user.userId;
+
+    let data = {
+      data: {
+        userId: userId,
+      },
+    };
+
+    instance.defaults.headers["Content-Type"] = "application/json";
+
+    instance.post(`/post/`, data).then((res) => {
+      makeDataPost(res.data.posts);
+    });
+
     return {
       postsData,
     };
   },
-
-  // created() {
-  //   this.$store.dispatch("getPosts");
-  //   this.postsData = this.$store.state.postsInfos;
-  //   // console.log("coucouuu"); // a modifier si paase pas
-  //   // console.log(this.$store.state.postsInfos);
-  //   console.log(this.$store.state.postsInfos);
-  // },
+  
 };
 </script>
 

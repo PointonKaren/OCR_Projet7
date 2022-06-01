@@ -5,7 +5,7 @@
       <h2 class="comments__title">Commentaires</h2>
     </div>
     <div class="post__comments">
-      <CommentCard v-for="(card, index) in 8" :key="index" />
+      <CommentCard v-for="(comment, index) in post_data.comments" :key="index" :post_data="comment"/>
     </div>
   </div>
 </template>
@@ -17,6 +17,12 @@ export default {
   components: {
     CommentCard,
   },
+
+  props: {
+    post_data: Object,
+  },
+
+
 };
 </script>
 
