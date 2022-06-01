@@ -35,7 +35,18 @@
       </div>
     </Transition>
     <div id="cascade">
-      <MinifiedPost v-for="(card, index) in 3" :key="index" />
+      <MinifiedPost
+        v-for="(post, index) in postsData"
+        :key="index"
+        :post_data="post"
+      />
+      <!-- <MinifiedPost
+        v-for="(post, index) in postsData"
+        :post="post"
+        :index="index"
+        :key="post.id"
+      /> -->
+      <!-- <MinifiedPost /> -->
     </div>
   </div>
 </template>
@@ -43,6 +54,9 @@
 <script>
 import MinifiedPost from "./MinifiedPost.vue";
 import AddPost from "../posts/AddPost.vue";
+
+import BDD from "../../BDD";
+import { onMounted, ref } from "vue";
 
 export default {
   name: "PostsCascade",
@@ -56,6 +70,7 @@ export default {
     return {
       show: true,
       add_post_is_here: false,
+      // postsData: [],
     };
   },
 
@@ -64,6 +79,44 @@ export default {
       this.add_post_is_here = !this.add_post_is_here;
     },
   },
+
+  setup() {
+    class Post {
+      constructor(title, author, created_at, image_url) {
+        this.title = title;
+        this.author = author;
+        this.created_at = created_at;
+        this.image_url = image_url;
+      }
+    }
+    let postsData = ref([]);
+
+    const makeDataPost = () => {
+      for (const post of BDD) {
+        const new_post = new Post(
+          post.title,
+          post.author,
+          post.created_at,
+          post.image_url
+        );
+        postsData.value.push(new_post);
+      }
+    };
+
+    onMounted(makeDataPost);
+    console.log(postsData.value);
+    return {
+      postsData,
+    };
+  },
+
+  // created() {
+  //   this.$store.dispatch("getPosts");
+  //   this.postsData = this.$store.state.postsInfos;
+  //   // console.log("coucouuu"); // a modifier si paase pas
+  //   // console.log(this.$store.state.postsInfos);
+  //   console.log(this.$store.state.postsInfos);
+  // },
 };
 </script>
 

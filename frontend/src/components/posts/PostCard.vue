@@ -1,8 +1,9 @@
 <template>
   <!--Carte de la publication-->
   <div class="post__card">
-    <h2 class="post__title">Titre de l'image</h2>
-    <h3>Auteur</h3>
+    <h2 class="post__title">{{ post_data.title }}</h2>
+    <h3>{{ post_data.author }}</h3>
+    <h3>Créé le : {{ post_data.created_at }}</h3>
     <div class="post__image">
       <img :src="require('@/assets/background.jpg')" alt="Titre" />
     </div>
@@ -10,8 +11,31 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
+  computed: {
+    ...mapState({
+      user: "userInfos",
+    }),
+  },
+
+  props: {
+    post_data: Object,
+  },
+
   name: "PostCard",
+
+  method: function () {
+    console.log(this.$store.state.user.userId);
+    return;
+  },
+
+  data() {
+    return {
+      posts: [this.$store.state.post],
+    };
+  },
 };
 </script>
 

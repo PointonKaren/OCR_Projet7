@@ -59,6 +59,7 @@ const store = createStore({
       jobTitle: "",
       bio: "",
     },
+    postsInfos: [],
   },
 
   mutations: {
@@ -100,6 +101,10 @@ const store = createStore({
       };
 
       localStorage.removeItem("user");
+    },
+
+    setPosts: function (state, posts) {
+      state.postsInfos = posts;
     },
   },
 
@@ -288,7 +293,7 @@ const store = createStore({
       formData.append("data", JSON.stringify(newUserData));
 
       instance
-        .post("/post/", formData)
+        .put("/post/", formData)
         .then(function (response) {
           console.log(response);
           //commit("userInfos", response.data);
@@ -296,6 +301,23 @@ const store = createStore({
         .catch(function () {
           commit("setStatus", "error_create");
         });
+    },
+
+    getPosts: async ({ commit }) => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user.userId;
+
+      let data = {
+        data: {
+          userId: userId,
+        },
+      };
+
+      instance.defaults.headers["Content-Type"] = "application/json";
+
+      const res = await instance.post(`/post/`, data);
+
+      commit("setPosts", res.data.posts);
     },
   },
 });

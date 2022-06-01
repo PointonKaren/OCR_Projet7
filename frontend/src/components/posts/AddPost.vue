@@ -73,6 +73,9 @@ export default {
         postData,
         formData,
       });
+
+      // reload page
+      window.location.reload();
     },
   },
 };

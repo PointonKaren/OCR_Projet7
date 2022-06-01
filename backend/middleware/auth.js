@@ -28,6 +28,8 @@ const verifyToken = (req, res, next) => {
       }
     }
 
+    console.log(userId);
+
     // On parse le body pour récupérer l'id de l'utilisateur sous forme de nombre
     const authUserId = parseInt(req.auth.userId);
     const authUserRole = parseInt(req.auth.userRole);
