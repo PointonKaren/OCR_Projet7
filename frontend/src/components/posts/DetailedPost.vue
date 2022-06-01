@@ -145,10 +145,10 @@ export default {
           : "0" + (date.getMonth() + 1)) +
         "/" +
         date.getFullYear() +
-        " " +
-        date.getHours() +
-        ":" +
-        date.getMinutes();
+          " à " +
+          date.getHours() +
+          "h" +
+          date.getMinutes();
 
       const firstName = post?.User?.firstName === undefined ? "Utilisateur" : post.User.firstName;
       const lastName = post?.User?.lastName === undefined ? "supprimé" : post.User.lastName;

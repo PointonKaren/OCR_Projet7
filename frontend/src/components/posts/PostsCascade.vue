@@ -103,9 +103,9 @@ export default {
             : "0" + (date.getMonth() + 1)) +
           "/" +
           date.getFullYear() +
-          " " +
+          " à " +
           date.getHours() +
-          ":" +
+          "h" +
           date.getMinutes();
 
         const firstName = post?.User?.firstName === undefined ? "Utilisateur" : post.User.firstName;
