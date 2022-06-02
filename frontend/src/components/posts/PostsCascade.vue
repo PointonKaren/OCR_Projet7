@@ -89,7 +89,6 @@ export default {
     let postsData = ref([]);
 
     const makeDataPost = (database) => {
-
       for (const post of database) {
         // convert timestamp to date
         let date = new Date(post.createdAt);
@@ -98,8 +97,8 @@ export default {
         let dateString =
           (date.getDate() > 9 ? date.getDate() : "0" + date.getDate()) +
           "/" +
-          ((date.getMonth() + 1) > 9
-            ? (date.getMonth() + 1)
+          (date.getMonth() + 1 > 9
+            ? date.getMonth() + 1
             : "0" + (date.getMonth() + 1)) +
           "/" +
           date.getFullYear() +
@@ -108,8 +107,12 @@ export default {
           "h" +
           date.getMinutes();
 
-        const firstName = post?.User?.firstName === undefined ? "Utilisateur" : post.User.firstName;
-        const lastName = post?.User?.lastName === undefined ? "supprimé" : post.User.lastName;
+        const firstName =
+          post?.User?.firstName === undefined
+            ? "Utilisateur"
+            : post.User.firstName;
+        const lastName =
+          post?.User?.lastName === undefined ? "supprimé" : post.User.lastName;
 
         const author = firstName + " " + lastName;
 
@@ -146,7 +149,6 @@ export default {
       postsData,
     };
   },
-  
 };
 </script>
 
@@ -166,16 +168,17 @@ export default {
 #posts__cascade {
   #posts__cascade__header {
     width: 35vw;
+    max-width: 900px;
     margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     #posts__cascade__title {
       text-align: center;
+      margin-right: 20px;
     }
     .add__post__button,
     .add__post__cancel {
-      margin-left: 2vw;
       border-radius: 50px;
     }
     .add__post__cancel {
@@ -197,11 +200,6 @@ export default {
       width: 95vw;
       #posts__cascade__title {
         color: white;
-      }
-      .add__post__button,
-      .add__post__cancel {
-        margin: 0;
-        margin-right: 5vw;
       }
     }
     .arrow_up {

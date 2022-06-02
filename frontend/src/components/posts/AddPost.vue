@@ -3,17 +3,18 @@
   <div id="add__post">
     <h2 class="add__post__title">Importer une image</h2>
     <form id="add__post__form" @submit.prevent="uploadPost()">
-      <div id="add__post__title">
+      <div id="add__post__form__title">
         <label for="title">Titre de la publication :</label>
         <input
           type="text"
           placeholder="Ecrire un titre"
           name="title"
+          class="add__post__form__title__input"
           v-model="title"
           required
         />
       </div>
-      <div id="add__post__file">
+      <div id="add__post__form__file">
         <label>Sélectionner un fichier : </label>
         <input
           ref="file"
@@ -87,6 +88,7 @@ export default {
 #add__post {
   background-color: $background;
   border: 2px solid $primaire;
+  color: $primaire;
   width: 35vw;
   max-width: 900px;
   margin: auto;
@@ -99,12 +101,21 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 11vh;
-    #add__post__title {
+    height: 150px;
+    width: 30vw;
+    max-width: 900px;
+    margin-bottom: 15px;
+    #add__post__form__title {
       margin: auto;
     }
-    #add__post__file {
+    #add__post__form__file {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 20vw;
+      max-width: 350px;
       margin: auto;
+      justify-content: center;
     }
     label {
       padding-right: 20px;
@@ -113,18 +124,48 @@ export default {
     .button__submit__file {
       width: 150px;
       align-self: center;
-      margin-bottom: 15px;
     }
   }
 }
 @media screen and (max-width: 1200px) {
   #add__post {
     width: 95vw;
+    height: 60vh;
+    .add__post__title {
+      margin: 0;
+      margin-top: 15px;
+    }
     #add__post__form {
-      padding-left: 10px;
-      .select__file {
+      width: 90vw;
+      height: 50vh;
+
+      #add__post__form__title {
+        display: flex;
+        flex-direction: column;
+        width: 90vw;
+        max-width: 900px;
+        align-items: center;
+        .add__post__form__title__input {
+          width: 85vw;
+          max-width: 350px;
+        }
+      }
+      #add__post__form__file {
+        width: 90vw;
         margin: auto;
-        width: 100vw;
+        .select__file {
+          margin: auto;
+        }
+      }
+      label {
+        padding: 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .button__submit__file {
+        margin-top: 10px;
+        width: 150px;
+        align-self: center;
       }
     }
   }
