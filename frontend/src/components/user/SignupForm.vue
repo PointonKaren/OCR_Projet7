@@ -152,6 +152,7 @@ export default {
 <style lang="scss">
 @import "./scss/_variables.scss";
 @import "./scss/_mixins.scss";
+@import "./scss/_buttons.scss";
 
 #signup {
   width: 35vw;

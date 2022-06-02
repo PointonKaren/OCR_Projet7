@@ -199,6 +199,7 @@ export default {
 <style lang="scss">
 @import "./scss/_variables.scss";
 @import "./scss/_mixins.scss";
+@import "./scss/_buttons.scss";
 
 #detailed__post {
   background-color: $background;
@@ -248,9 +249,6 @@ export default {
           align-self: flex-end;
           font-size: 1.2em;
         }
-        .heart {
-          padding-top: 10px;
-        }
       }
     }
   }
@@ -283,11 +281,7 @@ export default {
             display: none;
           }
           .comment__icon {
-            font-size: 12px;
-            border-radius: 50px;
-            height: 35px;
             display: inline;
-            padding: 4px 8px 4px 8px;
           }
           .number_of_comments {
             padding-bottom: 5px;
@@ -298,10 +292,6 @@ export default {
           .number_of_likes {
             padding-bottom: 5px;
             font-size: 1em;
-          }
-          .heart {
-            font-size: 12px;
-            padding: 6px 8px 4px 8px;
           }
         }
       }

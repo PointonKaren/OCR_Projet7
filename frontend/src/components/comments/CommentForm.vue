@@ -33,6 +33,7 @@ export default {
 <style lang="scss">
 @import "./scss/_variables.scss";
 @import "./scss/_mixins.scss";
+@import "./scss/_buttons.scss";
 
 #comment {
   display: flex;
@@ -62,9 +63,6 @@ export default {
       margin-top: 10px;
       margin-bottom: 20px;
     }
-    .comment__icon {
-      display: none;
-    }
   }
 }
 @media screen and (max-width: 1200px) {
@@ -77,17 +75,6 @@ export default {
       #comment__textarea {
         height: 10vh;
         width: 80vw;
-      }
-      .comment__button {
-        display: none;
-      }
-      .comment__icon {
-        margin-top: 1vh;
-        font-size: 12px;
-        border-radius: 50px;
-        height: 35px;
-        display: inline;
-        padding: 4px 8px 4px 8px;
       }
     }
   }

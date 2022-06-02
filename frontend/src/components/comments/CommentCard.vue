@@ -84,6 +84,7 @@ export default {
 <style lang="scss">
 @import "./scss/_variables.scss";
 @import "./scss/_mixins.scss";
+@import "./scss/_buttons.scss";
 
 .comment__card {
   border: 1px solid white;
@@ -119,6 +120,17 @@ export default {
 @media screen and (max-width: 1200px) {
   .comment__card {
     width: 80vw;
+    .comment__data {
+      padding: 0;
+      font-size: 12px;
+      .comment__user {
+        width: 50vw;
+      }
+      .comment__date {
+        width: 50vw;
+        text-align: end;
+      }
+    }
   }
 }
 </style>
