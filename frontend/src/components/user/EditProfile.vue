@@ -207,7 +207,7 @@ export default {
   background-color: $background;
   border: 2px solid $primaire;
   border-top: none;
-  width: 25vw;
+  width: 20vw;
   max-width: 500px;
   padding: 20px;
   h2 {

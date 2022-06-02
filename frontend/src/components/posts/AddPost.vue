@@ -2,10 +2,9 @@
   <!--Bloc "Création de publication" -->
   <div id="add__post">
     <h2 class="add__post__title">Importer une image</h2>
-    <form id="form" @submit.prevent="uploadPost()">
-      <div>
+    <form id="add__post__form" @submit.prevent="uploadPost()">
+      <div id="add__post__title">
         <label for="title">Titre de la publication :</label>
-        <br />
         <input
           type="text"
           placeholder="Ecrire un titre"
@@ -14,7 +13,7 @@
           required
         />
       </div>
-      <div>
+      <div id="add__post__file">
         <label>Sélectionner un fichier : </label>
         <input
           ref="file"
@@ -69,7 +68,6 @@ export default {
 
       formData.append("image", this.pictureUrl);
 
-
       this.$store.dispatch("addPost", {
         postData,
         formData,
@@ -97,24 +95,37 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  label {
-    padding-right: 20px;
-    padding-bottom: 20px;
-  }
-  .select__file {
-    width: 25vw;
-    max-width: 300px;
-  }
-  .button__submit__file {
-    margin-bottom: 20px;
+  #add__post__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 11vh;
+    #add__post__title {
+      margin: auto;
+    }
+    #add__post__file {
+      margin: auto;
+    }
+    label {
+      padding-right: 20px;
+      padding-bottom: 20px;
+    }
+    .button__submit__file {
+      width: 150px;
+      align-self: center;
+      margin-bottom: 15px;
+    }
   }
 }
 @media screen and (max-width: 1200px) {
   #add__post {
     width: 95vw;
-    .select__file {
-      margin: auto;
-      width: 90vw;
+    #add__post__form {
+      padding-left: 10px;
+      .select__file {
+        margin: auto;
+        width: 100vw;
+      }
     }
   }
 }

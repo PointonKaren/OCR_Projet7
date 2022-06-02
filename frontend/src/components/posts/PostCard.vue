@@ -44,13 +44,10 @@ export default {
 @import "./scss/_mixins.scss";
 
 .post__card {
-  max-height: 800px;
   margin-bottom: 30px;
   .post__image {
     img {
       border-radius: 10px;
-      border: 3px solid white;
-      width: 30vw;
     }
   }
 }
