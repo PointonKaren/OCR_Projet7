@@ -9,11 +9,18 @@
       >
         <i class="fa-regular fa-trash-can"></i>
       </button>
-      <button aria-label="Modifier le commentaire" class="button edit" v-if="editAuth">
+      <button
+        aria-label="Modifier le commentaire"
+        class="button edit"
+        v-if="editAuth"
+      >
         <i class="fa-regular fa-pen-to-square"></i>
       </button>
     </div>
-    <p class="comment__user">{{ author }} </p>
+    <div class="comment__data">
+      <p class="comment__user">{{ author }}</p>
+      <p class="comment__date">Posté le {{ createdAt }}</p>
+    </div>
     <p class="comment__text">
       {{ message }}
     </p>
@@ -21,7 +28,6 @@
 </template>
 
 <script>
-
 import { mapState } from "vuex";
 
 export default {
@@ -32,6 +38,7 @@ export default {
       author: "",
       message: "",
       postId: "",
+      createdAt: "",
       editAuth: false,
       suppAuth: false,
     };
@@ -48,23 +55,29 @@ export default {
   },
 
   beforeMount() {
-    const firstName = this.post_data?.User?.firstName ? this.post_data?.User.firstName : "Utilisateur";
-    const lastName = this.post_data?.User?.lastName ? this.post_data?.User.lastName : "supprimé";
+    const firstName = this.post_data?.User?.firstName
+      ? this.post_data?.User.firstName
+      : "Utilisateur";
+    const lastName = this.post_data?.User?.lastName
+      ? this.post_data?.User.lastName
+      : "supprimé";
     this.author = `${firstName} ${lastName}`;
     this.message = this.post_data.message;
     this.postId = this.post_data.id;
+    this.createdAt = this.post_data.createdAt;
 
-    if ((this.user.id === this.post_data?.UserId) || (this.user.role === 1) || (this.user.role === 2)) {
+    if (
+      this.user.id === this.post_data?.UserId ||
+      this.user.role === 1 ||
+      this.user.role === 2
+    ) {
       this.suppAuth = true;
     }
 
-    if ((this.user.id === this.post_data?.UserId)  || (this.user.role === 2)) {
+    if (this.user.id === this.post_data?.UserId || this.user.role === 2) {
       this.editAuth = true;
     }
-
   },
-
-
 };
 </script>
 
@@ -85,12 +98,20 @@ export default {
     display: flex;
     justify-content: flex-end;
   }
-  .comment__user {
-    font-size: 1.1em;
-    font-weight: bold;
-    margin-left: 10px;
+  .comment__data {
+    display: flex;
+    justify-content: space-between;
+    .comment__user {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .comment__date {
+      margin-right: 10px;
+    }
   }
   .comment__text {
+    margin-top: 0;
     padding-left: 10px;
     padding-right: 10px;
   }

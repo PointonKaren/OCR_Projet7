@@ -49,7 +49,6 @@ import { instance } from "../../store/index.js";
 import MinifiedPost from "./MinifiedPost.vue";
 import AddPost from "../posts/AddPost.vue";
 
-/* import BDD from "../../BDD";*/
 import { ref } from "vue";
 
 export default {

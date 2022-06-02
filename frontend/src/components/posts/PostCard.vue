@@ -2,11 +2,12 @@
   <!--Carte de la publication-->
   <div class="post__card">
     <h2 class="post__title">{{ post_data.title }}</h2>
-    <h3>{{ post_data.author }}</h3>
-    <p>Créé le {{ post_data.created_at }}</p>
     <div class="post__image">
       <img :src="post_data.image_url" alt="Titre" />
     </div>
+    <p class="post__infos">
+      Postée par {{ post_data.author }} le {{ post_data.created_at }}
+    </p>
   </div>
 </template>
 
@@ -44,22 +45,40 @@ export default {
 @import "./scss/_mixins.scss";
 
 .post__card {
-  margin-bottom: 30px;
+  background-color: $background;
+  width: 35vw;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 20px;
+  text-decoration: none;
+  .post__infos {
+    align-self: flex-end;
+    margin-right: 10px;
+  }
   .post__image {
     img {
       border-radius: 10px;
+      border: 5px solid white;
+      max-width: 30vw;
     }
   }
 }
 @media screen and (max-width: 1200px) {
   .post__card {
-    margin-top: -10px;
+    width: 90vw;
     margin-bottom: 5px;
     .post__image {
       img {
         width: 90vw;
         max-width: 800px;
+        border: 2px solid white;
       }
+    }
+    .post__infos {
+      font-size: 12px;
     }
   }
 }

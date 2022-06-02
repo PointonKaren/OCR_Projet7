@@ -1,6 +1,9 @@
 <template>
   <!--Post minifié utlisé pour la cascade de publications -->
-  <router-link :to="{ name: 'post', params: { id: post_data.id }}" class="minified__post">> 
+  <router-link
+    :to="{ name: 'post', params: { id: post_data.id } }"
+    class="minified__post"
+  >
     <PostCard :post_data="post_data" />
     <div class="minified__post__react">
       <p class="number__of__comments__per__post">{{}} commentaires</p>

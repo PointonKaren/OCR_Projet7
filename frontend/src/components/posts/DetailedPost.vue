@@ -6,17 +6,20 @@
         <button
           aria-label="Supprimer la publication"
           class="button delete post__delete"
+          v-if="suppAuth"
         >
           <i class="fa-regular fa-trash-can test"></i>
         </button>
         <button
           aria-label="Modifier la publication"
           class="button edit post__edit"
+          v-if="editAuth"
         >
           <i class="fa-regular fa-pen-to-square"></i>
         </button>
       </div>
-      <PostCard v-for="(post, index) in postsData"
+      <PostCard
+        v-for="(post, index) in postsData"
         :key="index"
         :post_data="post"
       />
@@ -59,9 +62,7 @@
               <i class="fa-solid fa-check"></i>
             </button>
           </span>
-          <p class="number_of_comments">
-              1
-            </p>
+          <p class="number_of_comments">1</p>
         </div>
         <div class="likes">
           <p class="number_of_likes">42</p>
@@ -75,7 +76,8 @@
           <CommentForm />
         </div>
       </Transition>
-      <CommentsCard v-for="(post, index) in postsData"
+      <CommentsCard
+        v-for="(post, index) in postsData"
         :key="index"
         :post_data="post"
       />
@@ -85,7 +87,7 @@
 
 <script>
 import { instance } from "../../store/index.js";
-import { ref } from 'vue'
+import { ref } from "vue";
 import PostCard from "../posts/PostCard.vue";
 import CommentForm from "../comments/CommentForm.vue";
 import CommentsCard from "../comments/CommentsCard.vue";
@@ -103,7 +105,6 @@ export default {
     };
   },
 
-
   components: {
     PostCard,
     CommentForm,
@@ -117,7 +118,7 @@ export default {
   },
 
   setup() {
-   class Post {
+    class Post {
       constructor(id, title, author, created_at, image_url, likes, comments) {
         this.id = id;
         this.title = title;
@@ -132,7 +133,6 @@ export default {
     let postsData = ref([]);
 
     const makeDataPost = (post) => {
-
       // convert timestamp to date
       let date = new Date(post.createdAt);
 
@@ -140,18 +140,22 @@ export default {
       let dateString =
         (date.getDate() > 9 ? date.getDate() : "0" + date.getDate()) +
         "/" +
-        ((date.getMonth() + 1) > 9
-          ? (date.getMonth() + 1)
+        (date.getMonth() + 1 > 9
+          ? date.getMonth() + 1
           : "0" + (date.getMonth() + 1)) +
         "/" +
         date.getFullYear() +
-          " à " +
-          date.getHours() +
-          "h" +
-          date.getMinutes();
+        " à " +
+        date.getHours() +
+        "h" +
+        date.getMinutes();
 
-      const firstName = post?.User?.firstName === undefined ? "Utilisateur" : post.User.firstName;
-      const lastName = post?.User?.lastName === undefined ? "supprimé" : post.User.lastName;
+      const firstName =
+        post?.User?.firstName === undefined
+          ? "Utilisateur"
+          : post.User.firstName;
+      const lastName =
+        post?.User?.lastName === undefined ? "supprimé" : post.User.lastName;
 
       const author = firstName + " " + lastName;
 
@@ -166,7 +170,6 @@ export default {
       );
 
       postsData.value.push(new_post);
-    
     };
 
     const user = JSON.parse(localStorage.getItem("user"));
@@ -186,12 +189,10 @@ export default {
       makeDataPost(res.data.post);
     });
 
-
     return {
       postsData,
     };
   },
-
 };
 </script>
 

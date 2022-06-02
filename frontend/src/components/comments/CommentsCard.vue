@@ -5,7 +5,11 @@
       <h2 class="comments__title">Commentaires</h2>
     </div>
     <div class="post__comments">
-      <CommentCard v-for="(comment, index) in post_data.comments" :key="index" :post_data="comment"/>
+      <CommentCard
+        v-for="(comment, index) in post_data.comments"
+        :key="index"
+        :post_data="comment"
+      />
     </div>
   </div>
 </template>
@@ -21,8 +25,6 @@ export default {
   props: {
     post_data: Object,
   },
-
-
 };
 </script>
 
@@ -42,6 +44,10 @@ export default {
       margin: auto;
       margin-top: 20px;
     }
+  }
+  .post__comments {
+    display: flex;
+    flex-direction: column-reverse;
   }
 }
 @media screen and (max-width: 1200px) {
