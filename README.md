@@ -43,23 +43,26 @@ Pour chaque niveau d'utilisateurs :
 
 * **0 : simple utilisateur :**
   
-  - S'enregistrer et se connecter
-  - Poster un post
-  - Supprimer un de ses posts
-  - Consulter tous les posts
-  - Liker un post
-  - Consulter le détail et les commendaires d'un post
-  - Commenter un post
+  - S'enregistrer, se connecter et se déconnecter
+  - Consulter toutes les publications 
+  - Consulter le détail et les commentaires d'une publication
+  - Poster une publication
+  - Aimer une publication
+  - Commenter une publication
   - Editer ses commentaires
   - Supprimer ses commentaires
-  - Consulter et modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
+  - Supprimer ses publications
+  - Consulter son profil utilisateur
   - Modifier son mot de passe
+  - Modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
   - Supprimer son compte
+  
 * **1 : modérateur : idem +**
   
-  - Modifier un titre de post
-  - Supprimer un post
+  - Modifier une publication
+  - Supprimer une publication
   - Supprimer des commentaires
+  
 * **2 : administrateur : idem +**
   
   - Modifier n'importe quel commentaire
@@ -81,31 +84,25 @@ Pour chaque niveau d'utilisateurs :
 
 Pour chaque niveau d'utilisateurs :
 
-* **0 simple utilisateur:**
+* **0 : simple utilisateur:**
 
   - S'enregistrer, se connecter et se déconnecter
-  - Consulter tous les posts 
-  - Consulter le détail et les commentaires d'un post
+  - Consulter toutes les publications 
+  - Consulter le détail et les commentaires d'une publication
+  - Poster une publication
+  - Aimer une publication
+  - Commenter une publication
+  - Supprimer ses commentaires
+  - Supprimer ses publications
   - Consulter son profil utilisateur
+  - Modifier son mot de passe
+  - Modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
   - Supprimer son compte 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
   
 * **1 : modérateur : idem +**
   
-  - 
-  - 
-  
-* **2 : administrateur : idem +**
-  
-  - 
-  - 
-  - 
+  - Supprimer n'importe quelle publication
+  - Supprimer n'importe quel commentaire
 
 ### Proposition de Fonctionnalités
 
@@ -115,28 +112,17 @@ Pour chaque niveau d'utilisateurs :
 
 * **0 : simple utilisateur :**
 
-  - Poster un post
-  - Supprimer un de ses posts
-  - Liker un post
-  - Commenter un post
   - Editer ses commentaires
-  - Supprimer ses commentaires
-  - Modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
-  - Modifier son mot de passe
   - Accéder à un trombinoscope
   
 * **1 : modérateur : idem +**
   
-  - Modifier un titre de post
-  - Supprimer un post
-  - Supprimer des commentaires
+  - Editer une publication
+  
 * **2 : administrateur : idem +**
   
-  - Modifier n'importe quel commentaire
+  - Editer n'importe quel commentaire
   - Consulter n'importe quel profil
   - Modifier n'importe quel profil (notamment mail/mot de passe en cas d'oubli)
   - Supprimer un utilisateur
   - Consulter une liste de tous les posts et commentaires d'un utilisateur précis
-
-
-*Readme à compléter*
