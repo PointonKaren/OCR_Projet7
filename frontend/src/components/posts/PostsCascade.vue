@@ -35,7 +35,7 @@
       </div>
     </Transition>
     <div id="cascade">
-      <MinifiedPost
+      <PostCard
         v-for="(post, index) in postsData"
         :key="index"
         :post_data="post"
@@ -46,7 +46,7 @@
 
 <script>
 import { instance } from "../../store/index.js";
-import MinifiedPost from "./MinifiedPost.vue";
+import PostCard from "./PostCard.vue";
 import AddPost from "../posts/AddPost.vue";
 
 import { ref } from "vue";
@@ -55,7 +55,7 @@ export default {
   name: "PostsCascade",
 
   components: {
-    MinifiedPost,
+    PostCard,
     AddPost,
   },
 
@@ -177,21 +177,6 @@ export default {
       text-align: center;
       margin-right: 20px;
     }
-    .add__post__button,
-    .add__post__cancel {
-      border-radius: 50px;
-    }
-    .add__post__cancel {
-      font-size: 1em;
-      padding-left: 12px;
-      padding-right: 12px;
-    }
-  }
-  .arrow_up {
-    border-radius: 50px;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
   }
 }
 @media screen and (max-width: 1200px) {

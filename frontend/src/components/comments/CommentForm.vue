@@ -3,15 +3,21 @@
   <div id="comment" v-show="!here">
     <form class="comment__form" @submit.prevent="submitComment">
       <label for="comment__textarea"
-        ><h2 class="comment__title">Ecrivez votre commentaire :</h2>
+        ><h3 class="comment__title">Ecrivez votre commentaire :</h3>
       </label>
       <textarea id="comment__textarea" v-model="comment"></textarea>
+      <input
+        type="submit"
+        value="Envoyer"
+        aria-label="Envoyer le fichier"
+        class="button button__submit__comment"
+      />
     </form>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import { instance } from "../../store/index.js";
 
 export default {
   name: "CommentForm",
@@ -24,7 +30,29 @@ export default {
 
   methods: {
     submitComment() {
-      axios.put("/comment/:id", { content: this.comment });
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user.userId;
+
+      const postId = this.$route.params.id;
+
+      console.log(postId, userId, this.comment);
+
+      let data = {
+        data: {
+          userId: userId,
+          message: this.comment,
+        },
+      };
+
+      instance
+        .post(`/post/${postId}/comment`, data)
+        .then((response) => {
+          console.log(response);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

@@ -23,53 +23,34 @@
         :key="index"
         :post_data="post"
       />
-      <div class="post__react">
-        <div class="comments">
-          <span @click="show = !show">
-            <button
-              aria-label="Commenter"
-              class="button comment comment__button"
-              @click="toggle"
-              v-show="show"
-            >
-              Commenter
-            </button>
-            <button
-              aria-label="Poster le commentaire"
-              type="submit"
-              class="button comment__button"
-              @click="toggle"
-              v-show="!show"
-            >
-              Poster le commentaire
-            </button>
-          </span>
-          <span @click="show = !show">
-            <button
-              aria-label="Commenter"
-              class="button comment comment__icon"
-              @click="toggle"
-              v-show="show"
-            >
-              <i class="fa-regular fa-comment-dots"></i>
-            </button>
-            <button
-              aria-label="Poster le commentaire"
-              class="button comment comment__icon"
-              @click="toggle"
-              v-show="!show"
-            >
-              <i class="fa-solid fa-check"></i>
-            </button>
-          </span>
-          <p class="number_of_comments">1</p>
-        </div>
-        <div class="likes">
-          <p class="number_of_likes">42</p>
-          <button aria-label="Aimer la publication" class="button heart">
-            <i class="fa-regular fa-heart"></i>
+      <div class="comments__header">
+        <h2 class="comments__title">
+          Commentaires
+        </h2>
+        <!-- <h2 class="comments__title" v-if="haveComments">
+          Commentaires
+        </h2>
+        <h2 class="comments__title" v-else>
+          Pas de commentaire
+        </h2> -->
+        <span @click="show = !show">
+          <button
+            class="button add__comment__button"
+            aria-label="Ajouter une publication"
+            @click="toggle"
+            v-show="show"
+          >
+            <i class="fa-solid fa-plus"></i>
           </button>
-        </div>
+          <button
+            class="button add__comment__cancel"
+            aria-label="Annuler"
+            @click="toggle"
+            v-show="!show"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </span>
       </div>
       <Transition>
         <div v-if="comment_form_is_here" class="add__comment">
@@ -88,12 +69,24 @@
 <script>
 import { instance } from "../../store/index.js";
 import { ref } from "vue";
+import { mapState } from "vuex";
+
 import PostCard from "../posts/PostCard.vue";
 import CommentForm from "../comments/CommentForm.vue";
 import CommentsCard from "../comments/CommentsCard.vue";
 
 export default {
   name: "DetailedPost",
+
+  computed: {
+    ...mapState({
+      user: "userInfos",
+    }),
+  },
+
+  props: {
+    pdata: Object,
+  },
 
   data() {
     return {
@@ -102,6 +95,8 @@ export default {
       postInfo: null,
       editAuth: false,
       suppAuth: false,
+      posts: [this.$store.state.post],
+      haveComments: false,
     };
   },
 
@@ -193,6 +188,18 @@ export default {
       postsData,
     };
   },
+
+  beforeMount() {
+    
+/*     const lenPosts = this.postsData.comments.length;
+
+    console.log(lenPosts);
+
+    if (lenPosts > 0) {
+      this.haveComments = true;
+    } */
+
+  },
 };
 </script>
 
@@ -251,8 +258,17 @@ export default {
         }
       }
     }
+    .comments__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .comments__title {
+        margin-right: 20px;
+      }
+    }
   }
 }
+
 @media screen and (max-width: 1200px) {
   #detailed__post {
     width: 95vw;

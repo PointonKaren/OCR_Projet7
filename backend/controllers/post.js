@@ -174,7 +174,7 @@ const deletePost = (req, res, next) => {
  * @param {*} next
  */
 const likePost = (req, res, next) => {
-  const currentUserId = req.body.userId;
+  const currentUserId = req.body.data.userId;
   const currentPostId = req.params.id;
   Like.findOne({ where: { UserId: currentUserId, PostId: currentPostId } })
     .then((like) => {

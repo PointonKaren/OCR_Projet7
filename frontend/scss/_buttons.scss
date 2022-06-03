@@ -23,7 +23,11 @@
 .delete,
 .edit,
 .heart,
-.comment__icon {
+.comment__icon,
+.add__post__button,
+.add__post__cancel,
+.add__comment__button,
+.add__comment__cancel {
     border-radius: 50px;
 }
 
@@ -34,6 +38,24 @@
 
 .heart {
     padding-top: 10px;
+}
+
+.add__post__cancel {
+    font-size: 1em;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.arrow_up {
+    border-radius: 50px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.button__submit__comment {
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 @media screen and (max-width: 1200px) {

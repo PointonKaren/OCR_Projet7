@@ -5,7 +5,9 @@
       <button
         aria-label="Supprimer le commentaire"
         class="button delete post__delete"
+        v-bind="{ id: post_data.id }"
         v-if="suppAuth"
+        @click="deleteComment"
       >
         <i class="fa-regular fa-trash-can"></i>
       </button>
@@ -29,6 +31,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { instance } from "../../store/index.js"
 
 export default {
   name: "CommentCard",
@@ -64,7 +67,21 @@ export default {
     this.author = `${firstName} ${lastName}`;
     this.message = this.post_data.message;
     this.postId = this.post_data.id;
-    this.createdAt = this.post_data.createdAt;
+
+    const postDate = new Date(this.post_data.createdAt);
+
+    this.createdAt =
+      (postDate.getDate() > 9 ? postDate.getDate() : "0" + postDate.getDate()) +
+      "/" +
+      (postDate.getMonth() + 1 > 9
+        ? postDate.getMonth() + 1
+        : "0" + (postDate.getMonth() + 1)) +
+      "/" +
+      postDate.getFullYear() +
+      " à " +
+      postDate.getHours() +
+      "h" +
+      postDate.getMinutes();
 
     if (
       this.user.id === this.post_data?.UserId ||
@@ -77,6 +94,33 @@ export default {
     if (this.user.id === this.post_data?.UserId || this.user.role === 2) {
       this.editAuth = true;
     }
+  },
+
+  methods: {
+    deleteComment(e) {
+      console.log(e);
+
+      const commentId = e.path[1].id;
+
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user.userId;
+
+      console.log(commentId, userId);
+
+      instance
+        .delete(`/comment/${commentId}`, {
+          data: {
+            userId: userId,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>

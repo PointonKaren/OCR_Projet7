@@ -1,9 +1,6 @@
 <template>
   <!--Carte des commentaires-->
   <div class="comments__card">
-    <div class="comments__header">
-      <h2 class="comments__title">Commentaires</h2>
-    </div>
     <div class="post__comments">
       <CommentCard
         v-for="(comment, index) in post_data.comments"
