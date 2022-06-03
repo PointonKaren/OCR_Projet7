@@ -3,15 +3,21 @@
   <div id="comment" v-show="!here">
     <form class="comment__form" @submit.prevent="submitComment">
       <label for="comment__textarea"
-        ><h2 class="comment__title">Ecrivez votre commentaire :</h2>
+        ><h3 class="comment__title">Ecrivez votre commentaire :</h3>
       </label>
       <textarea id="comment__textarea" v-model="comment"></textarea>
+      <input
+        type="submit"
+        value="Envoyer"
+        aria-label="Envoyer le fichier"
+        class="button button__submit__comment"
+      />
     </form>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import { instance } from "../../store/index.js";
 
 export default {
   name: "CommentForm",
@@ -24,13 +30,39 @@ export default {
 
   methods: {
     submitComment() {
-      axios.put("/comment/:id", { content: this.comment });
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user.userId;
+
+      const postId = this.$route.params.id;
+
+      console.log(postId, userId, this.comment);
+
+      let data = {
+        data: {
+          userId: userId,
+          message: this.comment,
+        },
+      };
+
+      instance
+        .post(`/post/${postId}/comment`, data)
+        .then((response) => {
+          console.log(response);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+@import "./scss/_buttons.scss";
+
 #comment {
   display: flex;
   align-items: center;
@@ -42,7 +74,7 @@ export default {
     align-items: center;
     margin: auto;
     #comment__textarea {
-      border: 1px solid #d1515a;
+      border: 1px solid $tertiaire;
       padding-top: 5px;
       padding-left: 5px;
       border-radius: 10px;
@@ -52,18 +84,12 @@ export default {
       max-height: 100px;
       resize: none;
       &:focus {
-        color: white;
-        background-color: #091f435d;
-        border: 1px solid white;
-        outline: 1px solid white;
+        @include focus;
       }
     }
     .comment__button {
       margin-top: 10px;
       margin-bottom: 20px;
-    }
-    .comment__icon {
-      display: none;
     }
   }
 }
@@ -77,17 +103,6 @@ export default {
       #comment__textarea {
         height: 10vh;
         width: 80vw;
-      }
-      .comment__button {
-        display: none;
-      }
-      .comment__icon {
-        margin-top: 1vh;
-        font-size: 12px;
-        border-radius: 50px;
-        height: 35px;
-        display: inline;
-        padding: 4px 8px 4px 8px;
       }
     }
   }

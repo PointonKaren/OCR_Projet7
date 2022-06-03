@@ -1,36 +1,37 @@
 <template>
   <div>
-    <BoxHeaderLogged />
+    <HeaderLogged />
     <div id="post">
       <router-link to="/post">
         <button aria-label="Retour à l'accueil" class="button button__back">
           <i class="fa-solid fa-reply"></i></button
       ></router-link>
-      <DetailPost />
+      <DetailedPost />
     </div>
   </div>
 </template>
 
 <script>
-import BoxHeaderLogged from "../components/others/BoxHeaderLogged.vue";
-import DetailPost from "../components/posts/DetailPost.vue";
+import HeaderLogged from "../components/others/HeaderLogged.vue";
+import DetailedPost from "../components/posts/DetailedPost.vue";
 export default {
   name: "ViewPost",
   components: {
-    BoxHeaderLogged,
-    DetailPost,
+    HeaderLogged,
+    DetailedPost,
   },
   data: function () {
     return {
       mode: "login",
     };
   },
-  // methods: {
-  // },
 };
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+
 #post {
   margin: auto;
   width: 45vw;

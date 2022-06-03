@@ -1,0 +1,8 @@
+@import "./_variables.scss";
+
+@mixin focus {
+    color: white;
+    background-color: #091f435d;
+    border: 1px solid white;
+    outline: 1px solid white;
+}

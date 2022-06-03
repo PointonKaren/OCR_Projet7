@@ -1,39 +1,44 @@
 <template>
-  <!--Header une fois l'utilisateur connecté-->
-  <div>
+  <!--Header-->
+  <header>
     <div id="header">
-      <router-link to="/post">
-        <img :src="require('@/assets/logo.png')" alt="Logo de Groupomania" />
-      </router-link>
+      <img :src="require('@/assets/logo.png')" alt="Logo de Groupomania" />
       <div id="header__buttons">
+        <ProfileButton @click="toggle" />
         <a href="mailto:admin@groupomania.com" title="contact"
           ><button aria-label="Contact" class="button contact">Contact</button>
           <button aria-label="Contact" class="button contact__icon">
             <i class="fa-regular fa-envelope"></i>
           </button>
         </a>
-        <ProfileButton @click="toggle" />
       </div>
     </div>
     <!-- Apparition progressive du profil au clic sur le bouton -->
     <Transition>
       <div v-if="profile_is_here">
-        <BoxProfile />
+        <ProfileCard />
       </div>
     </Transition>
-  </div>
+  </header>
 </template>
 
 <script>
-import ProfileButton from "../others/ProfileButton.vue";
-import BoxProfile from "../others/BoxProfile.vue";
+import ProfileButton from "../user/ProfileButton.vue";
+import ProfileCard from "../user/ProfileCard.vue";
+import { mapState } from "vuex";
 
 export default {
-  name: "BoxHeaderLogged",
+  name: "HeaderLogged",
 
   components: {
     ProfileButton,
-    BoxProfile,
+    ProfileCard,
+  },
+
+  computed: {
+    ...mapState({
+      user: "userInfos",
+    }),
   },
 
   /**
@@ -57,21 +62,26 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+@import "./scss/_buttons.scss";
+
 #header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  border-bottom: 3px solid #d1515a;
+  border-bottom: 3px solid $tertiaire;
   background-color: lightgrey;
   img {
     margin-left: 20px;
   }
   #header__buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    width: 180px;
+    width: 190px;
+    height: 60px;
     margin-right: 20px;
     a {
       .contact {

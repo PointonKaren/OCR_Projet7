@@ -33,7 +33,6 @@ if (!user) {
     user = {
       userId: -1,
       role: 0,
-      token: "",
       firstName: "",
       lastName: "",
       pictureUrl: "",
@@ -60,8 +59,9 @@ const store = createStore({
       jobTitle: "",
       bio: "",
     },
+    postsInfos: [],
   },
-  
+
   mutations: {
     setStatus: function (state, status) {
       state.status = status;
@@ -90,9 +90,21 @@ const store = createStore({
     logout: function (state) {
       state.user = {
         userId: -1,
-        token: "",
+        id: "",
+        role: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        pictureUrl: "",
+        jobTitle: "",
+        bio: "",
       };
+
       localStorage.removeItem("user");
+    },
+
+    setPosts: function (state, posts) {
+      state.postsInfos = posts;
     },
   },
 
@@ -163,9 +175,135 @@ const store = createStore({
     },
 
     /**
+     *
+     * @param {*} param0
+     * @returns
+     */
+
+    updateUserInfos: ({ commit }, { containImage, formData, userData }) => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user.userId;
+
+      const newUserData = {
+        userId: userId,
+        ...userData,
+      };
+
+      if (containImage) {
+        formData.append("data", JSON.stringify(newUserData));
+        instance
+          .put(`/user/${userId}`, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then(function (response) {
+            commit("userInfos", response.data);
+          })
+          .catch(function (e) {
+            console.log(e);
+            //commit("setStatus", "error_create");
+          });
+      } else {
+        instance
+          .put(`/user/${userId}`, newUserData, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then(function (response) {
+            commit("userInfos", response.data);
+          })
+          .catch(function (e) {
+            console.log(e);
+            commit("setStatus", "error_create");
+          });
+      }
+    },
+
+    /**
      * Supprimer le compte utilisateur
      */
-    deleteAccount: ({ commit }) => {
+    deleteAccount: async ({ commit }) => {
+      try {
+        const user = JSON.parse(localStorage.getItem("user"));
+        const userId = user.userId;
+
+        let data = {
+          data: {
+            userId: userId,
+          },
+        };
+
+        instance.defaults.headers["Content-Type"] = "application/json";
+
+        const delRes = await instance.delete(`/user/${userId}`, data);
+
+        if (delRes.status === 200) {
+          const userData = {
+            userId: -1,
+            token: "",
+            id: "",
+            role: "",
+            firstName: "",
+            lastName: "",
+            email: "",
+            pictureUrl: "",
+            jobTitle: "",
+            bio: "",
+          };
+
+          commit("userInfos", userData);
+          commit("logout");
+
+          return {
+            success: true,
+          };
+        } else {
+          return {
+            success: false,
+          };
+        }
+      } catch (error) {
+        console.log(error);
+        return {
+          success: false,
+        };
+      }
+    },
+
+    /**
+     * Ajouter un post
+     * @param {*} param0
+     * @param {*} post
+     * @returns
+     */
+
+    addPost: ({ commit }, { postData, formData }) => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user.userId;
+
+      instance.defaults.headers["Content-Type"] = "multipart/form-data";
+
+      const newUserData = {
+        userId: userId,
+        ...postData,
+      };
+
+      formData.append("data", JSON.stringify(newUserData));
+
+      instance
+        .put("/post/", formData)
+        .then(function (response) {
+          console.log(response);
+          //commit("userInfos", response.data);
+        })
+        .catch(function () {
+          commit("setStatus", "error_create");
+        });
+    },
+
+    getPosts: ({ commit }) => {
       const user = JSON.parse(localStorage.getItem("user"));
       const userId = user.userId;
 
@@ -177,15 +315,16 @@ const store = createStore({
 
       instance.defaults.headers["Content-Type"] = "application/json";
 
-      instance
-        .delete(`/user/${userId}`, data)
-        .then(function (response) {
-          commit("userInfos", response.data.user);
-        })
-        .catch(function () {
-          commit("setStatus", "error_create");
-        });
+      instance.post(`/post/`, data).then(function (response) {
+        commit("setPosts", response.data.posts);
+      }).catch(function (err) {
+        console.log(err);
+      });
+
     },
   },
 });
+
 export default store;
+
+export { instance };

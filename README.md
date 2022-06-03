@@ -3,8 +3,18 @@
 ## Lancer les serveurs :
 
 1) Télécharger, installer et lancer le logiciel XAMPP : https://www.apachefriends.org/fr/index.html,
-2) Se connecter à la BDD : ,
-// TODO: Ajouter la méthode pour se connecter. Où entrer mdp ?
+2) Se connecter à la BDD : dans le dossier backend, créer un fichier .env et y écrire :
+
+DB_NAME=[Nom de la BDD]
+DB_USER=root
+DB_PASSWORD=[Mot de passe de la BDD]
+DB_HOST=localhost
+DB_PORT=3306
+PORT=3000
+SECRET_KEY=[Clé secrète]
+
+Remplacer les données entre [] par les données réelles.
+
 3) Cliquer sur Start sur les deux premières lignes (Apache et MySQL),
 4) *Facultatif : pour consulter la BDD, cliquer sur le bouton Admin de MySQL (possible uniquement si Apache démarré),*
 5) Sur l'éditeur de code, dans le terminal de commande, lancer le serveur (commande nodemon depuis le dossier backend),
@@ -33,23 +43,26 @@ Pour chaque niveau d'utilisateurs :
 
 * **0 : simple utilisateur :**
   
-  - S'enregistrer et se connecter
-  - Poster un post
-  - Supprimer un de ses posts
-  - Consulter tous les posts
-  - Liker un post
-  - Consulter le détail et les commendaires d'un post
-  - Commenter un post
+  - S'enregistrer, se connecter et se déconnecter
+  - Consulter toutes les publications 
+  - Consulter le détail et les commentaires d'une publication
+  - Poster une publication
+  - Aimer une publication
+  - Commenter une publication
   - Editer ses commentaires
   - Supprimer ses commentaires
-  - Consulter et modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
+  - Supprimer ses publications
+  - Consulter son profil utilisateur
   - Modifier son mot de passe
+  - Modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
   - Supprimer son compte
+  
 * **1 : modérateur : idem +**
   
-  - Modifier un titre de post
-  - Supprimer un post
+  - Modifier une publication
+  - Supprimer une publication
   - Supprimer des commentaires
+  
 * **2 : administrateur : idem +**
   
   - Modifier n'importe quel commentaire
@@ -71,31 +84,25 @@ Pour chaque niveau d'utilisateurs :
 
 Pour chaque niveau d'utilisateurs :
 
-* **0 simple utilisateur:**
+* **0 : simple utilisateur:**
 
   - S'enregistrer, se connecter et se déconnecter
-  - Consulter tous les posts 
-  - Consulter le détail et les commentaires d'un post
+  - Consulter toutes les publications 
+  - Consulter le détail et les commentaires d'une publication
+  - Poster une publication
+  - Aimer une publication
+  - Commenter une publication
+  - Supprimer ses commentaires
+  - Supprimer ses publications
   - Consulter son profil utilisateur
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Modifier son mot de passe
+  - Modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
+  - Supprimer son compte 
   
 * **1 : modérateur : idem +**
   
-  - 
-  - 
-  
-* **2 : administrateur : idem +**
-  
-  - 
-  - 
-  - 
+  - Supprimer n'importe quelle publication
+  - Supprimer n'importe quel commentaire
 
 ### Proposition de Fonctionnalités
 
@@ -105,29 +112,17 @@ Pour chaque niveau d'utilisateurs :
 
 * **0 : simple utilisateur :**
 
-  - Poster un post
-  - Supprimer un de ses posts
-  - Liker un post
-  - Commenter un post
   - Editer ses commentaires
-  - Supprimer ses commentaires
-  - Modifier son profil en ajoutant une bio, son poste au sein de l'entreprise, une photo de profil
-  - Modifier son mot de passe
-  - Supprimer son compte
   - Accéder à un trombinoscope
   
 * **1 : modérateur : idem +**
   
-  - Modifier un titre de post
-  - Supprimer un post
-  - Supprimer des commentaires
+  - Editer une publication
+  
 * **2 : administrateur : idem +**
   
-  - Modifier n'importe quel commentaire
+  - Editer n'importe quel commentaire
   - Consulter n'importe quel profil
   - Modifier n'importe quel profil (notamment mail/mot de passe en cas d'oubli)
   - Supprimer un utilisateur
   - Consulter une liste de tous les posts et commentaires d'un utilisateur précis
-
-
-*Readme à compléter*

@@ -21,14 +21,23 @@ const verifyToken = (req, res, next) => {
     if (contentType === "multipart/form-data") {
       userId = JSON.parse(req.body.data).userId;
     } else {
-      userId = req.body.data.userId;
+      if (req.body?.data) {
+        userId = req.body.data.userId;
+      } else {
+        userId = req.body.userId;
+      }
     }
+
+    console.log(userId);
 
     // On parse le body pour récupérer l'id de l'utilisateur sous forme de nombre
     const authUserId = parseInt(req.auth.userId);
     const authUserRole = parseInt(req.auth.userRole);
 
-    if (userId && (userId === authUserId || authUserRole === 2 || authUserRole === 1)) {
+    if (
+      userId &&
+      (userId === authUserId || authUserRole === 2 || authUserRole === 1)
+    ) {
       // S'il y a un userId dans le corps de la requête et qu'il est le même que celui contenu dans le token
       next();
     } else {

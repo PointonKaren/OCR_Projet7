@@ -1,7 +1,7 @@
 <template>
   <div id="home">
-    <BoxHeader />
-    <BoxPresentation />
+    <HeaderHome />
+    <PresentationCard />
     <div id="create" v-if="mode == 'create'">
       <button
         aria-label="Me connecter"
@@ -10,39 +10,40 @@
       >
         Me connecter
       </button>
-      <BoxSignup />
+      <SignupForm />
     </div>
     <div id="login" v-else>
       <button
-        aria-label=" "
+        aria-label="M'enregistrer"
         class="button signup"
         @click="switchToCreateAccount()"
       >
         M'enregistrer
       </button>
-      <BoxLogin />
+      <LoginForm />
     </div>
   </div>
 </template>
 
 <script>
-import BoxHeader from "../components/others/BoxHeader.vue";
-import BoxPresentation from "../components/others/BoxPresentation.vue";
-import BoxSignup from "../components/others/BoxSignup.vue";
-import BoxLogin from "../components/others/BoxLogin.vue";
+import HeaderHome from "../components/others/HeaderHome.vue";
+import PresentationCard from "../components/others/PresentationCard.vue";
+import SignupForm from "../components/user/SignupForm.vue";
+import LoginForm from "../components/user/LoginForm.vue";
 export default {
   name: "ViewHome",
   components: {
-    BoxHeader,
-    BoxPresentation,
-    BoxSignup,
-    BoxLogin,
+    HeaderHome,
+    PresentationCard,
+    SignupForm,
+    LoginForm,
   },
   data: function () {
     return {
       mode: "login",
     };
   },
+
   methods: {
     switchToCreateAccount: function () {
       this.mode = "create";
@@ -55,6 +56,10 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+@import "./scss/_buttons.scss";
+
 #home {
   #create,
   #login {

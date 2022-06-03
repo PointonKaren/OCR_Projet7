@@ -1,12 +1,34 @@
 <template>
-  <!--Bloc "Login"-->
-  <div id="login_form">
-    <h1>Connexion</h1>
+  <!--Bloc "Signup"-->
+  <div id="signup">
+    <h1>Inscription</h1>
     <div class="form">
+      <p>
+        <label for="firstName">Prénom : </label>
+        <input
+          class="input"
+          type="text"
+          name="firstName"
+          id="firstName"
+          required
+          v-model="firstName"
+        />
+      </p>
+      <p>
+        <label for="lastName">Nom : </label>
+        <input
+          class="input"
+          type="text"
+          name="lastName"
+          id="lastName"
+          required
+          v-model="lastName"
+        />
+      </p>
       <p>
         <label for="email">Mail professionnel : </label>
         <input
-          class="input email"
+          class="input"
           type="email"
           name="email"
           id="email"
@@ -20,7 +42,7 @@
         <label for="password">Mot de passe : </label>
         <input
           class="input"
-          :type="show ? 'password' : 'text'"
+          :type="show ? 'text' : 'password'"
           name="password"
           id="password"
           required
@@ -28,20 +50,38 @@
         minuscule et 2 chiffres."
           v-model="password"
         />
-        <button class="button show_password" @click="show = !show">
+      </p>
+
+      <p id="password__field">
+        <label for="password">Confirmation de mot de passe : </label>
+        <input
+          class="input"
+          :type="show ? 'text' : 'password'"
+          name="password"
+          id="password"
+          required
+          title="Minimun 8 caractères, 1 majuscule, 1
+        minuscule et 2 chiffres."
+          v-model="passwordConfirm"
+        />
+        <button
+          aria-label="Montrer/masquer le mot de passe"
+          class="button show_password"
+          @click="show = !show"
+        >
           <i class="fa-regular fa-eye" v-show="!show"></i>
           <i class="fa-regular fa-eye-slash" v-show="show"></i>
         </button>
       </p>
-      <div v-if="status == 'error_login'">
-        Adresse mail et/ou mot de passe invalide.
+      <div v-if="status == 'error_create'">
+        Adresse mail et/ou mot de passe invalide(s).
       </div>
       <input
         type="submit"
         value="Envoyer"
         class="button send"
         :class="{ 'button--disabled': !validatedFields }"
-        @click="login()"
+        @click="createAccount()"
       />
     </div>
   </div>
@@ -51,32 +91,31 @@
 import { mapState } from "vuex";
 
 export default {
-  name: "BoxLogin",
+  name: "SignupForm",
 
   data: function () {
     return {
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
-      show: true,
+      passwordConfirm: "",
+      show: false,
     };
-  },
-
-  mounted: function () {
-    /**
-     * Si l'utilisateur est log -> redirection vers la cascade de publications
-     */
-    if (this.$store.state.user.userId != -1) {
-      this.$router.push("/post");
-      return;
-    }
   },
 
   computed: {
     /**
-     * Si le mail et le mot de passe ne sont pas identiques aux attentes, login refusé
+     * Si les champs obligatoires sont remplis, renvoyer true (valide le formulaire)
      */
     validatedFields: function () {
-      if (this.email != "" && this.password != "") {
+      if (
+        this.firstName != "" &&
+        this.lastName != "" &&
+        this.email != "" &&
+        this.password != "" &&
+        this.password === this.passwordConfirm
+      ) {
         return true;
       } else {
         return false;
@@ -87,38 +126,41 @@ export default {
 
   methods: {
     /**
-     * Fonction de login
+     * Créer un compte
      */
-    login: function () {
+    createAccount: function () {
+      // Ajoute au store vuex les données entrées par l'utilisateur et le redirige vers la cascade de publications
       const self = this;
       this.$store
-        // Ajout au store vuex du mail et du mdp utilisateur
-        .dispatch("login", {
+        .dispatch("createAccount", {
+          firstName: this.firstName,
+          lastName: this.lastName,
           email: this.email,
           password: this.password,
         })
-        .then(
-          function () {
-            // Redirection de l'utilisateur sur la cascade de publications
-            self.$router.push("/post");
-          },
-          function (error) {
-            console.log(error);
-          }
-        );
+        .then(function () {
+          self.$router.push("/post");
+        }),
+        function (error) {
+          console.log(error);
+        };
     },
   },
 };
 </script>
 
 <style lang="scss">
-#login_form {
-  width: 40vw;
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+@import "./scss/_buttons.scss";
+
+#signup {
+  width: 35vw;
   max-width: 600px;
   margin: auto;
   padding-left: 20px;
-  background-color: rgb(207, 207, 207);
-  border: 2px solid #091f43;
+  background-color: $background;
+  border: 2px solid $primaire;
   margin-bottom: 30px;
   h1 {
     text-align: center;
@@ -128,7 +170,7 @@ export default {
     flex-direction: column;
     align-items: center;
     p {
-      font-size: 1.3em;
+      font-size: 1.1em;
       label {
         display: block;
         text-align: center;
@@ -153,7 +195,7 @@ export default {
       font-size: 1.3em;
     }
     .button--disabled {
-      background-color: grey;
+      background-color: $secondaire;
       color: lightgrey;
       border: 1px solid darkgrey;
     }
@@ -170,7 +212,7 @@ export default {
   }
 }
 @media screen and (max-width: 1200px) {
-  #login_form {
+  #signup {
     margin-top: 30px;
     padding: 0;
     width: 90vw;

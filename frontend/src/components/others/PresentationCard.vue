@@ -12,13 +12,12 @@
       d'échange entre départements.
     </p>
     <p>
-      Munissez-vous de votre adresse mail professionnelle et embarquez avec nous
-      dans cette nouvelle aventure !
-    </p>
-
-    <p>
       Ce réseau social interne vous permettra de partager avec vos collègues
       inscrits du contenu multimédia tels que des gifs.
+    </p>
+    <p>
+      Munissez-vous de votre adresse mail professionnelle et embarquez avec nous
+      dans cette nouvelle aventure !
     </p>
     <p>
       Nous espérons que GroupoNetwork vous permettra de faire plus ample
@@ -29,11 +28,15 @@
 
 <script>
 export default {
-  name: "BoxPresentation",
+  name: "PresentationCard",
 };
 </script>
 
 <style lang="scss">
+@import "./scss/_variables.scss";
+@import "./scss/_mixins.scss";
+@import "./scss/_buttons.scss";
+
 #presentation {
   h1 {
     text-align: center;
@@ -42,8 +45,8 @@ export default {
   margin: auto;
   margin-top: 10vh;
   padding-left: 20px;
-  background-color: rgb(207, 207, 207);
-  border: 2px solid #091f43;
+  background-color: $background;
+  border: 2px solid $primaire;
 }
 @media screen and (max-width: 1200px) {
   #presentation {

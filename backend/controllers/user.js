@@ -19,12 +19,7 @@ const {
  * @returns
  */
 const signup = (req, res, next) => {
-  const {
-    firstName,
-    lastName,
-    email,
-    password,
-  } = req.body;
+  const { firstName, lastName, email, password } = req.body;
 
   if (!firstName || !lastName || !email || !password) {
     return res.status(400).json({
@@ -51,6 +46,11 @@ const signup = (req, res, next) => {
           lastName: lastName,
           email: email,
           password: hashedPassword,
+          pictureUrl: `${req.protocol}://${req.get(
+            "host"
+          )}/images/default_profile_picture.png`,
+          jobTitle: "À préciser",
+          bio: "À préciser",
         });
         user
           .save()
@@ -78,7 +78,7 @@ const signup = (req, res, next) => {
  */
 const login = (req, res, next) => {
   const { email, password } = req.body;
-  
+
   User.findOne({ where: { email: email } }) // Est-ce que l'utilisateur existe ?
     .then((user) => {
       if (!user) {
@@ -190,7 +190,7 @@ const getUser = (req, res, next) => {
 const modifyUser = (req, res, next) => {
   let updatedUser;
 
-  // 2 cas possibles : soit l'utilisateur modifie notamment l'image, soit il ne touche pas à l'image et ne modifie que le contenu du formulaire
+  // 2 cas possibles : soit l'utilisateur modifie notamment l'image, soit il ne touche pas à l'image et ne modifie que le contenu du formulair
 
   if (req.file) {
     updatedUser = {
@@ -213,60 +213,53 @@ const modifyUser = (req, res, next) => {
 
   User.findOne({ where: { id: currentUserId } })
     .then((user) => {
+      // On vérifie si l'utilisateur est bien celui qui a demandé la modification ou si l'utilisateur est admin
       if (currentUserId === reqAuthUserId || authUserRole === 2) {
+        // On vérifie si l'utilisateur a envoyé un fichier
         if (req.file) {
           if (user.pictureUrl) {
             const pictureName = user.pictureUrl.split("images/")[1];
-            fileSystem.unlink(`images/${pictureName}`, () => {});
+
+            // Vérifier si l'image existe dans le dossier
+            if (fileSystem.existsSync(`images/${pictureName}`)) {
+              // Vérifier si l'image à supprimer n'est pas la photo de profil par défaut
+              if (pictureName !== "default_profile_picture.png") {
+                // Supprimer l'image
+                fileSystem.unlink(`images/${pictureName}`, () => {});
+              }
+            }
           }
+
+          // On modifie l'image de l'utilisateur
           user.pictureUrl = updatedUser.pictureUrl;
         }
 
-        bcrypt
-          .compare(updatedUser.password, user.password)
-          .then((samePassword) => {
-            if (!samePassword) {
-              bcrypt
-                .hash(updatedUser.password, 10)
-                .then((hashedPassword) => {
-                  user.email = updatedUser.email;
-                  user.firstName = updatedUser.firstName;
-                  user.lastName = updatedUser.lastName;
-                  user.jobTitle = updatedUser.jobTitle;
-                  user.bio = updatedUser.bio;
-                  user.password = hashedPassword;
+        // On modifie le contenu de l'utilisateur
+        user.firstName =
+          updatedUser.firstName === "" ? user.firstName : updatedUser.firstName;
+        user.lastName =
+          updatedUser.lastName === "" ? user.lastName : updatedUser.lastName;
+        user.jobTitle =
+          updatedUser.jobTitle === "" ? user.jobTitle : updatedUser.jobTitle;
+        user.bio = updatedUser.email === "" ? user.bio : updatedUser.bio;
+        user.email = updatedUser.email === "" ? user.email : updatedUser.email;
 
-                  user
-                    .save()
-                    .then(() =>
-                      res
-                        .status(200)
-                        .json({ message: "Utilisateur modifié.", user: user })
-                    )
-                    .catch((error) => res.status(400).json({ message: error }));
-                })
-                .catch((error) => {
-                  return res.status(500).json({ message: error });
-                });
-            } else {
-              user.email = updatedUser.email;
-              user.firstName = updatedUser.firstName;
-              user.lastName = updatedUser.lastName;
-              user.jobTitle = updatedUser.jobTitle;
-              user.bio = updatedUser.bio;
+        // On vérifie si l'utilisateur a modifié son mot de passe
+        user.password =
+          updatedUser.password === ""
+            ? user.password
+            : bcrypt.hashSync(updatedUser.password, 10);
 
-              user
-                .save()
-                .then(() =>
-                  res
-                    .status(200)
-                    .json({ message: "Utilisateur modifié.", user: user })
-                )
-                .catch((error) => res.status(400).json({ message: error }));
-            }
+        // On sauvegarde les modifications de l'utilisateur
+        user
+          .save()
+          .then((user) => {
+            res
+              .status(200)
+              .json({ message: "Utilisateur modifié.", user: user });
           })
           .catch((error) => {
-            return res.status(500).json({ message: error });
+            res.status(400).json({ message: error });
           });
       } else {
         return res.status(403).json({ message: "Requête non autorisée." });
@@ -282,15 +275,32 @@ const modifyUser = (req, res, next) => {
  * @param {*} next
  */
 const deleteUser = (req, res, next) => {
-  const currentUserId = req.params.id;
-  User.findOne({ where: { id: currentUserId } })
+  const currentUserId = parseInt(req.params.id);
+  User.findOne({ where: { id: req.params.id } })
     .then((user) => {
+      console.log(user);
       if (!user) {
         res.status(404).json({ message: "L'utilisateur n'existe pas." });
       }
-      if (currentUserId === req.auth.userId || req.auth.userRole === 2) {
+
+      const authUserId = parseInt(req.auth.userId);
+      const authUserRole = parseInt(req.auth.userRole);
+
+      if (currentUserId === authUserId || authUserRole === 2) {
         const filename = user.pictureUrl.split("/images/")[1];
-        fileSystem.unlink(`images/${filename}`, () => {
+        console.log(filename);
+        if (filename !== "default_profile_picture.png") {
+          fileSystem.unlink(`images/${filename}`, () => {
+            user
+              .destroy()
+              .then(() => {
+                res.status(200).json({ message: "Utilisateur supprimé." });
+              })
+              .catch((error) => {
+                res.status(400).json({ message: error });
+              });
+          });
+        } else {
           user
             .destroy()
             .then(() => {
@@ -299,13 +309,13 @@ const deleteUser = (req, res, next) => {
             .catch((error) => {
               res.status(400).json({ message: error });
             });
-        });
+        }
       } else {
         res.status(403).json({ message: "Requête non autorisée." });
       }
     })
     .catch((error) => {
-      res.status(500).json({ message: error });
+      res.status(500).json({ message: "L'utilisateur n'existe pas !" });
     });
 };
 

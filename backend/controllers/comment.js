@@ -9,9 +9,9 @@ const User = require("../models/User");
  */
 const createComment = (req, res, next) => {
   Comment.create({
-    UserId: req.body.userId,
+    UserId: req.body.data.userId,
     PostId: req.params.id,
-    message: req.body.message,
+    message: req.body.data.message,
   })
     .then(() =>
       res.status(201).json({
@@ -64,13 +64,16 @@ const getPostComments = (req, res, next) => {
  * @param {*} next
  */
 const deleteComment = (req, res, next) => {
+  console.log(req.body);
   const currentUserId = req.body.userId;
   const currentUserRole = req.auth.userRole;
   const currentCommentId = req.params.id;
   Comment.findOne({ where: { id: currentCommentId } })
     .then((comment) => {
       if (!comment) {
-        return res.status(404).json({ message: "Le commentaire n'existe pas." });
+        return res
+          .status(404)
+          .json({ message: "Le commentaire n'existe pas." });
       }
       if (
         currentUserId === comment.UserId ||
@@ -105,7 +108,6 @@ const modifyComment = (req, res, next) => {
   const currentUserRole = req.auth.userRole;
   const currentCommentId = req.params.id;
 
-
   Comment.findOne({
     where: {
       id: currentCommentId,
@@ -113,7 +115,7 @@ const modifyComment = (req, res, next) => {
   }).then((comment) => {
     if (!comment) {
       return res.status(404).json({ message: "Le commentaire n'existe pas." });
-    };
+    }
 
     if (currentUserId === comment.UserId || currentUserRole === 2) {
       comment.message = req.body.message;

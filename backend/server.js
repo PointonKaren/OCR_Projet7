@@ -22,7 +22,8 @@ const errorHandler = (error) => {
     throw error;
   }
   const address = server.address();
-  const bind = typeof address === "string" ? "pipe " + address : "port: " + port;
+  const bind =
+    typeof address === "string" ? "pipe " + address : "port: " + port;
   switch (error.code) {
     case "EACCES":
       console.error(bind + " requires elevated privileges.");
@@ -39,10 +40,10 @@ const errorHandler = (error) => {
 
 const server = http.createServer(app);
 
-// Importing the database model
+// On importe sequelize connecté à la base de données
 const sequelize = require("./utils/database");
 
-// Importing all models
+// On importe les models
 const User = require("./models/User");
 const Post = require("./models/Post");
 const Comment = require("./models/Comment");
@@ -50,10 +51,14 @@ const Like = require("./models/Like");
 
 const models = { User: User, Post: Post, Comment: Comment, Like: Like };
 
+// On associe les moèles entre eux
+
 User.associate(models);
 Post.associate(models);
 Comment.associate(models);
 Like.associate(models);
+
+// On synchronise les tables puis on démarre le serveur
 
 sequelize
   .sync({ force: false })
@@ -74,5 +79,3 @@ sequelize
     console.log(err);
     process.exit(1);
   });
-
-
