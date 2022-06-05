@@ -1,10 +1,10 @@
 const express = require("express");
 const path = require("path");
+let cors = require("cors");
 
 const postRoutes = require("./routes/post");
 const userRoutes = require("./routes/user");
 const commentRoutes = require("./routes/comment");
-var cors = require("cors");
 
 const app = express();
 app.use((req, res, next) => {

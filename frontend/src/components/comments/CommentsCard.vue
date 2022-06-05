@@ -15,6 +15,13 @@
 import CommentCard from "./CommentCard.vue";
 export default {
   name: "CommentsCard",
+
+  data() {
+    return {
+      comment_form_is_here: false,
+      show: true,
+    };
+  },
   components: {
     CommentCard,
   },

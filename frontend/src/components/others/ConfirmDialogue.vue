@@ -16,15 +16,14 @@ export default {
   name: "ConfirmDialogue",
 
   components: { PopupModal },
-
+// "Formulaire" générique pour toute demande de confirmation
   data: () => ({
-    // Parameters that change depending on the type of dialogue
+    // Paramètres génériques qui changeront selon l'utilisation
     title: undefined,
-    message: undefined, // Main text content
-    okButton: undefined, // Text for confirm button; leave it empty because we don't know what we're using it for
-    cancelButton: "Annuler", // text for cancel button
+    message: undefined, // Message principal
+    okButton: undefined, // Texte du bouton de confirmation
+    cancelButton: "Annuler", // Texte du bouton supprimer
 
-    // Private variables
     resolvePromise: undefined,
     rejectPromise: undefined,
   }),

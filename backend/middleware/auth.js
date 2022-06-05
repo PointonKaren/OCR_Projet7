@@ -13,7 +13,7 @@ const verifyToken = (req, res, next) => {
       };
     }
 
-    // Vérifiaction du content type de la requête
+    // Vérification du content type de la requête
 
     const contentType = req.headers["content-type"].split(";")[0];
     let userId = "";
@@ -21,14 +21,14 @@ const verifyToken = (req, res, next) => {
     if (contentType === "multipart/form-data") {
       userId = JSON.parse(req.body.data).userId;
     } else {
+
+      // Permet de prévoir les requêtes axios du frontend qui nécessitent pour la plupart data
       if (req.body?.data) {
         userId = req.body.data.userId;
       } else {
         userId = req.body.userId;
       }
     }
-
-    console.log(userId);
 
     // On parse le body pour récupérer l'id de l'utilisateur sous forme de nombre
     const authUserId = parseInt(req.auth.userId);

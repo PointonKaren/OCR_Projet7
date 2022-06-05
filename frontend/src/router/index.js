@@ -10,7 +10,7 @@ const routes = [
     path: "/",
     component: ViewHome,
     meta: {
-      title: "GroupoNetwork - Se connecter",
+      title: "Se connecter / S'inscrire",
     },
   },
   {
@@ -19,7 +19,7 @@ const routes = [
     path: "/post/",
     component: ViewPosts,
     meta: {
-      title: "GroupoNetwork - Accueil",
+      title: "Accueil",
     },
   },
   {
@@ -28,7 +28,7 @@ const routes = [
     path: "/post/:id",
     component: ViewPost,
     meta: {
-      title: "GroupoNetwork - Détail de la publication",
+      title: "Détail de la publication",
     },
   },
 ];

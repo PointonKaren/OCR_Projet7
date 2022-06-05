@@ -54,7 +54,7 @@
 </template>
 
 <script>
-// TODO: Ajouter bouton suppr/edit publication
+
 import { instance } from "../../store/index.js";
 import { mapState } from "vuex";
 export default {
@@ -115,6 +115,27 @@ export default {
           console.log(error);
         });
 
+    },
+
+    likePost(e) {
+      const cardPostId = e.path[1].id;
+
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user.userId;
+
+      const data = {
+        data : {
+          userId: userId,
+        },
+      };
+
+      instance.post(`/post/${cardPostId}/like`, data)
+        .then(() => {
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 

@@ -27,12 +27,7 @@
         <h2 class="comments__title">
           Commentaires
         </h2>
-        <!-- <h2 class="comments__title" v-if="haveComments">
-          Commentaires
-        </h2>
-        <h2 class="comments__title" v-else>
-          Pas de commentaire
-        </h2> -->
+
         <span @click="show = !show">
           <button
             class="button add__comment__button"
@@ -189,17 +184,6 @@ export default {
     };
   },
 
-  beforeMount() {
-    
-/*     const lenPosts = this.postsData.comments.length;
-
-    console.log(lenPosts);
-
-    if (lenPosts > 0) {
-      this.haveComments = true;
-    } */
-
-  },
 };
 </script>
 

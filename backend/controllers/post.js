@@ -39,8 +39,6 @@ const createPost = (req, res, next) => {
     return res.status(400).json({ message: "Fichier absent ou inattendu." });
   }
   const data = JSON.parse(req.body.data);
-  console.log(data);
-  console.log(req);
   const currentUserId = data.userId;
   const postTitle = data.title;
 
@@ -128,7 +126,7 @@ const modifyPost = (req, res, next) => {
 };
 
 /**
- *
+ * Supprimer une publication
  * @param {*} req
  * @param {*} res
  * @param {*} next

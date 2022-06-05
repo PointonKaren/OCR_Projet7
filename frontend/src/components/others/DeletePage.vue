@@ -16,6 +16,7 @@ export default {
   components: { ConfirmDialogue },
   methods: {
     async deleteConfirm() {
+      // Utilisation du formulaire générique de confirmation
       const ok = await this.$refs.confirmDialogue.show({
         title: "Supprimer le compte",
         message:

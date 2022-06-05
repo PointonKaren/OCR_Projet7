@@ -20,7 +20,8 @@ const storage = multer.diskStorage({
     const userId = req.auth.userId;
 
     const extension = MIME_TYPES[file.mimetype];
-    callback(null, `image_user_${userId}_${Date.now()}.${extension}`); // On change de nom pour plus de sécurité
+    callback(null, `image_user_${userId}_${Date.now()}.${extension}`); 
+    // Nom du fichier modifié pour inclure le nom de l'utilisateur afin d'éviter les doublons et anonymiser les données
   },
 });
 
