@@ -105,8 +105,6 @@ export default {
       const user = JSON.parse(localStorage.getItem("user"));
       const userId = user.userId;
 
-      console.log(commentId, userId);
-
       instance
         .delete(`/comment/${commentId}`, {
           data: {

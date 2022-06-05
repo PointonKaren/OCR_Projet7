@@ -36,7 +36,6 @@
 </template>
 
 <script>
-// import axios from "axios";
 import { mapState } from "vuex";
 
 export default {
@@ -74,7 +73,6 @@ export default {
         formData,
       });
 
-      // reload page
       window.location.reload();
     },
   },

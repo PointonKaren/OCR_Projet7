@@ -54,7 +54,7 @@
 </template>
 
 <script>
-// TODO: Ajouter bouton suppr/edit publication
+
 import { instance } from "../../store/index.js";
 import { mapState } from "vuex";
 export default {

@@ -35,8 +35,6 @@ export default {
 
       const postId = this.$route.params.id;
 
-      console.log(postId, userId, this.comment);
-
       let data = {
         data: {
           userId: userId,
@@ -46,8 +44,7 @@ export default {
 
       instance
         .post(`/post/${postId}/comment`, data)
-        .then((response) => {
-          console.log(response);
+        .then(() => {
           window.location.reload();
         })
         .catch((error) => {

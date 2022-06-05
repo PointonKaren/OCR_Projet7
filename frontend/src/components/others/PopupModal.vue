@@ -33,7 +33,6 @@ export default {
 @import "./scss/_mixins.scss";
 @import "./scss/_buttons.scss";
 
-/* css class for the transition */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s;

@@ -19,7 +19,11 @@ const {
  * @returns
  */
 const signup = (req, res, next) => {
-  const { firstName, lastName, email, password } = req.body;
+
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const email = req.body.email;
+  const password = req.body.password;
 
   if (!firstName || !lastName || !email || !password) {
     return res.status(400).json({
@@ -37,7 +41,6 @@ const signup = (req, res, next) => {
   }
 
   if (emailValidation.valid) {
-    // Si la syntaxe du mail utilisé est correcte
     bcrypt
       .hash(password, 10)
       .then((hashedPassword) => {
@@ -71,15 +74,16 @@ const signup = (req, res, next) => {
 };
 
 /**
- * Se log sur le site
+ * Se connecter sur le site
  * @param {*} req
  * @param {*} res
  * @param {*} next
  */
 const login = (req, res, next) => {
-  const { email, password } = req.body;
+  const email = req.body.email;
+  const password = req.body.password;
 
-  User.findOne({ where: { email: email } }) // Est-ce que l'utilisateur existe ?
+  User.findOne({ where: { email: email } })
     .then((user) => {
       if (!user) {
         return res
@@ -219,7 +223,6 @@ const modifyUser = (req, res, next) => {
         if (req.file) {
           if (user.pictureUrl) {
             const pictureName = user.pictureUrl.split("images/")[1];
-
             // Vérifier si l'image existe dans le dossier
             if (fileSystem.existsSync(`images/${pictureName}`)) {
               // Vérifier si l'image à supprimer n'est pas la photo de profil par défaut
@@ -278,7 +281,6 @@ const deleteUser = (req, res, next) => {
   const currentUserId = parseInt(req.params.id);
   User.findOne({ where: { id: req.params.id } })
     .then((user) => {
-      console.log(user);
       if (!user) {
         res.status(404).json({ message: "L'utilisateur n'existe pas." });
       }
@@ -287,8 +289,7 @@ const deleteUser = (req, res, next) => {
       const authUserRole = parseInt(req.auth.userRole);
 
       if (currentUserId === authUserId || authUserRole === 2) {
-        const filename = user.pictureUrl.split("/images/")[1];
-        console.log(filename);
+        const filename = user.pictureUrl.split("/images/")[1];        
         if (filename !== "default_profile_picture.png") {
           fileSystem.unlink(`images/${filename}`, () => {
             user

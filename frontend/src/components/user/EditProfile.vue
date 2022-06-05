@@ -140,9 +140,8 @@ export default {
 
   methods: {
     /**
-     * Ajouter l'image de profil
+     * Récupérer l'image upload par l'utilisateur
      */
-
     uploadImage: function (e) {
       this.pictureUrl = e.target.files[0];
     },

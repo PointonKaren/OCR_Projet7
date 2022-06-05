@@ -202,7 +202,6 @@ const store = createStore({
           })
           .catch(function (e) {
             console.log(e);
-            //commit("setStatus", "error_create");
           });
       } else {
         instance
@@ -296,7 +295,6 @@ const store = createStore({
         .put("/post/", formData)
         .then(function (response) {
           console.log(response);
-          //commit("userInfos", response.data);
         })
         .catch(function () {
           commit("setStatus", "error_create");

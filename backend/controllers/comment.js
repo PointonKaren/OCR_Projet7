@@ -64,7 +64,6 @@ const getPostComments = (req, res, next) => {
  * @param {*} next
  */
 const deleteComment = (req, res, next) => {
-  console.log(req.body);
   const currentUserId = req.body.userId;
   const currentUserRole = req.auth.userRole;
   const currentCommentId = req.params.id;
