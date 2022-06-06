@@ -272,7 +272,7 @@ const store = createStore({
     },
 
     /**
-     * Ajouter un post
+     * Ajouter une publication
      * @param {*} param0
      * @param {*} post
      * @returns
@@ -313,12 +313,14 @@ const store = createStore({
 
       instance.defaults.headers["Content-Type"] = "application/json";
 
-      instance.post(`/post/`, data).then(function (response) {
-        commit("setPosts", response.data.posts);
-      }).catch(function (err) {
-        console.log(err);
-      });
-
+      instance
+        .post(`/post/`, data)
+        .then(function (response) {
+          commit("setPosts", response.data.posts);
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
     },
   },
 });

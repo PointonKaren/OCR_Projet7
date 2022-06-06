@@ -128,4 +128,4 @@ Pour chaque niveau d'utilisateurs :
   - Consulter n'importe quel profil
   - Modifier n'importe quel profil (notamment mail/mot de passe en cas d'oubli)
   - Supprimer un utilisateur
-  - Consulter une liste de tous les posts et commentaires d'un utilisateur précis
+  - Consulter une liste de toutes les publications et commentaires d'un utilisateur précis

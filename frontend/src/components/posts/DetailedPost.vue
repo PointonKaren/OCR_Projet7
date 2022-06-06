@@ -1,5 +1,5 @@
 <template>
-  <!--Détail du post : carte image + cartes commentaires -->
+  <!--Détail de la publication : carte image + cartes commentaires -->
   <div id="detailed__post">
     <div id="cards">
       <div class="post__buttons">
