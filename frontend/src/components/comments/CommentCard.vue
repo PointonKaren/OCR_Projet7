@@ -31,7 +31,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { instance } from "../../store/index.js"
+import { instance } from "../../store/index.js";
 
 export default {
   name: "CommentCard",
@@ -81,7 +81,9 @@ export default {
       " à " +
       postDate.getHours() +
       "h" +
-      postDate.getMinutes();
+      (postDate.getMinutes() > 9
+        ? postDate.getMinutes()
+        : "0" + postDate.getMinutes());
 
     if (
       this.user.id === this.post_data?.UserId ||

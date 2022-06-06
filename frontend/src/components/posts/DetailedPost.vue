@@ -24,9 +24,7 @@
         :post_data="post"
       />
       <div class="comments__header">
-        <h2 class="comments__title">
-          Commentaires
-        </h2>
+        <h2 class="comments__title">Espace de commentaires</h2>
 
         <span @click="show = !show">
           <button
@@ -138,7 +136,7 @@ export default {
         " à " +
         date.getHours() +
         "h" +
-        date.getMinutes();
+        (date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes());
 
       const firstName =
         post?.User?.firstName === undefined
@@ -183,7 +181,6 @@ export default {
       postsData,
     };
   },
-
 };
 </script>
 
