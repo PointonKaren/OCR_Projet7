@@ -75,10 +75,11 @@ export default {
 
   setup() {
     class Post {
-      constructor(id, title, author, created_at, image_url, likes, comments) {
+      constructor(id, title, author, authorId, created_at, image_url, likes, comments) {
         this.id = id;
         this.title = title;
         this.author = author;
+        this.authorId = authorId;
         this.created_at = created_at;
         this.image_url = image_url;
         this.likes = likes;
@@ -120,6 +121,7 @@ export default {
           post.id,
           post.title,
           author,
+          post.User.id,
           dateString,
           post.imageUrl,
           post.Likes,

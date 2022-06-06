@@ -75,17 +75,15 @@ export default {
   },
 
   beforeMount() {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const userId = user.userId;
     if (
-      this.user.id === userId ||
+      this.user.id === this.post_data?.authorId ||
       this.user.role === 1 ||
       this.user.role === 2
     ) {
       this.suppAuth = true;
     }
 
-    if (this.user.id === userId || this.user.role === 2) {
+    if (this.user.id === this.post_data?.authorId || this.user.role === 2) {
       this.editAuth = true;
     }
   },

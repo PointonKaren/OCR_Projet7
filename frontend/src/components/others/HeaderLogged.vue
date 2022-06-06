@@ -78,7 +78,6 @@ export default {
   }
   #header__buttons {
     margin-right: 20px;
-    border: 1px solid red;
     width: 250px;
   }
 }

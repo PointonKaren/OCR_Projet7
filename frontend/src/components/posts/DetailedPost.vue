@@ -1,23 +1,7 @@
 <template>
   <!--Détail de la publication : carte image + cartes commentaires -->
   <div id="detailed__post">
-    <div id="cards">
-      <div class="post__buttons">
-        <button
-          aria-label="Supprimer la publication"
-          class="button delete"
-          v-if="suppAuth"
-        >
-          <i class="fa-regular fa-trash-can test"></i>
-        </button>
-        <button
-          aria-label="Modifier la publication"
-          class="button edit"
-          v-if="editAuth"
-        >
-          <i class="fa-regular fa-pen-to-square"></i>
-        </button>
-      </div>
+    <div id="cards">      
       <PostCard
         v-for="(post, index) in postsData"
         :key="index"
@@ -84,9 +68,7 @@ export default {
     return {
       comment_form_is_here: false,
       show: true,
-      postInfo: null,
-      editAuth: false,
-      suppAuth: false,
+      postInfo: null,      
       posts: [this.$store.state.post],
       haveComments: false,
     };
@@ -106,10 +88,11 @@ export default {
 
   setup() {
     class Post {
-      constructor(id, title, author, created_at, image_url, likes, comments) {
+      constructor(id, title, author, authorId, created_at, image_url, likes, comments) {
         this.id = id;
         this.title = title;
         this.author = author;
+        this.authorId = authorId;
         this.created_at = created_at;
         this.image_url = image_url;
         this.likes = likes;
@@ -143,13 +126,13 @@ export default {
           : post.User.firstName;
       const lastName =
         post?.User?.lastName === undefined ? "supprimé" : post.User.lastName;
-
       const author = firstName + " " + lastName;
 
       const new_post = new Post(
         post.id,
         post.title,
         author,
+        post.User.id,
         dateString,
         post.imageUrl,
         post.Likes,
