@@ -28,7 +28,9 @@
 .add__post__button,
 .add__post__cancel,
 .add__comment__button,
-.add__comment__cancel {
+.add__comment__cancel,
+.profile__edit__cancel,
+.profile__logout__button__icon {
   border-radius: 50px;
 }
 
@@ -66,7 +68,8 @@
 }
 
 .add__post__cancel,
-.add__comment__cancel {
+.add__comment__cancel,
+.profile__edit__cancel {
   font-size: 1em;
   padding-left: 12px;
   padding-right: 12px;
@@ -108,9 +111,10 @@
   }
   .heart {
     padding: 0;
-    padding: 8px 8px 4px 8px;
+    padding: 8px 8px 5px 8px;
   }
-  .add__comment__cancel {
+  .add__comment__cancel,
+  .profile__edit__cancel {
     font-size: 0.9em;
     padding: 0;
     padding: 6px 10px 4px 10px;
@@ -119,5 +123,9 @@
     font-size: 0.9em;
     padding: 0;
     padding: 6px 8px 4px 8px;
+  }
+  .profile__logout__button__icon {
+    font-size: 0.8em;
+    padding: 6px 8px 6px 8px;
   }
 }

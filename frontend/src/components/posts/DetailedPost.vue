@@ -1,7 +1,7 @@
 <template>
   <!--Détail de la publication : carte image + cartes commentaires -->
   <div id="detailed__post">
-    <div id="cards">      
+    <div id="cards">
       <PostCard
         v-for="(post, index) in postsData"
         :key="index"
@@ -68,7 +68,7 @@ export default {
     return {
       comment_form_is_here: false,
       show: true,
-      postInfo: null,      
+      postInfo: null,
       posts: [this.$store.state.post],
       haveComments: false,
     };
@@ -88,7 +88,16 @@ export default {
 
   setup() {
     class Post {
-      constructor(id, title, author, authorId, created_at, image_url, likes, comments) {
+      constructor(
+        id,
+        title,
+        author,
+        authorId,
+        created_at,
+        image_url,
+        likes,
+        comments
+      ) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -204,6 +213,7 @@ export default {
     #cards {
       .comments__header {
         width: 90vw;
+        max-width: 800px;
         .comments__title {
           font-size: 1.3em;
           margin-right: 0;

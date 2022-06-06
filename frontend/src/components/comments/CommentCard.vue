@@ -131,27 +131,31 @@ export default {
 @import "./scss/_buttons.scss";
 
 .comment__card {
-  border: 1px solid white;
   background-color: white;
   box-shadow: 3px 4px 7px $secondaire;
   border-radius: 20px;
+  margin: auto;
   margin-bottom: 20px;
   width: 30vw;
   .comment__buttons {
     padding-right: 10px;
     padding-top: 10px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: flex-end;
   }
   .comment__data {
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     .comment__user {
       font-size: 1.1em;
       font-weight: bold;
+      margin: 0;
       margin-left: 10px;
     }
     .comment__date {
+      margin: 0;
       margin-right: 10px;
     }
   }
@@ -166,6 +170,8 @@ export default {
 @media screen and (max-width: 1200px) {
   .comment__card {
     width: 80vw;
+    max-width: 800px;
+
     .comment__data {
       padding: 0;
       font-size: 12px;

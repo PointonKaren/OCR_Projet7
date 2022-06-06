@@ -1,6 +1,10 @@
 <template>
   <div class="delete__button" @click="deleteConfirm()">
-    <button class="button profile__delete__account" @click="deleteAccount()">
+    <button
+      aria-label="Supprimer le compte"
+      class="button profile__delete__account"
+      @click="deleteAccount()"
+    >
       Supprimer mon compte
     </button>
     <p>Action irréversible !</p>
