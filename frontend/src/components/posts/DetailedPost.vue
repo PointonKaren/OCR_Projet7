@@ -199,6 +199,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-top: -20px;
       .comments__title {
         margin-right: 20px;
       }

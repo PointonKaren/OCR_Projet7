@@ -143,7 +143,6 @@ export default {
 
 .postcard {
   background-color: $background;
-
   width: 35vw;
   max-width: 900px;
   display: flex;
@@ -156,6 +155,7 @@ export default {
     align-self: flex-end;
     margin-right: 10px;
     margin-top: 10px;
+    position: absolute;
   }
   .detailed__post-link {
     text-decoration: none;
@@ -199,6 +199,9 @@ export default {
   .postcard {
     width: 95vw;
     margin-bottom: 5px;
+    .post__buttons {
+      position: initial;
+    }
     .detailed__post-link {
       .post__title {
         margin-top: 5px;
