@@ -104,7 +104,7 @@ export default {
           " à " +
           date.getHours() +
           "h" +
-          date.getMinutes();
+          (date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes());
 
         const firstName =
           post?.User?.firstName === undefined
