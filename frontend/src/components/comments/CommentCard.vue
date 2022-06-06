@@ -4,7 +4,7 @@
     <div class="comment__buttons">
       <button
         aria-label="Supprimer le commentaire"
-        class="button delete post__delete"
+        class="button delete"
         v-bind="{ id: post_data.id }"
         v-if="suppAuth"
         @click="deleteComment"
@@ -159,6 +159,8 @@ export default {
     margin-top: 0;
     padding-left: 10px;
     padding-right: 10px;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 }
 @media screen and (max-width: 1200px) {
@@ -169,6 +171,7 @@ export default {
       font-size: 12px;
       .comment__user {
         width: 50vw;
+        align-self: center;
       }
       .comment__date {
         width: 50vw;

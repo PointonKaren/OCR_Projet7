@@ -1,6 +1,6 @@
 <template>
   <!--Bouton "Profil"-->
-  <div class="profile__button__picture" v-bind:class="isVisible">
+  <div class="profile__button" v-bind:class="isVisible">
     <img :src="user.pictureUrl" alt="Photo de profil" />
   </div>
 </template>
@@ -48,7 +48,7 @@ export default {
 @import "./scss/_mixins.scss";
 @import "./scss/_buttons.scss";
 
-.profile__button__picture {
+.profile__button {
   margin-top: 6px;
   cursor: pointer;
   img {
@@ -67,7 +67,7 @@ export default {
 }
 
 @media screen and (max-width: 1200px) {
-  .profile__button__picture {
+  .profile__button {
     img {
       height: 35px;
       width: 35px;

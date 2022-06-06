@@ -1,9 +1,9 @@
 <template>
-  <div class="minified__post">
-    <div class="comment__buttons">
+  <div class="postcard">
+    <div class="post__buttons">
       <button
-        aria-label="Supprimer le commentaire"
-        class="button delete post__delete"
+        aria-label="Supprimer la publication"
+        class="button delete"
         v-bind="{ id: post_data.id }"
         v-if="suppAuth"
         @click="deletePost"
@@ -11,7 +11,7 @@
         <i class="fa-regular fa-trash-can"></i>
       </button>
       <button
-        aria-label="Modifier le commentaire"
+        aria-label="Modifier la publication"
         class="button edit"
         v-if="editAuth"
       >
@@ -20,8 +20,8 @@
     </div>
     <router-link
       :to="{ name: 'post', params: { id: post_data.id } }"
-      class="minified__post"
       :pdata="post_data"
+      class="detailed__post-link"
     >
       <h2 class="post__title">{{ post_data.title }}</h2>
       <div class="post__image">
@@ -33,11 +33,9 @@
     </router-link>
 
     <div class="post__react">
-      <div class="comments">
-        <p class="number__of__comments__per__post">
-          {{ post_data.comments.length }} commentaire(s)
-        </p>
-      </div>
+      <p class="number_of_comments">
+        {{ post_data.comments.length }} commentaire(s)
+      </p>
       <div class="likes">
         <p class="number_of_likes">{{ post_data.likes.length }}</p>
         <button
@@ -54,7 +52,6 @@
 </template>
 
 <script>
-
 import { instance } from "../../store/index.js";
 import { mapState } from "vuex";
 export default {
@@ -76,7 +73,6 @@ export default {
       user: "userInfos",
     }),
   },
-
 
   beforeMount() {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -102,19 +98,19 @@ export default {
       const userId = user.userId;
 
       const data = {
-        data : {
+        data: {
           userId: userId,
         },
       };
 
-      instance.delete(`/post/${cardPostId}`, data)
+      instance
+        .delete(`/post/${cardPostId}`, data)
         .then(() => {
           window.location.reload();
         })
         .catch((error) => {
           console.log(error);
         });
-
     },
 
     likePost(e) {
@@ -124,12 +120,13 @@ export default {
       const userId = user.userId;
 
       const data = {
-        data : {
+        data: {
           userId: userId,
         },
       };
 
-      instance.post(`/post/${cardPostId}/like`, data)
+      instance
+        .post(`/post/${cardPostId}/like`, data)
         .then(() => {
           window.location.reload();
         })
@@ -138,7 +135,6 @@ export default {
         });
     },
   },
-
 };
 </script>
 
@@ -147,9 +143,9 @@ export default {
 @import "./scss/_mixins.scss";
 @import "./scss/_buttons.scss";
 
-.minified__post {
+.postcard {
   background-color: $background;
-  border: 2px solid $primaire;
+
   width: 35vw;
   max-width: 900px;
   display: flex;
@@ -158,77 +154,82 @@ export default {
   margin: auto;
   margin-bottom: 20px;
   text-decoration: none;
-  .post__infos {
+  .post__buttons {
     align-self: flex-end;
     margin-right: 10px;
+    margin-top: 10px;
   }
-  .post__image {
-    img {
-      border-radius: 10px;
-      border: 5px solid white;
-      max-width: 30vw;
+  .detailed__post-link {
+    text-decoration: none;
+    .post__title {
+      text-align: center;
     }
-  }
-  .minified__post__react {
-    display: flex;
-    width: 30vw;
-    max-width: 800px;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-
-  .comment__buttons {
-    padding-right: 10px;
-    padding-top: 10px;
-    display: flex;
-    justify-content: flex-end;
-  }
-}
-
-.post__react {
-  width: 30vw;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 10px 0 10px;
-  .comments {
-    display: flex;
-    .comment__icon {
-      display: none;
-    }
-    .number_of_comments {
-      margin: 0;
-      margin-left: 5px;
-      align-self: flex-end;
-      font-size: 1.2em;
-    }
-  }
-  .likes {
-    display: flex;
-    .number_of_likes {
-      margin: 0;
-      margin-right: 5px;
-      align-self: flex-end;
-      font-size: 1.2em;
-    }
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .minified__post {
-    width: 95vw;
-    margin-bottom: 5px;
     .post__image {
+      margin-bottom: -10px;
       img {
-        width: 90vw;
-        max-width: 800px;
-        border: 2px solid white;
+        border-radius: 10px;
+        border: 5px solid white;
+        max-width: 30vw;
       }
     }
     .post__infos {
-      font-size: 12px;
+      text-align: end;
+      margin-right: 10px;
+      margin-bottom: 0;
     }
-    .minified__post__react {
+  }
+  .post__react {
+    width: 30vw;
+    max-width: 800px;
+    display: flex;
+    justify-content: space-between;
+    .number_of_comments {
+      font-size: 1.2em;
+    }
+    .likes {
+      display: flex;
+      align-items: center;
+      .number_of_likes {
+        margin: 0;
+        margin-right: 5px;
+        font-size: 1.2em;
+      }
+    }
+  }
+}
+@media screen and (max-width: 1200px) {
+  .postcard {
+    width: 95vw;
+    margin-bottom: 5px;
+    .detailed__post-link {
+      .post__title {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 1.4em;
+      }
+      .post__image {
+        img {
+          width: 90vw;
+          max-width: 800px;
+          border: 2px solid white;
+        }
+      }
+      .post__infos {
+        font-size: 12px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+    .post__react {
       width: 90vw;
+      .number_of_comments {
+        font-size: 1em;
+      }
+      .likes {
+        .number_of_likes {
+          font-size: 1em;
+        }
+      }
     }
   }
 }

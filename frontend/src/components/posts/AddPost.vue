@@ -120,23 +120,19 @@ export default {
       padding-right: 20px;
       padding-bottom: 20px;
     }
-    .button__submit__file {
-      width: 150px;
-      align-self: center;
-    }
   }
 }
 @media screen and (max-width: 1200px) {
   #add__post {
     width: 95vw;
-    height: 60vh;
+    height: 250px;
     .add__post__title {
       margin: 0;
-      margin-top: 15px;
+      margin-top: -20px;
+      margin-bottom: 10px;
     }
     #add__post__form {
       width: 90vw;
-      height: 50vh;
 
       #add__post__form__title {
         display: flex;
@@ -160,11 +156,6 @@ export default {
         padding: 0;
         margin-top: 10px;
         margin-bottom: 10px;
-      }
-      .button__submit__file {
-        margin-top: 10px;
-        width: 150px;
-        align-self: center;
       }
     }
   }

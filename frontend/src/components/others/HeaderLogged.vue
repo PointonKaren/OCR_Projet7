@@ -77,20 +77,9 @@ export default {
     margin-left: 20px;
   }
   #header__buttons {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 190px;
-    height: 60px;
     margin-right: 20px;
-    a {
-      .contact {
-        font-size: 1.3em;
-      }
-      .contact__icon {
-        display: none;
-      }
-    }
+    border: 1px solid red;
+    width: 250px;
   }
 }
 
@@ -99,7 +88,8 @@ export default {
     padding-left: 0;
     padding-right: 0;
     img {
-      width: 40vw;
+      width: 50vw;
+      max-width: 200px;
     }
     #header__buttons {
       width: 30vw;
@@ -109,8 +99,6 @@ export default {
           display: none;
         }
         .contact__icon {
-          border-radius: 50px;
-          padding-right: 9px;
           display: inline;
         }
       }

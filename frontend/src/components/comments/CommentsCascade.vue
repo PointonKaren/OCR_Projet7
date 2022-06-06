@@ -1,13 +1,11 @@
 <template>
   <!--Carte des commentaires-->
   <div class="comments__card">
-    <div class="post__comments">
-      <CommentCard
-        v-for="(comment, index) in post_data.comments"
-        :key="index"
-        :post_data="comment"
-      />
-    </div>
+    <CommentCard
+      v-for="(comment, index) in post_data.comments"
+      :key="index"
+      :post_data="comment"
+    />
   </div>
 </template>
 
@@ -39,21 +37,8 @@ export default {
 
 .comments__card {
   width: 30vw;
-  .comments__header {
-    padding-left: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 20px;
-    .comments__title {
-      margin: auto;
-      margin-top: 20px;
-    }
-  }
-  .post__comments {
-    display: flex;
-    flex-direction: column-reverse;
-  }
+  display: flex;
+  flex-direction: column-reverse;
 }
 @media screen and (max-width: 1200px) {
   .comments__card {

@@ -39,6 +39,7 @@
         v-for="(post, index) in postsData"
         :key="index"
         :post_data="post"
+        class="posts__cascade__postcard"
       />
     </div>
   </div>
@@ -176,6 +177,11 @@ export default {
     #posts__cascade__title {
       text-align: center;
       margin-right: 20px;
+    }
+  }
+  #cascade {
+    .posts__cascade__postcard {
+      border: 2px solid $primaire;
     }
   }
 }

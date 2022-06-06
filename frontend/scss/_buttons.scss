@@ -1,25 +1,26 @@
 @import "./_variables.scss";
 
 .button {
-    cursor: pointer;
-    color: white;
-    background-color: $primaire;
-    border: 2px solid white;
-    box-shadow: 3px 4px 7px $secondaire;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    padding: 8px 10px 6px 10px;
+  cursor: pointer;
+  color: white;
+  background-color: $primaire;
+  border: 2px solid white;
+  box-shadow: 3px 4px 7px $secondaire;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 8px 10px 6px 10px;
 
-    &:active {
-        background-color: #091f43b6;
-        border: 2px solid $primaire;
-    }
+  &:active {
+    background-color: #091f43b6;
+    border: 2px solid $primaire;
+  }
 
-    i {
-        font-size: 1.2em;
-    }
+  i {
+    font-size: 1.2em;
+  }
 }
 
+.contact__icon,
 .delete,
 .edit,
 .heart,
@@ -28,51 +29,95 @@
 .add__post__cancel,
 .add__comment__button,
 .add__comment__cancel {
-    border-radius: 50px;
+  border-radius: 50px;
+}
+
+#header__buttons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 190px;
+  height: 60px;
+  margin-right: 20px;
+
+  a {
+    .contact__icon {
+      display: none;
+    }
+  }
+}
+
+.contact {
+  font-size: 1.3em;
+}
+
+.contact__icon {
+  padding-right: 9px;
 }
 
 .edit {
-    padding-right: 7px;
-    margin-left: 5px;
+  padding-right: 7px;
+  margin-left: 5px;
 }
 
 .heart {
-    padding-top: 10px;
+  padding: 0;
+  padding: 10px 8px 5px 9px;
 }
 
-.add__post__cancel {
-    font-size: 1em;
-    padding-left: 12px;
-    padding-right: 12px;
+.add__post__cancel,
+.add__comment__cancel {
+  font-size: 1em;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .arrow_up {
-    border-radius: 50px;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+  border-radius: 50px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.button__submit__file {
+  width: 150px;
+  align-self: center;
 }
 
 .button__submit__comment {
-    margin-top: 10px;
-    margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 1200px) {
+  .delete,
+  .edit,
+  .heart,
+  .comment__icon {
+    font-size: 12px;
+  }
 
-    .delete,
-    .edit,
-    .heart,
-    .comment__icon {
-        font-size: 12px;
-    }
-
-    .heart {
-        padding: 6px 8px 4px 8px;
-    }
-
-    .comment__icon {
-        height: 35px;
-        padding: 4px 8px 4px 8px;
-    }
+  .button__submit__file {
+    margin-top: 20px;
+    width: 150px;
+    align-self: center;
+  }
+  .comment__icon {
+    height: 35px;
+    padding: 4px 8px 4px 8px;
+  }
+  .heart {
+    padding: 0;
+    padding: 8px 8px 4px 8px;
+  }
+  .add__comment__cancel {
+    font-size: 0.9em;
+    padding: 0;
+    padding: 6px 10px 4px 10px;
+  }
+  .add__comment__button {
+    font-size: 0.9em;
+    padding: 0;
+    padding: 6px 8px 4px 8px;
+  }
 }

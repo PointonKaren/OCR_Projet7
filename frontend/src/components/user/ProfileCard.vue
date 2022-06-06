@@ -36,7 +36,7 @@
         alt="Photo de profil"
         class="profile__picture"
       />
-      <div class="delete__button">
+      <div class="delete__account__button">
         <button
           class="button profile__delete__account"
           @click="deleteConfirm()"
@@ -165,7 +165,7 @@ export default {
       border: 2px solid $primaire;
       max-width: 200px;
     }
-    .delete__button {
+    .delete__account__button {
       height: 60px;
       margin-top: 20px;
       display: flex;
