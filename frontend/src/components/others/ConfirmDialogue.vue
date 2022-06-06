@@ -3,8 +3,12 @@
     <h2 class="confirmation__title">Confirmation</h2>
     <p class="confirmation__message">{{ message }}</p>
     <div class="btns">
-      <button class="cancel-btn" @click="_cancel">{{ cancelButton }}</button>
-      <span class="ok-btn" @click="_confirm">{{ okButton }}</span>
+      <button aria-label="Annulation" class="cancel-btn" @click="_cancel">
+        {{ cancelButton }}
+      </button>
+      <button aria-label="Confirmation" class="ok-btn" @click="_confirm">
+        {{ okButton }}
+      </button>
     </div>
   </popup-modal>
 </template>
@@ -16,7 +20,7 @@ export default {
   name: "ConfirmDialogue",
 
   components: { PopupModal },
-// "Formulaire" générique pour toute demande de confirmation
+  // "Formulaire" générique pour toute demande de confirmation
   data: () => ({
     // Paramètres génériques qui changeront selon l'utilisation
     title: undefined,

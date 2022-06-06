@@ -1,33 +1,14 @@
 <template>
-  <!--Détail du post : carte image + cartes commentaires -->
+  <!--Détail de la publication : carte image + cartes commentaires -->
   <div id="detailed__post">
     <div id="cards">
-      <div class="post__buttons">
-        <button
-          aria-label="Supprimer la publication"
-          class="button delete post__delete"
-          v-if="suppAuth"
-        >
-          <i class="fa-regular fa-trash-can test"></i>
-        </button>
-        <button
-          aria-label="Modifier la publication"
-          class="button edit post__edit"
-          v-if="editAuth"
-        >
-          <i class="fa-regular fa-pen-to-square"></i>
-        </button>
-      </div>
       <PostCard
         v-for="(post, index) in postsData"
         :key="index"
         :post_data="post"
       />
       <div class="comments__header">
-        <h2 class="comments__title">
-          Commentaires
-        </h2>
-
+        <h2 class="comments__title">Espace de commentaires</h2>
         <span @click="show = !show">
           <button
             class="button add__comment__button"
@@ -52,7 +33,7 @@
           <CommentForm />
         </div>
       </Transition>
-      <CommentsCard
+      <CommentsCascade
         v-for="(post, index) in postsData"
         :key="index"
         :post_data="post"
@@ -68,7 +49,7 @@ import { mapState } from "vuex";
 
 import PostCard from "../posts/PostCard.vue";
 import CommentForm from "../comments/CommentForm.vue";
-import CommentsCard from "../comments/CommentsCard.vue";
+import CommentsCascade from "../comments/CommentsCascade.vue";
 
 export default {
   name: "DetailedPost",
@@ -88,8 +69,6 @@ export default {
       comment_form_is_here: false,
       show: true,
       postInfo: null,
-      editAuth: false,
-      suppAuth: false,
       posts: [this.$store.state.post],
       haveComments: false,
     };
@@ -98,7 +77,7 @@ export default {
   components: {
     PostCard,
     CommentForm,
-    CommentsCard,
+    CommentsCascade,
   },
 
   methods: {
@@ -109,10 +88,20 @@ export default {
 
   setup() {
     class Post {
-      constructor(id, title, author, created_at, image_url, likes, comments) {
+      constructor(
+        id,
+        title,
+        author,
+        authorId,
+        created_at,
+        image_url,
+        likes,
+        comments
+      ) {
         this.id = id;
         this.title = title;
         this.author = author;
+        this.authorId = authorId;
         this.created_at = created_at;
         this.image_url = image_url;
         this.likes = likes;
@@ -138,7 +127,7 @@ export default {
         " à " +
         date.getHours() +
         "h" +
-        date.getMinutes();
+        (date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes());
 
       const firstName =
         post?.User?.firstName === undefined
@@ -146,13 +135,13 @@ export default {
           : post.User.firstName;
       const lastName =
         post?.User?.lastName === undefined ? "supprimé" : post.User.lastName;
-
       const author = firstName + " " + lastName;
 
       const new_post = new Post(
         post.id,
         post.title,
         author,
+        post.User.id,
         dateString,
         post.imageUrl,
         post.Likes,
@@ -183,7 +172,6 @@ export default {
       postsData,
     };
   },
-
 };
 </script>
 
@@ -207,45 +195,11 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    .post__buttons {
-      position: absolute;
-      right: 6vw;
-    }
-    .post__title {
-      margin-top: 15px;
-      text-align: center;
-    }
-    .post__react {
-      width: 30vw;
-      display: flex;
-      justify-content: space-between;
-      padding: 0 10px 0 10px;
-      .comments {
-        display: flex;
-        .comment__icon {
-          display: none;
-        }
-        .number_of_comments {
-          margin: 0;
-          margin-left: 5px;
-          align-self: flex-end;
-          font-size: 1.2em;
-        }
-      }
-      .likes {
-        display: flex;
-        .number_of_likes {
-          margin: 0;
-          margin-right: 5px;
-          align-self: flex-end;
-          font-size: 1.2em;
-        }
-      }
-    }
     .comments__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-top: -20px;
       .comments__title {
         margin-right: 20px;
       }
@@ -258,41 +212,12 @@ export default {
     width: 95vw;
     margin-top: 2vh;
     #cards {
-      .post__buttons {
-        font-size: 12px;
-        .post__delete {
-          font-size: 12px;
-          width: 35px;
-          padding: 6px 4px 6px 4px;
-        }
-        .post__edit {
-          font-size: 12px;
-          padding: 6px 6px 6px 9px;
-        }
-      }
-      .post__title {
-        margin-top: 50px;
-      }
-      .post__react {
-        width: 80vw;
-        padding: 0px 10px 0 10px;
-        .comments {
-          .comment__button {
-            display: none;
-          }
-          .comment__icon {
-            display: inline;
-          }
-          .number_of_comments {
-            padding-bottom: 5px;
-            font-size: 1em;
-          }
-        }
-        .likes {
-          .number_of_likes {
-            padding-bottom: 5px;
-            font-size: 1em;
-          }
+      .comments__header {
+        width: 90vw;
+        max-width: 800px;
+        .comments__title {
+          font-size: 1.3em;
+          margin-right: 0;
         }
       }
     }

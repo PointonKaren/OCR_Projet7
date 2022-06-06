@@ -300,7 +300,7 @@ export default {
 @media screen and (max-width: 1200px) {
   #edit__profile {
     right: 7px;
-    top: 180px;
+    top: 220px;
     width: 85vw;
     padding: 0;
     padding: 15px;

@@ -3,18 +3,34 @@
     <div id="profile">
       <div class="profile__datas">
         <div class="profile__buttons">
-          <button
-            aria-label="Modifier le profil"
-            class="button edit profile__edit__button"
-            @click="toggle"
-          >
-            <i class="fa-regular fa-pen-to-square"></i>
-          </button>
+          <span @click="show = !show">
+            <button
+              aria-label="Modifier le profil"
+              class="button edit profile__edit__button"
+              @click="toggle"
+              v-show="show"
+            >
+              <i class="fa-regular fa-pen-to-square"></i>
+            </button>
+            <button
+              class="button profile__edit__cancel"
+              aria-label="Annuler"
+              @click="toggle"
+              v-show="!show"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </span>
 
-          <button class="button profile__logout__button" @click="logout()">
+          <button
+            aria-label="Se déconnecter"
+            class="button profile__logout__button"
+            @click="logout()"
+          >
             Se déconnecter
           </button>
           <button
+            aria-label="Se déconnecter"
             class="button profile__logout__button__icon"
             @click="logout()"
           >
@@ -36,8 +52,9 @@
         alt="Photo de profil"
         class="profile__picture"
       />
-      <div class="delete__button">
+      <div class="delete__account__button">
         <button
+          aria-label="Supprimer son compte"
           class="button profile__delete__account"
           @click="deleteConfirm()"
         >
@@ -69,6 +86,7 @@ export default {
   data() {
     return {
       edit_profile_is_here: false,
+      show: true,
     };
   },
 
@@ -149,7 +167,8 @@ export default {
       padding-left: 15px;
       .profile__buttons {
         align-self: flex-end;
-        .profile__edit__button {
+        .profile__edit__button,
+        .profile__edit__cancel {
           margin-right: 20px;
         }
         .profile__logout__button__icon {
@@ -165,7 +184,7 @@ export default {
       border: 2px solid $primaire;
       max-width: 200px;
     }
-    .delete__button {
+    .delete__account__button {
       height: 60px;
       margin-top: 20px;
       display: flex;
@@ -205,7 +224,6 @@ export default {
           }
           .profile__logout__button__icon {
             display: inline;
-            border-radius: 50px;
           }
         }
       }

@@ -4,7 +4,7 @@
     <div class="comment__buttons">
       <button
         aria-label="Supprimer le commentaire"
-        class="button delete post__delete"
+        class="button delete"
         v-bind="{ id: post_data.id }"
         v-if="suppAuth"
         @click="deleteComment"
@@ -31,7 +31,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { instance } from "../../store/index.js"
+import { instance } from "../../store/index.js";
 
 export default {
   name: "CommentCard",
@@ -81,7 +81,9 @@ export default {
       " à " +
       postDate.getHours() +
       "h" +
-      postDate.getMinutes();
+      (postDate.getMinutes() > 9
+        ? postDate.getMinutes()
+        : "0" + postDate.getMinutes());
 
     if (
       this.user.id === this.post_data?.UserId ||
@@ -129,27 +131,31 @@ export default {
 @import "./scss/_buttons.scss";
 
 .comment__card {
-  border: 1px solid white;
   background-color: white;
   box-shadow: 3px 4px 7px $secondaire;
   border-radius: 20px;
+  margin: auto;
   margin-bottom: 20px;
   width: 30vw;
   .comment__buttons {
     padding-right: 10px;
     padding-top: 10px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: flex-end;
   }
   .comment__data {
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     .comment__user {
       font-size: 1.1em;
       font-weight: bold;
+      margin: 0;
       margin-left: 10px;
     }
     .comment__date {
+      margin: 0;
       margin-right: 10px;
     }
   }
@@ -157,16 +163,21 @@ export default {
     margin-top: 0;
     padding-left: 10px;
     padding-right: 10px;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 }
 @media screen and (max-width: 1200px) {
   .comment__card {
     width: 80vw;
+    max-width: 800px;
+
     .comment__data {
       padding: 0;
       font-size: 12px;
       .comment__user {
         width: 50vw;
+        align-self: center;
       }
       .comment__date {
         width: 50vw;

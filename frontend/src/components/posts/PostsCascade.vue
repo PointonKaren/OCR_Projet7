@@ -39,6 +39,7 @@
         v-for="(post, index) in postsData"
         :key="index"
         :post_data="post"
+        class="posts__cascade__postcard"
       />
     </div>
   </div>
@@ -74,10 +75,11 @@ export default {
 
   setup() {
     class Post {
-      constructor(id, title, author, created_at, image_url, likes, comments) {
+      constructor(id, title, author, authorId, created_at, image_url, likes, comments) {
         this.id = id;
         this.title = title;
         this.author = author;
+        this.authorId = authorId;
         this.created_at = created_at;
         this.image_url = image_url;
         this.likes = likes;
@@ -104,7 +106,7 @@ export default {
           " à " +
           date.getHours() +
           "h" +
-          date.getMinutes();
+          (date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes());
 
         const firstName =
           post?.User?.firstName === undefined
@@ -119,6 +121,7 @@ export default {
           post.id,
           post.title,
           author,
+          post.User.id,
           dateString,
           post.imageUrl,
           post.Likes,
@@ -176,6 +179,11 @@ export default {
     #posts__cascade__title {
       text-align: center;
       margin-right: 20px;
+    }
+  }
+  #cascade {
+    .posts__cascade__postcard {
+      border: 2px solid $primaire;
     }
   }
 }
