@@ -28,7 +28,7 @@
         <img :src="post_data.image_url" alt="Titre" />
       </div>
       <p class="post__infos">
-        Postée par {{ post_data.author }} le {{ post_data.created_at }}
+        Publié par {{ post_data.author }} le {{ post_data.created_at }}.
       </p>
     </router-link>
 
@@ -209,16 +209,23 @@ export default {
         font-size: 1.4em;
       }
       .post__image {
+        width: 90vw;
+        max-width: 800px;
+        margin: auto;
         img {
-          width: 90vw;
+          display: block;
+          width: 85vw;
           max-width: 800px;
+          margin: auto;
           border: 2px solid white;
         }
       }
       .post__infos {
         font-size: 12px;
-        width: 100%;
+        width: 90%;
         text-align: center;
+        margin: auto;
+        margin-top: 15px;
       }
     }
     .post__react {
