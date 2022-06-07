@@ -75,7 +75,16 @@ export default {
 
   setup() {
     class Post {
-      constructor(id, title, author, authorId, created_at, image_url, likes, comments) {
+      constructor(
+        id,
+        title,
+        author,
+        authorId,
+        created_at,
+        image_url,
+        likes,
+        comments
+      ) {
         this.id = id;
         this.title = title;
         this.author = author;
