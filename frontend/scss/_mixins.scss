@@ -1,8 +1,41 @@
 @import "./_variables.scss";
 
 @mixin focus {
-    color: white;
-    background-color: #091f435d;
-    border: 1px solid white;
-    outline: 1px solid white;
+  color: white;
+  background-color: #091f435d;
+  border: 1px solid white;
+  outline: 1px solid white;
+}
+
+@mixin header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-bottom: 3px solid $tertiaire;
+  background-color: lightgrey;
+  img {
+    margin-left: 20px;
+  }
+}
+
+@mixin header_responsive {
+  padding-left: 0;
+  padding-right: 0;
+  img {
+    width: 50vw;
+    max-width: 200px;
+  }
+  #header__buttons {
+    width: 30vw;
+    a {
+      .contact {
+        display: none;
+      }
+
+      .contact__icon {
+        display: inline;
+      }
+    }
+  }
 }
