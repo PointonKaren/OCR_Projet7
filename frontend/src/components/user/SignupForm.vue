@@ -59,28 +59,6 @@
           <i class="fa-regular fa-eye-slash" v-show="show"></i>
         </button>
       </p>
-
-      <!-- <p id="password__field">
-        <label for="password">Confirmation de mot de passe : </label>
-        <input
-          class="input"
-          :type="show ? 'text' : 'password'"
-          name="password"
-          id="password"
-          required
-          title="Minimun 8 caractères, 1 majuscule, 1
-        minuscule et 2 chiffres."
-          v-model="passwordConfirm"
-        />
-        <button
-          aria-label="Montrer/masquer le mot de passe"
-          class="button show_password"
-          @click="show = !show"
-        >
-          <i class="fa-regular fa-eye" v-show="!show"></i>
-          <i class="fa-regular fa-eye-slash" v-show="show"></i>
-        </button>
-      </p> -->
       <div v-if="status == 'error_create'">
         Adresse mail et/ou mot de passe invalide(s).
       </div>
