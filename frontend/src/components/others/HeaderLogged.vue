@@ -67,15 +67,7 @@ export default {
 @import "./scss/_buttons.scss";
 
 #header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  border-bottom: 3px solid $tertiaire;
-  background-color: lightgrey;
-  img {
-    margin-left: 20px;
-  }
+  @include header;
   #header__buttons {
     margin-right: 20px;
     width: 250px;
@@ -84,23 +76,9 @@ export default {
 
 @media screen and (max-width: 1200px) {
   #header {
-    padding-left: 0;
-    padding-right: 0;
-    img {
-      width: 50vw;
-      max-width: 200px;
-    }
+    @include header_responsive;
     #header__buttons {
-      width: 30vw;
       max-width: 100px;
-      a {
-        .contact {
-          display: none;
-        }
-        .contact__icon {
-          display: inline;
-        }
-      }
     }
   }
 }
