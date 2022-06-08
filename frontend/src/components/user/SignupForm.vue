@@ -50,9 +50,17 @@
         minuscule et 2 chiffres."
           v-model="password"
         />
+        <button
+          aria-label="Montrer/masquer le mot de passe"
+          class="button show_password"
+          @click="show = !show"
+        >
+          <i class="fa-regular fa-eye" v-show="!show"></i>
+          <i class="fa-regular fa-eye-slash" v-show="show"></i>
+        </button>
       </p>
 
-      <p id="password__field">
+      <!-- <p id="password__field">
         <label for="password">Confirmation de mot de passe : </label>
         <input
           class="input"
@@ -72,7 +80,7 @@
           <i class="fa-regular fa-eye" v-show="!show"></i>
           <i class="fa-regular fa-eye-slash" v-show="show"></i>
         </button>
-      </p>
+      </p> -->
       <div v-if="status == 'error_create'">
         Adresse mail et/ou mot de passe invalide(s).
       </div>
@@ -99,7 +107,6 @@ export default {
       lastName: "",
       email: "",
       password: "",
-      passwordConfirm: "",
       show: false,
     };
   },
@@ -113,8 +120,7 @@ export default {
         this.firstName != "" &&
         this.lastName != "" &&
         this.email != "" &&
-        this.password != "" &&
-        this.password === this.passwordConfirm
+        this.password != ""
       ) {
         return true;
       } else {
@@ -139,7 +145,8 @@ export default {
           password: this.password,
         })
         .then(function () {
-          self.$router.push("/post");
+          alert("Le compte a été créé, vous pouvez désormais vous connecter");
+          self.$router.go();
         }),
         function (error) {
           console.log(error);
