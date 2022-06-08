@@ -113,7 +113,7 @@ export default {
      * Créer un compte
      */
     createAccount: function () {
-      // Ajoute au store vuex les données entrées par l'utilisateur et le redirige vers la cascade de publications
+      // Ajoute au store vuex les données entrées par l'utilisateur et le redirige vers le login
       const self = this;
       this.$store
         .dispatch("createAccount", {
