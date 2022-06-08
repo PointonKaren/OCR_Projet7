@@ -50,20 +50,6 @@
         minuscule et 2 chiffres."
           v-model="password"
         />
-      </p>
-
-      <p id="password__field">
-        <label for="password">Confirmation de mot de passe : </label>
-        <input
-          class="input"
-          :type="show ? 'text' : 'password'"
-          name="password"
-          id="password"
-          required
-          title="Minimun 8 caractères, 1 majuscule, 1
-        minuscule et 2 chiffres."
-          v-model="passwordConfirm"
-        />
         <button
           aria-label="Montrer/masquer le mot de passe"
           class="button show_password"
@@ -99,7 +85,6 @@ export default {
       lastName: "",
       email: "",
       password: "",
-      passwordConfirm: "",
       show: false,
     };
   },
@@ -113,8 +98,7 @@ export default {
         this.firstName != "" &&
         this.lastName != "" &&
         this.email != "" &&
-        this.password != "" &&
-        this.password === this.passwordConfirm
+        this.password != ""
       ) {
         return true;
       } else {
@@ -139,7 +123,8 @@ export default {
           password: this.password,
         })
         .then(function () {
-          self.$router.push("/post");
+          alert("Le compte a été créé, vous pouvez désormais vous connecter");
+          self.$router.go();
         }),
         function (error) {
           console.log(error);
