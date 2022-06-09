@@ -72,8 +72,8 @@ export default {
         postData,
         formData,
       });
-
-      window.location.reload();
+      const self = this;
+      self.$router.go();
     },
   },
 };
