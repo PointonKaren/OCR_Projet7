@@ -107,6 +107,8 @@ Pour chaque niveau d'utilisateurs :
   - Supprimer n'importe quelle publication
   - Supprimer n'importe quel commentaire
 
+* **2 : administrateur : idem**
+
 ### Proposition de Fonctionnalités
 
 Ces fonctionnalités peuvent être développées (certaines sont déjà prévues dans le backend) mais n'ont pas été mises en place dans ce MVP, afin de privilégier les fonctionnalités exigées.
