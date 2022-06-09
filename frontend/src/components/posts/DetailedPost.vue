@@ -137,11 +137,13 @@ export default {
         post?.User?.lastName === undefined ? "supprimé" : post.User.lastName;
       const author = firstName + " " + lastName;
 
+      const userId = post?.User?.id === undefined ? 0 : post.User.id;
+
       const new_post = new Post(
         post.id,
         post.title,
         author,
-        post.User.id,
+        userId,
         dateString,
         post.imageUrl,
         post.Likes,
