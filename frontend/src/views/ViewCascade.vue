@@ -9,7 +9,7 @@
 import HeaderLogged from "../components/others/HeaderLogged.vue";
 import PostsCascade from "../components/posts/PostsCascade.vue";
 export default {
-  name: "ViewPosts",
+  name: "ViewCascade",
   components: {
     HeaderLogged,
     PostsCascade,

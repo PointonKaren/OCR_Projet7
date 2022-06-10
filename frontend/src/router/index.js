@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 import ViewHome from "@/views/ViewHome.vue";
-import ViewPosts from "../views/ViewPosts.vue";
+import ViewCascade from "../views/ViewCascade.vue";
 import ViewPost from "../views/ViewPost.vue";
 
 const routes = [
@@ -17,7 +17,7 @@ const routes = [
     // Page d'accueil une fois l'utilisateur connecté (cascade de publications)
     name: "posts",
     path: "/post/",
-    component: ViewPosts,
+    component: ViewCascade,
     meta: {
       title: "Accueil",
     },
